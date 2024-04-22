@@ -33,7 +33,7 @@ impl Plugin for CorePlugin {
         let default_plugins = DefaultPlugins.set(if cfg!(debug_assertions) {
             LogPlugin {
                 level: bevy::log::Level::TRACE,
-                filter: "debug,wgpu_core=warn,wgpu_hal=warn,mygame=debug".into(),
+                filter: "info,wgpu_core=warn,wgpu_hal=warn,oxidized_pixel_dungeon=trace".into(),
                 ..Default::default()
             }
         } else {
