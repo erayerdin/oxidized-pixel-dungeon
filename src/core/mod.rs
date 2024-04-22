@@ -15,12 +15,32 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use bevy::{app::Plugin, DefaultPlugins};
+use bevy::{
+    app::{Plugin, PluginGroup},
+    log::LogPlugin,
+    DefaultPlugins,
+};
+
+use crate::grid::GridPlugin;
 
 pub struct CorePlugin;
 
 impl Plugin for CorePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.add_plugins(DefaultPlugins);
+        let default_plugins = DefaultPlugins.set(if cfg!(debug_assertions) {
+            LogPlugin {
+                level: bevy::log::Level::TRACE,
+                filter: "debug,wgpu_core=warn,wgpu_hal=warn,mygame=debug".into(),
+                ..Default::default()
+            }
+        } else {
+            LogPlugin {
+                level: bevy::log::Level::INFO,
+                filter: "info,wgpu_core=warn,wgpu_hal=warn".into(),
+                ..Default::default()
+            }
+        });
+
+        app.add_plugins(default_plugins).add_plugins(GridPlugin);
     }
 }
