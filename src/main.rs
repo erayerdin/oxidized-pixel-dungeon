@@ -1,3 +1,6 @@
+use bevy::app::App;
+use oxidized_pixel_dungeon::core::CorePlugin;
+
 fn main() {
-    println!("Hello, world!");
+    App::new().add_plugins(CorePlugin).run();
 }
