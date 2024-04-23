@@ -47,16 +47,13 @@ pub(crate) fn init_meshes(
     debug!("Painting grids...");
 
     for grid in grid_query.iter() {
-        let (grid_x, grid_y) = grid.indices();
-
         // let color = if (grid_x + grid_y) % 2 == 0 {
         //     Color::BLACK
         // } else {
         //     Color::WHITE
         // };
 
-        let pos_x = grid_x * GRID_SIZE;
-        let pos_y = grid_y * GRID_SIZE;
+        let (pos_x, pos_y) = grid.positions();
 
         let mesh_handler =
             Mesh2dHandle(meshes.add(Rectangle::new(GRID_SIZE as f32, GRID_SIZE as f32)));

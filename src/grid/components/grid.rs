@@ -38,4 +38,8 @@ impl Grid {
     pub(crate) fn indices(&self) -> (u8, u8) {
         (self.x(), self.y())
     }
+
+    pub(crate) fn positions(&self) -> (f32, f32) {
+        (self.x() as f32, self.y() as f32)
+    }
 }
