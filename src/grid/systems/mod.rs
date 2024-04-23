@@ -15,17 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod components;
-pub(crate) mod constants;
-mod systems;
-
 use bevy::{
-    app::{Plugin, Startup},
     asset::Assets,
-    ecs::{
-        schedule::IntoSystemConfigs,
-        system::{Commands, ResMut},
-    },
+    ecs::system::{Commands, Query, ResMut},
     log::debug,
     math::primitives::Rectangle,
     render::{color::Color, mesh::Mesh},
@@ -33,39 +25,47 @@ use bevy::{
     transform::components::Transform,
 };
 
-use crate::grid::systems::{init_grids, init_meshes};
+use crate::grid::{components::grid::Grid, constants::GRID_SIZE};
 
-pub(super) struct GridPlugin;
+pub(crate) fn init_grids(mut commands: Commands) {
+    debug!("Initializing grids...");
 
-impl Plugin for GridPlugin {
-    fn build(&self, app: &mut bevy::prelude::App) {
-        debug!("Initializing GridPlugin...");
-        app.add_systems(Startup, init_grids.after(init_meshes));
+    for x in 0..u8::MAX {
+        for y in 0..u8::MAX {
+            commands.spawn(Grid::new(x, y));
+        }
     }
 }
 
-fn init_system(
+pub(crate) fn init_meshes(
+    grid_query: Query<&Grid>,
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
 ) {
-    debug!("Drawing square...");
-
     // REF: https://bevyengine.org/examples/2D%20Rendering/2d-shapes/
-    const X_EXTENT: f32 = 600.;
+    debug!("Painting grids...");
 
-    let mesh_handler = Mesh2dHandle(meshes.add(Rectangle::new(50.0, 100.0)));
-    let color = Color::hsl(360. * 0. / 1., 0.95, 0.7);
+    for grid in grid_query.iter() {
+        let (grid_x, grid_y) = grid.indices();
 
-    commands.spawn(MaterialMesh2dBundle {
-        mesh: mesh_handler,
-        material: materials.add(color),
-        transform: Transform::from_xyz(
-            // Distribute shapes from -X_EXTENT to +X_EXTENT.
-            -X_EXTENT / 2. + 0. * X_EXTENT,
-            0.0,
-            0.0,
-        ),
-        ..Default::default()
-    });
+        // let color = if (grid_x + grid_y) % 2 == 0 {
+        //     Color::BLACK
+        // } else {
+        //     Color::WHITE
+        // };
+
+        let pos_x = grid_x * GRID_SIZE;
+        let pos_y = grid_y * GRID_SIZE;
+
+        let mesh_handler =
+            Mesh2dHandle(meshes.add(Rectangle::new(GRID_SIZE as f32, GRID_SIZE as f32)));
+
+        commands.spawn(MaterialMesh2dBundle {
+            mesh: mesh_handler,
+            material: materials.add(Color::BLACK),
+            transform: Transform::from_xyz(pos_x as f32, pos_y as f32, 0.0),
+            ..Default::default()
+        });
+    }
 }
