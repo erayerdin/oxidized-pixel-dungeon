@@ -19,53 +19,15 @@ pub mod components;
 pub(crate) mod constants;
 mod systems;
 
-use bevy::{
-    app::{Plugin, Startup},
-    asset::Assets,
-    ecs::{
-        schedule::IntoSystemConfigs,
-        system::{Commands, ResMut},
-    },
-    log::debug,
-    math::primitives::Rectangle,
-    render::{color::Color, mesh::Mesh},
-    sprite::{ColorMaterial, MaterialMesh2dBundle, Mesh2dHandle},
-    transform::components::Transform,
-};
+use bevy::prelude::*;
 
-use crate::grid::systems::{init_grids, init_meshes};
+use crate::grid::systems::init_grids;
 
 pub(super) struct GridPlugin;
 
 impl Plugin for GridPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         debug!("Initializing GridPlugin...");
-        app.add_systems(Startup, init_grids.after(init_meshes));
+        app.add_systems(Startup, init_grids);
     }
-}
-
-fn init_system(
-    mut commands: Commands,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
-) {
-    debug!("Drawing square...");
-
-    // REF: https://bevyengine.org/examples/2D%20Rendering/2d-shapes/
-    const X_EXTENT: f32 = 600.;
-
-    let mesh_handler = Mesh2dHandle(meshes.add(Rectangle::new(50.0, 100.0)));
-    let color = Color::hsl(360. * 0. / 1., 0.95, 0.7);
-
-    commands.spawn(MaterialMesh2dBundle {
-        mesh: mesh_handler,
-        material: materials.add(color),
-        transform: Transform::from_xyz(
-            // Distribute shapes from -X_EXTENT to +X_EXTENT.
-            -X_EXTENT / 2. + 0. * X_EXTENT,
-            0.0,
-            0.0,
-        ),
-        ..Default::default()
-    });
 }
