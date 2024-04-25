@@ -15,14 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use bevy::{
-    app::{Plugin, PluginGroup, Startup},
-    core_pipeline::core_2d::Camera2dBundle,
-    ecs::system::Commands,
-    log::LogPlugin,
-    utils::tracing::field::debug,
-    DefaultPlugins,
-};
+use bevy::{log::LogPlugin, prelude::*};
 
 use crate::grid::GridPlugin;
 
@@ -51,6 +44,6 @@ impl Plugin for CorePlugin {
 }
 
 fn init_system(mut commands: Commands) {
-    debug("Running CorePlugin::init_system");
+    debug!("Running CorePlugin::init_system");
     commands.spawn(Camera2dBundle::default());
 }
