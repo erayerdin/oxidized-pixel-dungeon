@@ -15,7 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use bevy::ecs::component::Component;
+use bevy::prelude::*;
+
+use crate::grid::constants::GRID_SIZE;
 
 #[derive(Debug, Component)]
 /// Defines a single grid.
@@ -35,11 +37,15 @@ impl Grid {
         self.1
     }
 
-    pub(crate) fn indices(&self) -> (u8, u8) {
-        (self.x(), self.y())
+    pub(crate) fn pos_x(&self) -> f32 {
+        self.x() as f32 * GRID_SIZE as f32
+    }
+
+    pub(crate) fn pos_y(&self) -> f32 {
+        self.y() as f32 * GRID_SIZE as f32
     }
 
     pub(crate) fn positions(&self) -> (f32, f32) {
-        (self.x() as f32, self.y() as f32)
+        (self.pos_x(), self.pos_y())
     }
 }
