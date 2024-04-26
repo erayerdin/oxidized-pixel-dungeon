@@ -327,7 +327,7 @@ dependencies = [
  "bevy_core",
  "bevy_core_pipeline",
  "bevy_ecs",
- "bevy_egui",
+ "bevy_egui 0.27.0",
  "bevy_hierarchy",
  "bevy_log",
  "bevy_math",
@@ -337,7 +337,7 @@ dependencies = [
  "bevy_time",
  "bevy_utils",
  "bevy_window",
- "egui",
+ "egui 0.27.2",
  "egui-dropdown",
  "fuzzy-matcher",
  "image",
@@ -564,6 +564,17 @@ dependencies = [
 
 [[package]]
 name = "bevy_egui"
+version = "0.25.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b84bfb8d4104a1467910cf2090bc6a6d394ebde39c0dbc02397b45aa9ef88e80"
+dependencies = [
+ "bevy",
+ "egui 0.26.2",
+ "web-sys",
+]
+
+[[package]]
+name = "bevy_egui"
 version = "0.27.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eac153cb176b04eb0734c60fbc2912aa6fb2539f5b64ba832661c1c4cf9e298a"
@@ -572,7 +583,7 @@ dependencies = [
  "bevy",
  "console_log",
  "crossbeam-channel",
- "egui",
+ "egui 0.27.2",
  "js-sys",
  "log",
  "thread_local",
@@ -787,6 +798,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a0d7ef7f2a826d0b19f059035831ce00a5e930435cc53c61e045773d0483f67a"
 dependencies = [
  "glam",
+]
+
+[[package]]
+name = "bevy_pancam"
+version = "0.11.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b6e50ba0b6cf11b847ef589ddc50646880dcb0a316b2653edcf231ef26202b32"
+dependencies = [
+ "bevy",
+ "bevy_egui 0.25.0",
 ]
 
 [[package]]
@@ -1683,6 +1704,15 @@ checksum = "75b325c5dbd37f80359721ad39aca5a29fb04c89279657cffdda8736d0c0b9d2"
 
 [[package]]
 name = "ecolor"
+version = "0.26.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "03cfe80b1890e1a8cdbffc6044d6872e814aaf6011835a2a5e2db0e5c5c4ef4e"
+dependencies = [
+ "bytemuck",
+]
+
+[[package]]
+name = "ecolor"
 version = "0.27.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "20930a432bbd57a6d55e07976089708d4893f3d556cf42a0d79e9e321fa73b10"
@@ -1692,12 +1722,23 @@ dependencies = [
 
 [[package]]
 name = "egui"
+version = "0.26.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "180f595432a5b615fc6b74afef3955249b86cfea72607b40740a4cd60d5297d0"
+dependencies = [
+ "ahash",
+ "epaint 0.26.2",
+ "nohash-hasher",
+]
+
+[[package]]
+name = "egui"
 version = "0.27.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "584c5d1bf9a67b25778a3323af222dbe1a1feb532190e103901187f92c7fe29a"
 dependencies = [
  "ahash",
- "epaint",
+ "epaint 0.27.2",
  "nohash-hasher",
 ]
 
@@ -1707,7 +1748,7 @@ version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "240e9423d44c6fd18a72208b442b1101ac871f9636c06d30cc6555d125f57db0"
 dependencies = [
- "egui",
+ "egui 0.27.2",
 ]
 
 [[package]]
@@ -1715,6 +1756,15 @@ name = "either"
 version = "1.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a47c1c47d2f5964e29c61246e81db715514cd532db6b5116a25ea3c03d6780a2"
+
+[[package]]
+name = "emath"
+version = "0.26.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6916301ecf80448f786cdf3eb51d9dbdd831538732229d49119e2d4312eaaf09"
+dependencies = [
+ "bytemuck",
+]
 
 [[package]]
 name = "emath"
@@ -1759,6 +1809,21 @@ dependencies = [
 
 [[package]]
 name = "epaint"
+version = "0.26.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "77b9fdf617dd7f58b0c8e6e9e4a1281f730cde0831d40547da446b2bb76a47af"
+dependencies = [
+ "ab_glyph",
+ "ahash",
+ "bytemuck",
+ "ecolor 0.26.2",
+ "emath 0.26.2",
+ "nohash-hasher",
+ "parking_lot",
+]
+
+[[package]]
+name = "epaint"
 version = "0.27.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b381f8b149657a4acf837095351839f32cd5c4aec1817fc4df84e18d76334176"
@@ -1766,8 +1831,8 @@ dependencies = [
  "ab_glyph",
  "ahash",
  "bytemuck",
- "ecolor",
- "emath",
+ "ecolor 0.27.2",
+ "emath 0.27.2",
  "nohash-hasher",
  "parking_lot",
 ]
@@ -2961,6 +3026,7 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "bevy-inspector-egui",
+ "bevy_pancam",
  "bevy_prototype_lyon",
  "rayon",
 ]
