@@ -16,6 +16,7 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::{prelude::*, sprite::*};
+use bevy_prototype_lyon::prelude::*;
 
 use crate::grid::{components::grid::Grid, constants::GRID_SIZE};
 
@@ -30,26 +31,43 @@ pub(crate) fn init_grids(
         for y in 0..u8::MAX {
             let grid = Grid::new(x, y);
 
-            let mesh_handler =
-                Mesh2dHandle(meshes.add(Rectangle::new(GRID_SIZE as f32, GRID_SIZE as f32)));
+            // let mesh_handler =
+            //     Mesh2dHandle(meshes.add(Rectangle::new(GRID_SIZE as f32, GRID_SIZE as f32)));
 
-            let coordination_sum = x as u16 + y as u16;
-            let color = if coordination_sum % 2 == 0 {
-                Color::WHITE
-            } else {
-                Color::BLACK
-            };
+            // let coordination_sum = x as u16 + y as u16;
+            // let color = if coordination_sum % 2 == 0 {
+            //     Color::WHITE
+            // } else {
+            //     Color::BLACK
+            // };
 
             let (pos_x, pos_y) = grid.positions();
 
+            let shape = shapes::Rectangle {
+                extents: Vec2 {
+                    x: GRID_SIZE as f32,
+                    y: GRID_SIZE as f32,
+                },
+                ..default()
+            };
+
             commands.spawn((
                 grid,
-                MaterialMesh2dBundle {
-                    mesh: mesh_handler,
-                    material: materials.add(color),
-                    transform: Transform::from_xyz(pos_x, pos_y, 0.0),
-                    ..Default::default()
+                // MaterialMesh2dBundle {
+                //     mesh: mesh_handler,
+                //     material: materials.add(color),
+                //     transform: Transform::from_xyz(pos_x, pos_y, 0.0),
+                //     ..Default::default()
+                // },
+                ShapeBundle {
+                    path: GeometryBuilder::build_as(&shape),
+                    spatial: SpatialBundle {
+                        transform: Transform::from_xyz(pos_x, pos_y, 0.0),
+                        ..default()
+                    },
+                    ..default()
                 },
+                Stroke::new(Color::WHITE, 1.0),
             ));
         }
     }
