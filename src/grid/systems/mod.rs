@@ -15,31 +15,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use bevy::{prelude::*, sprite::*};
+use bevy::prelude::*;
 use bevy_prototype_lyon::prelude::*;
 
 use crate::grid::{components::grid::Grid, constants::GRID_SIZE};
 
-pub(crate) fn init_grids(
-    mut commands: Commands,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
-) {
+pub(crate) fn init_grids(mut commands: Commands) {
     debug!("Initializing grids...");
 
     for x in 0..u8::MAX {
         for y in 0..u8::MAX {
             let grid = Grid::new(x, y);
-
-            // let mesh_handler =
-            //     Mesh2dHandle(meshes.add(Rectangle::new(GRID_SIZE as f32, GRID_SIZE as f32)));
-
-            // let coordination_sum = x as u16 + y as u16;
-            // let color = if coordination_sum % 2 == 0 {
-            //     Color::WHITE
-            // } else {
-            //     Color::BLACK
-            // };
 
             let (pos_x, pos_y) = grid.positions();
 
@@ -53,12 +39,6 @@ pub(crate) fn init_grids(
 
             commands.spawn((
                 grid,
-                // MaterialMesh2dBundle {
-                //     mesh: mesh_handler,
-                //     material: materials.add(color),
-                //     transform: Transform::from_xyz(pos_x, pos_y, 0.0),
-                //     ..Default::default()
-                // },
                 ShapeBundle {
                     path: GeometryBuilder::build_as(&shape),
                     spatial: SpatialBundle {
