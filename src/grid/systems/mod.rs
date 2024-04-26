@@ -23,7 +23,7 @@ use crate::{
     grid::{components::grid::Grid, constants::GRID_SIZE},
 };
 
-pub(crate) fn init_grids(game_config: Res<GameConfig>, mut commands: Commands) {
+pub(crate) fn grid_init_system(game_config: Res<GameConfig>, mut commands: Commands) {
     debug!("Initializing grids...");
 
     for x in 0..u8::MAX {
@@ -57,7 +57,7 @@ pub(crate) fn init_grids(game_config: Res<GameConfig>, mut commands: Commands) {
     }
 }
 
-pub(crate) fn paint_grids(
+pub(crate) fn grid_paint_system(
     mut visibility_query: Query<&mut Visibility, With<Grid>>,
     game_config: Res<GameConfig>,
 ) {
