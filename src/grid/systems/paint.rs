@@ -15,20 +15,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod components;
-pub(crate) mod constants;
-mod systems;
-
 use bevy::prelude::*;
 
-use crate::grid::systems::{grid_init_system, paint::grid_paint_system};
+use crate::{core::resources::game_config::GameConfig, grid::components::grid::Grid};
 
-pub(super) struct GridPlugin;
+pub(crate) fn grid_paint_system(
+    mut visibility_query: Query<&mut Visibility, With<Grid>>,
+    game_config: Res<GameConfig>,
+) {
+    debug!("Painting grids...");
 
-impl Plugin for GridPlugin {
-    fn build(&self, app: &mut bevy::prelude::App) {
-        debug!("Initializing GridPlugin...");
-        app.add_systems(Startup, grid_init_system)
-            .add_systems(Update, grid_paint_system);
-    }
+    // REF: https://github.com/bevyengine/bevy/blob/64b987921c4a4d54c3f250ae63bb9eb6b44a02aa/examples/ecs/parallel_query.rs#L31
+    visibility_query.par_iter_mut().for_each(|mut visibility| {
+        *visibility = game_config.grid_visibility();
+    });
 }
