@@ -19,6 +19,7 @@ pub(crate) mod resources;
 
 use bevy::{log::LogPlugin, prelude::*};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use bevy_pancam::{PanCam, PanCamPlugin};
 use bevy_prototype_lyon::prelude::*;
 
 use crate::grid::GridPlugin;
@@ -43,8 +44,7 @@ impl Plugin for CorePlugin {
             }
         });
 
-        app.add_plugins(default_plugins)
-            .add_plugins(ShapePlugin)
+        app.add_plugins((default_plugins, PanCamPlugin, ShapePlugin))
             .insert_resource(GameConfig::default())
             .add_systems(Startup, init_system)
             .add_plugins(GridPlugin);
@@ -58,5 +58,9 @@ impl Plugin for CorePlugin {
 
 fn init_system(mut commands: Commands) {
     debug!("Running CorePlugin::init_system");
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(Camera2dBundle::default()).insert(PanCam {
+        grab_buttons: vec![MouseButton::Middle],
+        enabled: true,
+        ..default()
+    });
 }
