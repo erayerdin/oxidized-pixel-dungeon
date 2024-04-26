@@ -29,3 +29,7 @@ impl GameConfig {
         self.grid_visibility
     }
 }
+
+pub(crate) fn has_game_config_changed(game_config: Res<GameConfig>) -> bool {
+    game_config.is_changed()
+}
