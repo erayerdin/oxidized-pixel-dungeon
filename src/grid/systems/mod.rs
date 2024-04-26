@@ -18,9 +18,12 @@
 use bevy::prelude::*;
 use bevy_prototype_lyon::prelude::*;
 
-use crate::grid::{components::grid::Grid, constants::GRID_SIZE};
+use crate::{
+    core::resources::game_config::GameConfig,
+    grid::{components::grid::Grid, constants::GRID_SIZE},
+};
 
-pub(crate) fn init_grids(mut commands: Commands) {
+pub(crate) fn init_grids(game_config: Res<GameConfig>, mut commands: Commands) {
     debug!("Initializing grids...");
 
     for x in 0..u8::MAX {
@@ -43,6 +46,7 @@ pub(crate) fn init_grids(mut commands: Commands) {
                     path: GeometryBuilder::build_as(&shape),
                     spatial: SpatialBundle {
                         transform: Transform::from_xyz(pos_x, pos_y, 0.0),
+                        visibility: game_config.grid_visibility(),
                         ..default()
                     },
                     ..default()
