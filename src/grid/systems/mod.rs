@@ -56,3 +56,14 @@ pub(crate) fn init_grids(game_config: Res<GameConfig>, mut commands: Commands) {
         }
     }
 }
+
+pub(crate) fn paint_grids(
+    mut visibility_query: Query<&mut Visibility, With<Grid>>,
+    game_config: Res<GameConfig>,
+) {
+    debug!("Painting grids...");
+
+    for mut visibility in visibility_query.iter_mut() {
+        *visibility = game_config.grid_visibility();
+    }
+}

@@ -21,13 +21,14 @@ mod systems;
 
 use bevy::prelude::*;
 
-use crate::grid::systems::init_grids;
+use crate::grid::systems::{init_grids, paint_grids};
 
 pub(super) struct GridPlugin;
 
 impl Plugin for GridPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         debug!("Initializing GridPlugin...");
-        app.add_systems(Startup, init_grids);
+        app.add_systems(Startup, init_grids)
+            .add_systems(Update, paint_grids);
     }
 }
