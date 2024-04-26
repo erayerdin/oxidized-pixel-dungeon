@@ -21,7 +21,7 @@ use bevy::{log::LogPlugin, prelude::*};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_prototype_lyon::prelude::*;
 
-use crate::grid::GridPlugin;
+use crate::{control::ControlPlugin, grid::GridPlugin};
 
 use self::resources::game_config::GameConfig;
 
@@ -47,7 +47,7 @@ impl Plugin for CorePlugin {
             .add_plugins(ShapePlugin)
             .insert_resource(GameConfig::default())
             .add_systems(Startup, init_system)
-            .add_plugins(GridPlugin);
+            .add_plugins((GridPlugin, ControlPlugin));
 
         if cfg!(debug_assertions) {
             app.register_type::<GameConfig>()

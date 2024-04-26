@@ -15,6 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod control;
-pub mod core;
-mod grid;
+use bevy::prelude::*;
+
+pub(crate) struct ControlPlugin;
+
+impl Plugin for ControlPlugin {
+    fn build(&self, app: &mut App) {
+        debug!("Initializing ControlPlugin...");
+    }
+}
