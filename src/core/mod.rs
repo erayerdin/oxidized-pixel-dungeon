@@ -16,6 +16,7 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::{log::LogPlugin, prelude::*};
+use bevy_prototype_lyon::prelude::*;
 
 use crate::grid::GridPlugin;
 
@@ -38,6 +39,7 @@ impl Plugin for CorePlugin {
         });
 
         app.add_plugins(default_plugins)
+            .add_plugins(ShapePlugin)
             .add_systems(Startup, init_system)
             .add_plugins(GridPlugin);
     }
