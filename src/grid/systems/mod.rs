@@ -63,7 +63,7 @@ pub(crate) fn grid_paint_system(
 ) {
     debug!("Painting grids...");
 
-    for mut visibility in visibility_query.iter_mut() {
+    visibility_query.par_iter_mut().for_each(|mut visibility| {
         *visibility = game_config.grid_visibility();
-    }
+    });
 }
