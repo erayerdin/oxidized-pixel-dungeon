@@ -15,10 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
+pub(crate) mod resources;
+
 use bevy::{log::LogPlugin, prelude::*};
 use bevy_prototype_lyon::prelude::*;
 
 use crate::grid::GridPlugin;
+
+use self::resources::game_config::GameConfig;
 
 pub struct CorePlugin;
 
@@ -40,6 +44,7 @@ impl Plugin for CorePlugin {
 
         app.add_plugins(default_plugins)
             .add_plugins(ShapePlugin)
+            .insert_resource(GameConfig::default())
             .add_systems(Startup, init_system)
             .add_plugins(GridPlugin);
     }
