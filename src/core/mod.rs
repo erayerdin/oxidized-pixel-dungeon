@@ -18,6 +18,7 @@
 pub(crate) mod resources;
 
 use bevy::{log::LogPlugin, prelude::*};
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_prototype_lyon::prelude::*;
 
 use crate::grid::GridPlugin;
@@ -47,6 +48,11 @@ impl Plugin for CorePlugin {
             .insert_resource(GameConfig::default())
             .add_systems(Startup, init_system)
             .add_plugins(GridPlugin);
+
+        if cfg!(debug_assertions) {
+            app.register_type::<GameConfig>()
+                .add_plugins(WorldInspectorPlugin::new());
+        }
     }
 }
 

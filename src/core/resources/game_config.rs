@@ -16,8 +16,10 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
+use bevy_inspector_egui::prelude::*;
 
-#[derive(Debug, Resource)]
+#[derive(Debug, Resource, Reflect, InspectorOptions)]
+#[reflect(Resource, InspectorOptions)]
 pub(crate) struct GameConfig {
     grid_visibility: Visibility,
 }
