@@ -17,21 +17,28 @@
 
 use bevy::prelude::*;
 use bevy_prototype_lyon::prelude::*;
+use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 
 use crate::{
     core::resources::game_config::GameConfig,
     grid::{components::grid::Grid, constants::GRID_SIZE},
 };
 
-pub(crate) fn grid_init_system(game_config: Res<GameConfig>, mut commands: Commands) {
+pub(crate) fn grid_init_system(game_config: Res<GameConfig>, par_commands: ParallelCommands) {
     debug!("Initializing grids...");
+    const TOTAL_GRID_LENGTH: u16 = u8::MAX as u16 * u8::MAX as u16;
+    let mut grid_spawners: Vec<(Grid, Stroke)> = Vec::with_capacity(TOTAL_GRID_LENGTH as usize);
 
     for x in 0..u8::MAX {
         for y in 0..u8::MAX {
             let grid = Grid::new(x, y);
+            let spawner: (Grid, Stroke) = (grid, Stroke::new(Color::WHITE, 1.0));
+            grid_spawners.push(spawner);
+        }
+    }
 
-            let (pos_x, pos_y) = grid.positions();
-
+    grid_spawners.par_iter().for_each(|(grid, stroke)| {
+        par_commands.command_scope(|mut commands| {
             let shape = shapes::Rectangle {
                 extents: Vec2 {
                     x: GRID_SIZE as f32,
@@ -39,9 +46,10 @@ pub(crate) fn grid_init_system(game_config: Res<GameConfig>, mut commands: Comma
                 },
                 ..default()
             };
+            let (pos_x, pos_y) = grid.positions();
 
             commands.spawn((
-                grid,
+                *grid,
                 ShapeBundle {
                     path: GeometryBuilder::build_as(&shape),
                     spatial: SpatialBundle {
@@ -51,10 +59,10 @@ pub(crate) fn grid_init_system(game_config: Res<GameConfig>, mut commands: Comma
                     },
                     ..default()
                 },
-                Stroke::new(Color::WHITE, 1.0),
+                *stroke,
             ));
-        }
-    }
+        });
+    });
 }
 
 pub(crate) fn grid_paint_system(
@@ -63,6 +71,7 @@ pub(crate) fn grid_paint_system(
 ) {
     debug!("Painting grids...");
 
+    // REF: https://github.com/bevyengine/bevy/blob/64b987921c4a4d54c3f250ae63bb9eb6b44a02aa/examples/ecs/parallel_query.rs#L31
     visibility_query.par_iter_mut().for_each(|mut visibility| {
         *visibility = game_config.grid_visibility();
     });
