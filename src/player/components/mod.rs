@@ -25,8 +25,8 @@ pub(crate) enum PlayerClass {
     Warrior,
 }
 
-impl<'a> From<PlayerClass> for AssetPath<'a> {
-    fn from(value: PlayerClass) -> Self {
+impl<'a> From<&PlayerClass> for AssetPath<'a> {
+    fn from(value: &PlayerClass) -> Self {
         match value {
             PlayerClass::Warrior => "spd/sprites/warrior.png".into(),
         }
