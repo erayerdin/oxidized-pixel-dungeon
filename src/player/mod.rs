@@ -16,13 +16,17 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 mod components;
+mod systems;
 
 use bevy::prelude::*;
+
+use crate::player::systems::init_player;
 
 pub(crate) struct PlayerPlugin;
 
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         debug!("Initializing PlayerPlugin...");
+        app.add_systems(Startup, init_player);
     }
 }
