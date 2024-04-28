@@ -20,6 +20,9 @@ use std::path::Path;
 use bevy::prelude::*;
 
 #[derive(Debug, Component)]
+pub(crate) struct Player;
+
+#[derive(Debug, Component)]
 pub(crate) enum PlayerClass {
     Warrior,
 }
