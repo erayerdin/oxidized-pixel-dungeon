@@ -15,9 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use std::path::Path;
-
-use bevy::prelude::*;
+use bevy::{asset::AssetPath, prelude::*};
 
 #[derive(Debug, Component)]
 pub(crate) struct Player;
@@ -27,10 +25,10 @@ pub(crate) enum PlayerClass {
     Warrior,
 }
 
-impl From<PlayerClass> for &Path {
-    fn from(val: PlayerClass) -> Self {
-        match val {
-            PlayerClass::Warrior => Path::new("spd/sprites/warrior.png"),
+impl<'a> From<PlayerClass> for AssetPath<'a> {
+    fn from(value: PlayerClass) -> Self {
+        match value {
+            PlayerClass::Warrior => "spd/sprites/warrior.png".into(),
         }
     }
 }
