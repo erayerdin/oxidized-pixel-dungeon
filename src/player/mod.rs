@@ -15,6 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-mod grid;
-mod player;
+use bevy::prelude::*;
+
+pub(crate) struct PlayerPlugin;
+
+impl Plugin for PlayerPlugin {
+    fn build(&self, app: &mut App) {
+        debug!("Initializing PlayerPlugin...");
+    }
+}

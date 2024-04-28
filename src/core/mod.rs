@@ -22,7 +22,7 @@ use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_pancam::{PanCam, PanCamPlugin};
 use bevy_prototype_lyon::prelude::*;
 
-use crate::grid::GridPlugin;
+use crate::{grid::GridPlugin, player::PlayerPlugin};
 
 use self::resources::game_config::GameConfig;
 
@@ -47,7 +47,7 @@ impl Plugin for CorePlugin {
         app.add_plugins((default_plugins, PanCamPlugin, ShapePlugin))
             .insert_resource(GameConfig::default())
             .add_systems(Startup, init_system)
-            .add_plugins(GridPlugin);
+            .add_plugins((GridPlugin, PlayerPlugin));
 
         if cfg!(debug_assertions) {
             app.register_type::<GameConfig>()
