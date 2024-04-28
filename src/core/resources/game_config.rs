@@ -18,7 +18,7 @@
 use bevy::prelude::*;
 use bevy_inspector_egui::prelude::*;
 
-#[derive(Debug, Default, Resource, Reflect, InspectorOptions)]
+#[derive(Debug, Resource, Reflect, InspectorOptions)]
 #[reflect(Resource, InspectorOptions)]
 pub(crate) struct GameConfig {
     grid_visibility: Visibility,
@@ -27,6 +27,14 @@ pub(crate) struct GameConfig {
 impl GameConfig {
     pub(crate) fn grid_visibility(&self) -> Visibility {
         self.grid_visibility
+    }
+}
+
+impl Default for GameConfig {
+    fn default() -> Self {
+        Self {
+            grid_visibility: Visibility::Hidden,
+        }
     }
 }
 
