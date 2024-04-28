@@ -44,10 +44,14 @@ impl Plugin for CorePlugin {
             }
         });
 
-        app.add_plugins((default_plugins, PanCamPlugin, ShapePlugin))
-            .insert_resource(GameConfig::default())
-            .add_systems(Startup, init_system)
-            .add_plugins((GridPlugin, PlayerPlugin));
+        app.add_plugins((
+            default_plugins.set(ImagePlugin::default_nearest()),
+            PanCamPlugin,
+            ShapePlugin,
+        ))
+        .insert_resource(GameConfig::default())
+        .add_systems(Startup, init_system)
+        .add_plugins((GridPlugin, PlayerPlugin));
 
         if cfg!(debug_assertions) {
             app.register_type::<GameConfig>()
