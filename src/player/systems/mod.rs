@@ -29,7 +29,13 @@ pub(crate) fn init_player(
     let player_class = PlayerClass::Warrior;
 
     let texture: Handle<Image> = asset_server.load(&player_class);
-    let layout = TextureAtlasLayout::from_grid(Vec2::new(13.0, 15.0), 21, 7, None, None);
+    let layout = TextureAtlasLayout::from_grid(
+        Vec2::new(11.0, 15.0),
+        21,
+        7,
+        Some(Vec2::new(1.0, 0.0)),
+        None,
+    );
     let texture_atlas_layout = texture_atlas_layouts.add(layout);
 
     commands.spawn((
@@ -39,7 +45,7 @@ pub(crate) fn init_player(
             texture,
             atlas: TextureAtlas {
                 layout: texture_atlas_layout,
-                index: 1,
+                index: 0,
             },
             transform: Transform::from_xyz(0.0, 0.0, 0.0),
             ..default()
