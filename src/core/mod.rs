@@ -15,16 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod resources;
-
 use bevy::{log::LogPlugin, prelude::*};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_pancam::{PanCam, PanCamPlugin};
 use bevy_prototype_lyon::prelude::*;
 
 use crate::{grid::GridPlugin, player::PlayerPlugin};
-
-use self::resources::game_config::GameConfig;
 
 pub struct CorePlugin;
 
@@ -49,14 +45,8 @@ impl Plugin for CorePlugin {
             PanCamPlugin,
             ShapePlugin,
         ))
-        .insert_resource(GameConfig::default())
         .add_systems(Startup, init_system)
         .add_plugins((GridPlugin, PlayerPlugin));
-
-        if cfg!(debug_assertions) {
-            app.register_type::<GameConfig>()
-                .add_plugins(WorldInspectorPlugin::new());
-        }
     }
 }
 

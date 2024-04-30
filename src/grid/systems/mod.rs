@@ -15,18 +15,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod paint;
-
 use bevy::prelude::*;
 use bevy_prototype_lyon::prelude::*;
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 
-use crate::{
-    core::resources::game_config::GameConfig,
-    grid::{components::grid::Grid, constants::GRID_SIZE},
-};
+use crate::grid::{components::grid::Grid, constants::GRID_SIZE};
 
-pub(crate) fn grid_init_system(game_config: Res<GameConfig>, par_commands: ParallelCommands) {
+pub(crate) fn grid_init_system(par_commands: ParallelCommands) {
     debug!("Initializing grids...");
     const TOTAL_GRID_LENGTH: u16 = u8::MAX as u16 * u8::MAX as u16;
     let mut grid_spawners: Vec<(Grid, Stroke)> = Vec::with_capacity(TOTAL_GRID_LENGTH as usize);
@@ -50,19 +45,7 @@ pub(crate) fn grid_init_system(game_config: Res<GameConfig>, par_commands: Paral
             };
             let (pos_x, pos_y) = grid.positions();
 
-            commands.spawn((
-                *grid,
-                ShapeBundle {
-                    path: GeometryBuilder::build_as(&shape),
-                    spatial: SpatialBundle {
-                        transform: Transform::from_xyz(pos_x, pos_y, 0.0),
-                        visibility: game_config.grid_visibility(),
-                        ..default()
-                    },
-                    ..default()
-                },
-                *stroke,
-            ));
+            commands.spawn((*grid, *stroke));
         });
     });
 }
