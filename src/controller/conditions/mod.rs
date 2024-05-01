@@ -15,12 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod conditions;
-
 use bevy::prelude::*;
 
-pub struct ControllerPlugin;
-
-impl Plugin for ControllerPlugin {
-    fn build(&self, _: &mut App) {}
+pub(crate) fn arrow_keys_condition(keys: Res<ButtonInput<KeyCode>>) -> bool {
+    keys.is_changed()
+        && keys.any_just_pressed([
+            KeyCode::ArrowUp,
+            KeyCode::ArrowDown,
+            KeyCode::ArrowLeft,
+            KeyCode::ArrowRight,
+        ])
 }
