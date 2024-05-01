@@ -20,6 +20,7 @@ pub(crate) mod position;
 use bevy::prelude::*;
 
 use crate::{
+    core::components::Character,
     grid::components::grid::Grid,
     player::components::{Player, PlayerClass},
 };
@@ -47,6 +48,7 @@ pub(crate) fn player_init_system(
 
     commands.spawn((
         Name::new("Player"),
+        Character,
         Player,
         player_class,
         SpriteSheetBundle {
