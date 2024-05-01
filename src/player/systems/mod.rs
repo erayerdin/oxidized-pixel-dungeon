@@ -53,7 +53,7 @@ pub(crate) fn init_player(
                 layout: texture_atlas_layout,
                 index: 0,
             },
-            transform: grid.into_transform(0.0),
+            transform: grid.transform(0.0),
             ..default()
         },
         grid,

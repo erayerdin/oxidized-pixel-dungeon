@@ -20,10 +20,14 @@ pub(crate) mod constants;
 
 use bevy::prelude::*;
 
+use crate::grid::components::grid::Grid;
+
 pub(super) struct GridPlugin;
 
 impl Plugin for GridPlugin {
-    fn build(&self, _: &mut bevy::prelude::App) {
+    fn build(&self, app: &mut bevy::prelude::App) {
         debug!("Initializing GridPlugin...");
+
+        app.register_type::<Grid>();
     }
 }

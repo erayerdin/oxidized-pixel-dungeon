@@ -19,7 +19,7 @@ use bevy::prelude::*;
 
 use crate::grid::constants::GRID_SIZE;
 
-#[derive(Debug, Component, Clone, Copy)]
+#[derive(Debug, Component, Reflect)]
 /// Defines a single grid.
 /// As `Cell` is a term used in Rust terminology, Grid is a better way to refer to this.
 pub(crate) struct Grid(u8, u8);
@@ -29,7 +29,7 @@ impl Grid {
         Self(x, y)
     }
 
-    pub(crate) fn into_transform(self, z: f32) -> Transform {
+    pub(crate) fn transform(&self, z: f32) -> Transform {
         Transform::from_xyz(
             self.0 as f32 * GRID_SIZE as f32,
             self.1 as f32 * GRID_SIZE as f32,
