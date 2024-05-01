@@ -45,3 +45,13 @@ pub(crate) fn player_move_system(
 
     *grid = new_grid;
 }
+
+pub(crate) fn player_sprite_flip_system(
+    keys: Res<ButtonInput<KeyCode>>,
+    mut sprite_query: Query<&mut Sprite, With<Player>>,
+) {
+    let mut sprite = sprite_query.single_mut();
+    let flip_x = keys.just_pressed(KeyCode::ArrowLeft);
+
+    sprite.flip_x = flip_x;
+}

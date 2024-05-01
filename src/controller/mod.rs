@@ -20,12 +20,21 @@ mod systems;
 
 use bevy::prelude::*;
 
-use self::{conditions::arrow_keys_condition, systems::player_move_system};
+use self::{
+    conditions::{arrow_keys_condition, horizontal_keys_condition},
+    systems::{player_move_system, player_sprite_flip_system},
+};
 
 pub struct ControllerPlugin;
 
 impl Plugin for ControllerPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Update, player_move_system.run_if(arrow_keys_condition));
+        app.add_systems(
+            Update,
+            (
+                player_move_system.run_if(arrow_keys_condition),
+                player_sprite_flip_system.run_if(horizontal_keys_condition),
+            ),
+        );
     }
 }
