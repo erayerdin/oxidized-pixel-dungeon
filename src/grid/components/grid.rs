@@ -22,17 +22,20 @@ use crate::grid::constants::GRID_SIZE;
 #[derive(Debug, Component, Reflect)]
 /// Defines a single grid.
 /// As `Cell` is a term used in Rust terminology, Grid is a better way to refer to this.
-pub(crate) struct Grid(u8, u8);
+pub(crate) struct Grid {
+    x: u8,
+    y: u8,
+}
 
 impl Grid {
     pub(crate) fn new(x: u8, y: u8) -> Self {
-        Self(x, y)
+        Self { x, y }
     }
 
     pub(crate) fn transform(&self, z: f32) -> Transform {
         Transform::from_xyz(
-            self.0 as f32 * GRID_SIZE as f32,
-            self.1 as f32 * GRID_SIZE as f32,
+            self.x as f32 * GRID_SIZE as f32,
+            self.y as f32 * GRID_SIZE as f32,
             z,
         )
     }
