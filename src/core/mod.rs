@@ -16,6 +16,7 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::{log::LogPlugin, prelude::*};
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_pancam::{PanCam, PanCamPlugin};
 use bevy_prototype_lyon::prelude::*;
 
@@ -46,6 +47,10 @@ impl Plugin for CorePlugin {
         ))
         .add_systems(Startup, init_system)
         .add_plugins((GridPlugin, PlayerPlugin));
+
+        if cfg!(debug_assertions) {
+            app.add_plugins(WorldInspectorPlugin::new());
+        }
     }
 }
 
