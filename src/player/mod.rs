@@ -20,13 +20,13 @@ mod systems;
 
 use bevy::prelude::*;
 
-use crate::player::systems::init_player;
+use crate::player::systems::player_init_system;
 
 pub(crate) struct PlayerPlugin;
 
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         debug!("Initializing PlayerPlugin...");
-        app.add_systems(Startup, init_player);
+        app.add_systems(Startup, player_init_system);
     }
 }

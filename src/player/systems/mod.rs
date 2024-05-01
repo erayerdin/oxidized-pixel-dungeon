@@ -22,7 +22,7 @@ use crate::{
     player::components::{Player, PlayerClass},
 };
 
-pub(crate) fn init_player(
+pub(crate) fn player_init_system(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
