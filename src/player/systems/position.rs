@@ -15,19 +15,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod components;
-mod systems;
-
 use bevy::prelude::*;
 
-use crate::player::systems::{player_init_system, position::player_position_system};
+use crate::{grid::components::grid::Grid, player::components::Player};
 
-pub(crate) struct PlayerPlugin;
+type TransformGridQuery<'a> = (&'a mut Transform, &'a Grid);
 
-impl Plugin for PlayerPlugin {
-    fn build(&self, app: &mut App) {
-        debug!("Initializing PlayerPlugin...");
-        app.add_systems(Startup, player_init_system)
-            .add_systems(Update, player_position_system);
+pub(crate) fn player_position_system(
+    mut transform_grid_query: Query<TransformGridQuery, (With<Player>, Changed<Grid>)>,
+) {
+    trace_span!("Repositioning Player due to grid change...");
+
+    for (mut transform, grid) in transform_grid_query.iter_mut() {
+        transform.translation = grid.transform(0.0).translation;
     }
 }
