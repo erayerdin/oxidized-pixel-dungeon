@@ -44,6 +44,7 @@ pub(crate) fn init_player(
     let grid = Grid::new(0, 0);
 
     commands.spawn((
+        Name::new("Player"),
         Player,
         player_class,
         SpriteSheetBundle {
