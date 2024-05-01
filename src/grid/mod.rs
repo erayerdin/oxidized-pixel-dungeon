@@ -22,7 +22,7 @@ use bevy::prelude::*;
 
 use crate::grid::components::grid::Grid;
 
-pub(super) struct GridPlugin;
+pub struct GridPlugin;
 
 impl Plugin for GridPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {

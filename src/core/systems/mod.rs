@@ -15,16 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod systems;
-
 use bevy::prelude::*;
+use bevy_pancam::PanCam;
 
-use self::systems::camera_init_system;
-
-pub struct CorePlugin;
-
-impl Plugin for CorePlugin {
-    fn build(&self, app: &mut bevy::prelude::App) {
-        app.add_systems(Startup, camera_init_system);
-    }
+pub(crate) fn camera_init_system(mut commands: Commands) {
+    debug!("Running CorePlugin::init_system");
+    commands.spawn(Camera2dBundle::default()).insert(PanCam {
+        grab_buttons: vec![MouseButton::Middle],
+        enabled: true,
+        ..default()
+    });
 }

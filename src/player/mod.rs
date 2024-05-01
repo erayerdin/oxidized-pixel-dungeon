@@ -22,7 +22,7 @@ use bevy::prelude::*;
 
 use crate::player::systems::{player_init_system, position::player_position_system};
 
-pub(crate) struct PlayerPlugin;
+pub struct PlayerPlugin;
 
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
