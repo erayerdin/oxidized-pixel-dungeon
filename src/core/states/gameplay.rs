@@ -15,19 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod components;
-pub(crate) mod states;
-pub(crate) mod systems;
-
 use bevy::prelude::*;
 
-use self::{states::GameplayState, systems::camera_init_system};
-
-pub struct CorePlugin;
-
-impl Plugin for CorePlugin {
-    fn build(&self, app: &mut bevy::prelude::App) {
-        app.init_state::<GameplayState>()
-            .add_systems(Startup, camera_init_system);
-    }
+/// A state which defines in-game turn state.
+#[derive(Debug, Eq, PartialEq, Hash, Clone, Default, States)]
+pub(crate) enum GameplayState {
+    /// The game is waiting for the user input.
+    #[default]
+    Awaiting,
+    /// The game is running the outcomes of turns.
+    InProgress,
 }

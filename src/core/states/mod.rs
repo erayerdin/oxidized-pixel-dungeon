@@ -15,19 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod components;
-pub(crate) mod states;
-pub(crate) mod systems;
+mod gameplay;
 
-use bevy::prelude::*;
-
-use self::{states::GameplayState, systems::camera_init_system};
-
-pub struct CorePlugin;
-
-impl Plugin for CorePlugin {
-    fn build(&self, app: &mut bevy::prelude::App) {
-        app.init_state::<GameplayState>()
-            .add_systems(Startup, camera_init_system);
-    }
-}
+pub(crate) use gameplay::GameplayState;
