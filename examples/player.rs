@@ -19,7 +19,9 @@ use bevy::{log::LogPlugin, prelude::*};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_pancam::PanCamPlugin;
 use bevy_prototype_lyon::plugin::ShapePlugin;
-use oxidized_pixel_dungeon::{core::CorePlugin, grid::GridPlugin, player::PlayerPlugin};
+use oxidized_pixel_dungeon::{
+    controller::ControllerPlugin, core::CorePlugin, grid::GridPlugin, player::PlayerPlugin,
+};
 
 fn main() {
     let mut app = App::new();
@@ -43,7 +45,7 @@ fn main() {
         PanCamPlugin,
         ShapePlugin,
     ))
-    .add_plugins((CorePlugin, GridPlugin, PlayerPlugin));
+    .add_plugins((CorePlugin, GridPlugin, PlayerPlugin, ControllerPlugin));
 
     if cfg!(debug_assertions) {
         app.add_plugins(WorldInspectorPlugin::new());
