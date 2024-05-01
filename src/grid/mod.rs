@@ -17,17 +17,13 @@
 
 pub mod components;
 pub(crate) mod constants;
-mod systems;
 
 use bevy::prelude::*;
-
-use crate::grid::systems::grid_init_system;
 
 pub(super) struct GridPlugin;
 
 impl Plugin for GridPlugin {
-    fn build(&self, app: &mut bevy::prelude::App) {
+    fn build(&self, _: &mut bevy::prelude::App) {
         debug!("Initializing GridPlugin...");
-        app.add_systems(Startup, grid_init_system);
     }
 }
