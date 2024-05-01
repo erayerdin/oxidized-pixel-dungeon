@@ -15,12 +15,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod conditions;
+mod conditions;
+mod systems;
 
 use bevy::prelude::*;
+
+use self::{conditions::arrow_keys_condition, systems::player_move_system};
 
 pub struct ControllerPlugin;
 
 impl Plugin for ControllerPlugin {
-    fn build(&self, _: &mut App) {}
+    fn build(&self, app: &mut App) {
+        app.add_systems(Update, player_move_system.run_if(arrow_keys_condition));
+    }
 }
