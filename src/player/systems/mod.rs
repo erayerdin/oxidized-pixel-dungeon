@@ -17,7 +17,10 @@
 
 use bevy::prelude::*;
 
-use crate::player::components::{Player, PlayerClass};
+use crate::{
+    grid::components::grid::Grid,
+    player::components::{Player, PlayerClass},
+};
 
 pub(crate) fn init_player(
     mut commands: Commands,
@@ -38,6 +41,8 @@ pub(crate) fn init_player(
     );
     let texture_atlas_layout = texture_atlas_layouts.add(layout);
 
+    let grid = Grid::new(0, 0);
+
     commands.spawn((
         Player,
         player_class,
@@ -47,8 +52,9 @@ pub(crate) fn init_player(
                 layout: texture_atlas_layout,
                 index: 0,
             },
-            transform: Transform::from_xyz(0.0, 0.0, 0.0),
+            transform: grid.into_transform(0.0),
             ..default()
         },
+        grid,
     ));
 }
