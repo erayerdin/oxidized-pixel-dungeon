@@ -26,3 +26,7 @@ pub(crate) fn arrow_keys_condition(keys: Res<ButtonInput<KeyCode>>) -> bool {
             KeyCode::ArrowRight,
         ])
 }
+
+pub(crate) fn horizontal_keys_condition(keys: Res<ButtonInput<KeyCode>>) -> bool {
+    keys.is_changed() && keys.any_just_pressed([KeyCode::ArrowLeft, KeyCode::ArrowRight])
+}
