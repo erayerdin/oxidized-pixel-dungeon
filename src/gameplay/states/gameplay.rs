@@ -17,12 +17,12 @@
 
 use bevy::prelude::*;
 
-/// A state which defines in-game turn state.
-#[derive(Debug, Eq, PartialEq, Hash, Clone, Default, States, Reflect)]
+/// State of gameplay.
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, States, Reflect)]
 pub(crate) enum GameplayState {
-    /// The game is waiting for the user input.
+    /// Awaiting user input.
     #[default]
     Awaiting,
-    /// The game is running the outcomes of turns.
-    InProgress,
+    /// In transition.
+    Transitioning,
 }

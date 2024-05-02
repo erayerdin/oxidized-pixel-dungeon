@@ -16,9 +16,18 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
+use bevy_inspector_egui::quick::StateInspectorPlugin;
+
+use self::states::GameplayState;
+
+pub(crate) mod states;
 
 pub struct GameplayPlugin;
 
 impl Plugin for GameplayPlugin {
-    fn build(&self, _: &mut App) {}
+    fn build(&self, app: &mut App) {
+        app.init_state::<GameplayState>()
+            .register_type::<GameplayState>()
+            .add_plugins(StateInspectorPlugin::<GameplayState>::default());
+    }
 }
