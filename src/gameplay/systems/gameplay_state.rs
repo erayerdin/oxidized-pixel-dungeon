@@ -16,24 +16,22 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
-use bevy_inspector_egui::quick::StateInspectorPlugin;
 
-use self::{states::GameplayState, systems::gameplay_state_transitioning_setter_system};
+use crate::gameplay::states::GameplayState;
 
-pub(crate) mod states;
-pub(crate) mod systems;
+pub(crate) fn gameplay_state_transitioning_setter_system(
+    keys: Res<ButtonInput<KeyCode>>,
+    mut next_gameplay_state: ResMut<NextState<GameplayState>>,
+) {
+    const TRANSITIONING_SETTER_KEYCODES: [KeyCode; 4] = [
+        KeyCode::ArrowLeft,
+        KeyCode::ArrowRight,
+        KeyCode::ArrowDown,
+        KeyCode::ArrowUp,
+    ];
 
-pub struct GameplayPlugin;
-
-impl Plugin for GameplayPlugin {
-    fn build(&self, app: &mut App) {
-        app.init_state::<GameplayState>()
-            .register_type::<GameplayState>()
-            .add_plugins(StateInspectorPlugin::<GameplayState>::default())
-            .add_systems(
-                Update,
-                gameplay_state_transitioning_setter_system
-                    .run_if(in_state(GameplayState::Awaiting)),
-            );
+    if keys.any_just_pressed(TRANSITIONING_SETTER_KEYCODES) {
+        trace!("GameplayState::Transitioning setter system triggered.");
+        next_gameplay_state.set(GameplayState::Transitioning);
     }
 }

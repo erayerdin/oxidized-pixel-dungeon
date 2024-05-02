@@ -15,25 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use bevy::prelude::*;
-use bevy_inspector_egui::quick::StateInspectorPlugin;
+mod gameplay_state;
 
-use self::{states::GameplayState, systems::gameplay_state_transitioning_setter_system};
-
-pub(crate) mod states;
-pub(crate) mod systems;
-
-pub struct GameplayPlugin;
-
-impl Plugin for GameplayPlugin {
-    fn build(&self, app: &mut App) {
-        app.init_state::<GameplayState>()
-            .register_type::<GameplayState>()
-            .add_plugins(StateInspectorPlugin::<GameplayState>::default())
-            .add_systems(
-                Update,
-                gameplay_state_transitioning_setter_system
-                    .run_if(in_state(GameplayState::Awaiting)),
-            );
-    }
-}
+pub(crate) use gameplay_state::gameplay_state_transitioning_setter_system;
