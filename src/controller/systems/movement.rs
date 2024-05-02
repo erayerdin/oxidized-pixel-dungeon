@@ -17,11 +17,11 @@
 
 use bevy::prelude::*;
 
-use crate::{grid::components::grid::Grid, player::components::Player};
+use crate::{core::components::Character, grid::components::grid::Grid};
 
-pub(crate) fn player_move_system(
+pub(crate) fn character_movement_system(
     keys: Res<ButtonInput<KeyCode>>,
-    mut transform_grid_player_query: Query<(&mut Transform, &mut Grid), With<Player>>,
+    mut transform_grid_player_query: Query<(&mut Transform, &mut Grid), With<Character>>,
 ) {
     let (mut transform, mut grid) = transform_grid_player_query.single_mut();
     let mut new_grid = grid.clone();
@@ -46,9 +46,9 @@ pub(crate) fn player_move_system(
     *grid = new_grid;
 }
 
-pub(crate) fn player_sprite_flip_system(
+pub(crate) fn character_sprite_flip_system(
     keys: Res<ButtonInput<KeyCode>>,
-    mut sprite_query: Query<&mut Sprite, With<Player>>,
+    mut sprite_query: Query<&mut Sprite, With<Character>>,
 ) {
     let mut sprite = sprite_query.single_mut();
     let flip_x = keys.just_pressed(KeyCode::ArrowLeft);

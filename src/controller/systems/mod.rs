@@ -17,4 +17,4 @@
 
 mod movement;
 
-pub(crate) use movement::{player_move_system, player_sprite_flip_system};
+pub(crate) use movement::{character_movement_system, character_sprite_flip_system};
