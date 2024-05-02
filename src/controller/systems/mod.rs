@@ -15,43 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use bevy::prelude::*;
+mod movement;
 
-use crate::{grid::components::grid::Grid, player::components::Player};
-
-pub(crate) fn player_move_system(
-    keys: Res<ButtonInput<KeyCode>>,
-    mut transform_grid_player_query: Query<(&mut Transform, &mut Grid), With<Player>>,
-) {
-    let (mut transform, mut grid) = transform_grid_player_query.single_mut();
-    let mut new_grid = grid.clone();
-
-    if keys.pressed(KeyCode::ArrowLeft) {
-        new_grid = grid.sub_x();
-        transform.translation = new_grid.transform(0.0).translation;
-    }
-    if keys.pressed(KeyCode::ArrowRight) {
-        new_grid = grid.add_x();
-        transform.translation = new_grid.transform(0.0).translation;
-    }
-    if keys.pressed(KeyCode::ArrowUp) {
-        new_grid = grid.add_y();
-        transform.translation = new_grid.transform(0.0).translation;
-    }
-    if keys.pressed(KeyCode::ArrowDown) {
-        new_grid = grid.sub_y();
-        transform.translation = new_grid.transform(0.0).translation;
-    }
-
-    *grid = new_grid;
-}
-
-pub(crate) fn player_sprite_flip_system(
-    keys: Res<ButtonInput<KeyCode>>,
-    mut sprite_query: Query<&mut Sprite, With<Player>>,
-) {
-    let mut sprite = sprite_query.single_mut();
-    let flip_x = keys.just_pressed(KeyCode::ArrowLeft);
-
-    sprite.flip_x = flip_x;
-}
+pub(crate) use movement::{player_move_system, player_sprite_flip_system};
