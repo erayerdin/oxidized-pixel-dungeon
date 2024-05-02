@@ -17,14 +17,9 @@
 
 use bevy::prelude::*;
 
-use crate::gameplay::{constants::TRANSITIONING_SETTER_KEYCODES, states::GameplayState};
-
-pub(crate) fn gameplay_state_transitioning_setter_system(
-    keys: Res<ButtonInput<KeyCode>>,
-    mut next_gameplay_state: ResMut<NextState<GameplayState>>,
-) {
-    if keys.any_just_pressed(TRANSITIONING_SETTER_KEYCODES) {
-        trace!("GameplayState::Transitioning setter system triggered.");
-        next_gameplay_state.set(GameplayState::Transitioning);
-    }
-}
+pub(crate) const TRANSITIONING_SETTER_KEYCODES: [KeyCode; 4] = [
+    KeyCode::ArrowLeft,
+    KeyCode::ArrowRight,
+    KeyCode::ArrowDown,
+    KeyCode::ArrowUp,
+];

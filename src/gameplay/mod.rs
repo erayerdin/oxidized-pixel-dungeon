@@ -20,6 +20,7 @@ use bevy_inspector_egui::quick::StateInspectorPlugin;
 
 use self::{states::GameplayState, systems::gameplay_state_transitioning_setter_system};
 
+pub(crate) mod constants;
 pub(crate) mod states;
 pub(crate) mod systems;
 
