@@ -17,14 +17,14 @@
 
 use bevy::prelude::*;
 
-use crate::{grid::components::grid::Grid, player::components::Player};
+use crate::{core::components::Character, grid::components::grid::Grid};
 
 type TransformGridQuery<'a> = (&'a mut Transform, &'a Grid);
 
-pub(crate) fn player_position_system(
-    mut transform_grid_query: Query<TransformGridQuery, (With<Player>, Changed<Grid>)>,
+pub(crate) fn character_movement_system(
+    mut transform_grid_query: Query<TransformGridQuery, (With<Character>, Changed<Grid>)>,
 ) {
-    trace_span!("Repositioning Player due to grid change...");
+    trace_span!("Repositioning Character due to grid change...");
 
     for (mut transform, grid) in transform_grid_query.iter_mut() {
         transform.translation = grid.transform(0.0).translation;

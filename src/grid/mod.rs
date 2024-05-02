@@ -17,10 +17,11 @@
 
 pub mod components;
 pub(crate) mod constants;
+mod systems;
 
 use bevy::prelude::*;
 
-use crate::grid::components::grid::Grid;
+use crate::grid::{components::grid::Grid, systems::movement::character_movement_system};
 
 pub struct GridPlugin;
 
@@ -28,6 +29,7 @@ impl Plugin for GridPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         debug!("Initializing GridPlugin...");
 
-        app.register_type::<Grid>();
+        app.register_type::<Grid>()
+            .add_systems(Update, character_movement_system);
     }
 }
