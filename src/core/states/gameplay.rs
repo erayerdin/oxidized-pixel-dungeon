@@ -18,7 +18,7 @@
 use bevy::prelude::*;
 
 /// A state which defines in-game turn state.
-#[derive(Debug, Eq, PartialEq, Hash, Clone, Default, States)]
+#[derive(Debug, Eq, PartialEq, Hash, Clone, Default, States, Reflect)]
 pub(crate) enum GameplayState {
     /// The game is waiting for the user input.
     #[default]

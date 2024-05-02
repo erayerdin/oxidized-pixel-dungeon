@@ -20,6 +20,7 @@ pub(crate) mod states;
 pub(crate) mod systems;
 
 use bevy::prelude::*;
+use bevy_inspector_egui::quick::StateInspectorPlugin;
 
 use self::{states::GameplayState, systems::camera_init_system};
 
@@ -28,6 +29,8 @@ pub struct CorePlugin;
 impl Plugin for CorePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.init_state::<GameplayState>()
+            .register_type::<GameplayState>()
+            .add_plugins(StateInspectorPlugin::<GameplayState>::default())
             .add_systems(Startup, camera_init_system);
     }
 }
