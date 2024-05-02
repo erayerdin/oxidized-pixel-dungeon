@@ -17,4 +17,13 @@
 
 mod movement;
 
+use bevy::prelude::*;
 pub(crate) use movement::{character_movement_system, character_sprite_flip_system};
+
+use crate::core::states::GameplayState;
+
+pub(crate) fn gameplay_inprogress_state_setter_system(
+    mut gameplay_state: ResMut<NextState<GameplayState>>,
+) {
+    gameplay_state.set(GameplayState::InProgress);
+}
