@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod controller;
 pub mod core;
 pub mod grid;
 pub mod player;
