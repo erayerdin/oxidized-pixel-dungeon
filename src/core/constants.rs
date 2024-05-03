@@ -15,19 +15,4 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod components;
-pub(crate) mod constants;
-pub(crate) mod systems;
-
-use bevy::prelude::*;
-
-use self::{components::FacingDirection, systems::camera_init_system};
-
-pub struct CorePlugin;
-
-impl Plugin for CorePlugin {
-    fn build(&self, app: &mut bevy::prelude::App) {
-        app.register_type::<FacingDirection>()
-            .add_systems(Startup, camera_init_system);
-    }
-}
+pub(crate) const CHARACTER_Z_INDEX: f32 = 2.0;

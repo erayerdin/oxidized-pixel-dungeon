@@ -18,8 +18,10 @@
 use bevy::prelude::*;
 
 use crate::{
-    core::components::FacingDirection, gameplay::states::GameplayState,
-    grid::components::grid::Grid, player::components::Player,
+    core::{components::FacingDirection, constants::CHARACTER_Z_INDEX},
+    gameplay::states::GameplayState,
+    grid::components::grid::Grid,
+    player::components::Player,
 };
 
 pub(crate) fn walk_action_system(
@@ -57,7 +59,7 @@ pub(crate) fn walk_action_system(
     }
 
     // apply transform
-    *transform = grid.transform(2.0);
+    *transform = grid.transform(CHARACTER_Z_INDEX);
 
     gameplay_state.set(GameplayState::Awaiting);
 }
