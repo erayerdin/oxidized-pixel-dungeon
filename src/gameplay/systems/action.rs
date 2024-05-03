@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use bevy::prelude::*;
+use bevy::{prelude::*, utils::hashbrown::Equivalent};
 
 use crate::{
     core::components::FacingDirection, grid::components::grid::Grid, player::components::Player,
@@ -34,11 +34,15 @@ pub(crate) fn move_action_system(
         }
         if keys.just_pressed(KeyCode::ArrowLeft) {
             grid.sub_x_mut();
-            *facing_direction = FacingDirection::West;
+            if !facing_direction.equivalent(&FacingDirection::West) {
+                *facing_direction = FacingDirection::West;
+            }
         }
         if keys.just_pressed(KeyCode::ArrowRight) {
             grid.add_x_mut();
-            *facing_direction = FacingDirection::East;
+            if !facing_direction.equivalent(&FacingDirection::East) {
+                *facing_direction = FacingDirection::East;
+            }
         }
     }
 }
