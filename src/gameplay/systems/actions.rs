@@ -21,13 +21,13 @@ use crate::{
     core::{components::FacingDirection, constants::CHARACTER_Z_INDEX},
     gameplay::states::GameplayState,
     grid::components::grid::Grid,
-    mob::components::Player,
+    mob::components::Hero,
 };
 
 pub(crate) fn walk_action_system(
     keys: Res<ButtonInput<KeyCode>>,
     mut gameplay_state: ResMut<NextState<GameplayState>>,
-    mut query: Query<(&mut Transform, &mut Grid, &mut FacingDirection, &mut Sprite), With<Player>>,
+    mut query: Query<(&mut Transform, &mut Grid, &mut FacingDirection, &mut Sprite), With<Hero>>,
 ) {
     gameplay_state.set(GameplayState::Transitioning);
 

@@ -18,17 +18,17 @@
 use bevy::{asset::AssetPath, prelude::*};
 
 #[derive(Debug, Component)]
-pub(crate) struct Player;
+pub(crate) struct Hero;
 
 #[derive(Debug, Component)]
-pub(crate) enum PlayerClass {
+pub(crate) enum HeroClass {
     Warrior,
 }
 
-impl<'a> From<&PlayerClass> for AssetPath<'a> {
-    fn from(value: &PlayerClass) -> Self {
+impl<'a> From<&HeroClass> for AssetPath<'a> {
+    fn from(value: &HeroClass) -> Self {
         match value {
-            PlayerClass::Warrior => "spd/sprites/warrior.png".into(),
+            HeroClass::Warrior => "spd/sprites/warrior.png".into(),
         }
     }
 }
