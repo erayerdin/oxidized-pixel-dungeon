@@ -15,20 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod components;
-pub(crate) mod resources;
-mod systems;
+mod mob_assets;
 
-use bevy::prelude::*;
-
-use crate::mob::{components::HeroClass, systems::player_init_system};
-
-pub struct MobPlugin;
-
-impl Plugin for MobPlugin {
-    fn build(&self, app: &mut App) {
-        debug!("Initializing MobPlugin...");
-        app.register_type::<HeroClass>()
-            .add_systems(Startup, player_init_system);
-    }
-}
+pub(crate) use mob_assets::HeroAssets;
