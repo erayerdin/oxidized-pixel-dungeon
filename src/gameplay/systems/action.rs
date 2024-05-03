@@ -15,8 +15,28 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod action;
-mod gameplay_state;
+use bevy::prelude::*;
 
-pub(crate) use action::move_action_system;
-pub(crate) use gameplay_state::gameplay_state_transitioning_setter_system;
+use crate::{grid::components::grid::Grid, player::components::Player};
+
+pub(crate) fn move_action_system(
+    keys: Res<ButtonInput<KeyCode>>,
+    mut grid_query: Query<&mut Grid, With<Player>>,
+) {
+    trace!("Running move_action_system...");
+
+    for mut grid in grid_query.iter_mut() {
+        if keys.just_pressed(KeyCode::ArrowUp) {
+            grid.add_y_mut();
+        }
+        if keys.just_pressed(KeyCode::ArrowDown) {
+            grid.sub_y_mut();
+        }
+        if keys.just_pressed(KeyCode::ArrowLeft) {
+            grid.sub_x_mut();
+        }
+        if keys.just_pressed(KeyCode::ArrowRight) {
+            grid.add_x_mut();
+        }
+    }
+}

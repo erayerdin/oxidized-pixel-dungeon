@@ -18,7 +18,10 @@
 use bevy::prelude::*;
 use bevy_inspector_egui::quick::StateInspectorPlugin;
 
-use self::{states::GameplayState, systems::gameplay_state_transitioning_setter_system};
+use self::{
+    states::GameplayState,
+    systems::{gameplay_state_transitioning_setter_system, move_action_system},
+};
 
 pub(crate) mod constants;
 pub(crate) mod states;
@@ -33,8 +36,11 @@ impl Plugin for GameplayPlugin {
             .add_plugins(StateInspectorPlugin::<GameplayState>::default())
             .add_systems(
                 Update,
-                gameplay_state_transitioning_setter_system
-                    .run_if(in_state(GameplayState::Awaiting)),
+                (
+                    gameplay_state_transitioning_setter_system
+                        .run_if(in_state(GameplayState::Awaiting)),
+                    move_action_system.run_if(in_state(GameplayState::Awaiting)),
+                ),
             );
     }
 }
