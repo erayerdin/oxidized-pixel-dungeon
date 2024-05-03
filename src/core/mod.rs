@@ -19,7 +19,9 @@ pub(crate) mod components;
 pub(crate) mod constants;
 pub(crate) mod systems;
 
-use bevy::prelude::*;
+use bevy::{log::LogPlugin, prelude::*};
+use bevy_pancam::PanCamPlugin;
+use bevy_prototype_lyon::plugin::ShapePlugin;
 
 use self::{components::FacingDirection, systems::camera_init_system};
 
@@ -27,7 +29,26 @@ pub struct CorePlugin;
 
 impl Plugin for CorePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.register_type::<FacingDirection>()
-            .add_systems(Startup, camera_init_system);
+        let default_plugins = DefaultPlugins.set(if cfg!(debug_assertions) {
+            LogPlugin {
+                level: bevy::log::Level::TRACE,
+                filter: "info,wgpu_core=warn,wgpu_hal=warn,oxidized_pixel_dungeon=trace".into(),
+                ..Default::default()
+            }
+        } else {
+            LogPlugin {
+                level: bevy::log::Level::INFO,
+                filter: "info,wgpu_core=warn,wgpu_hal=warn".into(),
+                ..Default::default()
+            }
+        });
+
+        app.add_plugins((
+            default_plugins.set(ImagePlugin::default_nearest()),
+            PanCamPlugin,
+            ShapePlugin,
+        ))
+        .register_type::<FacingDirection>()
+        .add_systems(Startup, camera_init_system);
     }
 }
