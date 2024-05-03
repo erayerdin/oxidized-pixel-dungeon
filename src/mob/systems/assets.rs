@@ -15,4 +15,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) fn hero_assets_init_system() {}
+use bevy::prelude::*;
+
+use crate::mob::{components::HeroClass, resources::HeroAssets};
+
+pub(crate) fn hero_assets_init_system(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let warrior_image_handle: Handle<Image> = asset_server.load(&HeroClass::Warrior);
+    let mage_image_handle: Handle<Image> = asset_server.load(&HeroClass::Mage);
+    let rogue_image_handle: Handle<Image> = asset_server.load(&HeroClass::Rogue);
+    let huntress_image_handle: Handle<Image> = asset_server.load(&HeroClass::Huntress);
+    let duelist_image_handle: Handle<Image> = asset_server.load(&HeroClass::Duelist);
+
+    let hero_assets = HeroAssets::new(
+        warrior_image_handle,
+        mage_image_handle,
+        rogue_image_handle,
+        huntress_image_handle,
+        duelist_image_handle,
+    );
+    commands.insert_resource(hero_assets);
+}
