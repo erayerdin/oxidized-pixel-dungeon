@@ -18,7 +18,9 @@
 use bevy::prelude::*;
 
 use crate::{
-    core::components::Character, gameplay::states::GameplayState, grid::components::grid::Grid,
+    core::components::{Character, FacingDirection},
+    gameplay::states::GameplayState,
+    grid::components::grid::Grid,
 };
 
 pub(crate) fn sprite_move_system(
@@ -31,4 +33,16 @@ pub(crate) fn sprite_move_system(
     }
 
     gameplay_state.set(GameplayState::Awaiting);
+}
+
+pub(crate) fn sprite_facing_direction_system(
+    mut sprite_facing_direction_query: Query<
+        (Entity, &mut Sprite, &FacingDirection),
+        Changed<FacingDirection>,
+    >,
+) {
+    for (entity, mut sprite, facing_direction) in sprite_facing_direction_query.iter_mut() {
+        trace!("Changing facing direction to {facing_direction:?} for {entity:?}...");
+        sprite.flip_x = facing_direction == &FacingDirection::West;
+    }
 }
