@@ -25,3 +25,21 @@ pub(crate) struct HeroAssets {
     huntress_image_handle: Handle<Image>,
     duelist_image_handle: Handle<Image>,
 }
+
+impl HeroAssets {
+    pub(crate) fn new(
+        warrior_image_handle: Handle<Image>,
+        mage_image_handle: Handle<Image>,
+        rogue_image_handle: Handle<Image>,
+        huntress_image_handle: Handle<Image>,
+        duelist_image_handle: Handle<Image>,
+    ) -> Self {
+        Self {
+            warrior_image_handle,
+            mage_image_handle,
+            rogue_image_handle,
+            huntress_image_handle,
+            duelist_image_handle,
+        }
+    }
+}
