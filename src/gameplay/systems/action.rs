@@ -23,8 +23,6 @@ pub(crate) fn move_action_system(
     keys: Res<ButtonInput<KeyCode>>,
     mut grid_query: Query<&mut Grid, With<Player>>,
 ) {
-    trace!("Running move_action_system...");
-
     for mut grid in grid_query.iter_mut() {
         if keys.just_pressed(KeyCode::ArrowUp) {
             grid.add_y_mut();
