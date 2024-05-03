@@ -20,7 +20,7 @@ use bevy::{asset::AssetPath, prelude::*};
 #[derive(Debug, Component)]
 pub(crate) struct Hero;
 
-#[derive(Debug, Component, Reflect)]
+#[derive(Debug, Copy, Clone, Component, Reflect)]
 pub(crate) enum HeroClass {
     Warrior,
     Mage,
