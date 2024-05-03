@@ -15,8 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod character;
-mod facing_direction;
+use bevy::prelude::*;
 
-pub(crate) use character::Character;
-pub(crate) use facing_direction::FacingDirection;
+#[derive(Debug, Component)]
+pub(crate) enum FacingDirection {
+    East,
+    West,
+}
