@@ -20,7 +20,6 @@ use bevy_inspector_egui::quick::StateInspectorPlugin;
 
 use self::{resources::GameTime, states::GameplayState, systems::walk_action_system};
 
-pub(crate) mod constants;
 pub(crate) mod resources;
 pub(crate) mod states;
 pub(crate) mod systems;
