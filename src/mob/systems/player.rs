@@ -20,27 +20,20 @@ use bevy::prelude::*;
 use crate::{
     core::components::{Character, FacingDirection},
     grid::components::grid::Grid,
-    mob::components::{Hero, HeroClass},
+    mob::{
+        components::{Hero, HeroClass},
+        resources::HeroAssets,
+    },
 };
 
 pub(crate) fn player_init_system(
     mut commands: Commands,
-    asset_server: Res<AssetServer>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
+    hero_assets: Res<HeroAssets>,
 ) {
     debug!("Initializing player...");
 
-    let player_class = HeroClass::Warrior;
-
-    let texture: Handle<Image> = asset_server.load(&player_class);
-    let layout = TextureAtlasLayout::from_grid(
-        Vec2::new(11.0, 15.0),
-        21,
-        7,
-        Some(Vec2::new(1.0, 0.0)),
-        None,
-    );
-    let texture_atlas_layout = texture_atlas_layouts.add(layout);
+    let hero_class = HeroClass::Warrior;
 
     let grid = Grid::new(0, 0);
 
@@ -48,17 +41,9 @@ pub(crate) fn player_init_system(
         Name::new("Player"),
         Character,
         Hero,
-        player_class,
+        hero_class,
         FacingDirection::default(),
-        SpriteSheetBundle {
-            texture,
-            atlas: TextureAtlas {
-                layout: texture_atlas_layout,
-                index: 0,
-            },
-            transform: grid.transform(0.0),
-            ..default()
-        },
+        hero_assets.sprite_sheet_bundle(&hero_class, &grid, &mut texture_atlas_layouts, 0),
         grid,
     ));
 }
