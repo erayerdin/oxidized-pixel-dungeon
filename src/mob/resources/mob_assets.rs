@@ -17,6 +17,10 @@
 
 use bevy::prelude::*;
 
+use crate::{
+    core::constants::CHARACTER_Z_INDEX, grid::components::grid::Grid, mob::components::HeroClass,
+};
+
 #[derive(Debug, Resource)]
 pub(crate) struct HeroAssets {
     warrior_image_handle: Handle<Image>,
@@ -40,6 +44,49 @@ impl HeroAssets {
             rogue_image_handle,
             huntress_image_handle,
             duelist_image_handle,
+        }
+    }
+
+    pub(crate) fn layout(&self) -> TextureAtlasLayout {
+        TextureAtlasLayout::from_grid(
+            Vec2::new(11.0, 15.0),
+            21,
+            7,
+            Some(Vec2::new(1.0, 0.0)),
+            None,
+        )
+    }
+
+    pub(crate) fn layout_handle(
+        &self,
+        texture_atlas_layouts: &mut ResMut<Assets<TextureAtlasLayout>>,
+    ) -> Handle<TextureAtlasLayout> {
+        texture_atlas_layouts.add(self.layout())
+    }
+
+    pub(crate) fn sprite_sheet_bundle(
+        &self,
+        hero_class: &HeroClass,
+        grid: &Grid,
+        texture_atlas_layouts: &mut ResMut<Assets<TextureAtlasLayout>>,
+        texture_atlas_index: usize,
+    ) -> SpriteSheetBundle {
+        let image_handle = match hero_class {
+            HeroClass::Warrior => self.warrior_image_handle.clone_weak(),
+            HeroClass::Mage => self.mage_image_handle.clone_weak(),
+            HeroClass::Rogue => self.rogue_image_handle.clone_weak(),
+            HeroClass::Huntress => self.huntress_image_handle.clone_weak(),
+            HeroClass::Duelist => self.duelist_image_handle.clone_weak(),
+        };
+
+        SpriteSheetBundle {
+            texture: image_handle,
+            atlas: TextureAtlas {
+                layout: self.layout_handle(texture_atlas_layouts),
+                index: texture_atlas_index,
+            },
+            transform: grid.transform(CHARACTER_Z_INDEX),
+            ..default()
         }
     }
 }
