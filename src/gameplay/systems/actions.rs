@@ -32,38 +32,38 @@ pub(crate) fn walk_action_system(
 ) {
     gameplay_state.set(GameplayState::Transitioning);
 
-    let (mut transform, mut grid, mut facing_direction, mut sprite) = query.single_mut();
-
-    if keys.just_pressed(KeyCode::ArrowUp) {
-        grid.add_y_mut();
-        *transform = grid.transform(CHARACTER_Z_INDEX);
-        game_time.counter += GameTime::base_walk_time();
-    }
-
-    if keys.just_pressed(KeyCode::ArrowDown) {
-        grid.sub_y_mut();
-        *transform = grid.transform(CHARACTER_Z_INDEX);
-        game_time.counter += GameTime::base_walk_time();
-    }
-
-    if keys.just_pressed(KeyCode::ArrowLeft) {
-        grid.sub_x_mut();
-        if *facing_direction != FacingDirection::West {
-            *facing_direction = FacingDirection::West;
-            sprite.flip_x = true;
+    for (mut transform, mut grid, mut facing_direction, mut sprite) in query.iter_mut() {
+        if keys.just_pressed(KeyCode::ArrowUp) {
+            grid.add_y_mut();
+            *transform = grid.transform(CHARACTER_Z_INDEX);
+            game_time.counter += GameTime::base_walk_time();
         }
-        *transform = grid.transform(CHARACTER_Z_INDEX);
-        game_time.counter += GameTime::base_walk_time();
-    }
 
-    if keys.just_pressed(KeyCode::ArrowRight) {
-        grid.add_x_mut();
-        if *facing_direction != FacingDirection::East {
-            *facing_direction = FacingDirection::East;
-            sprite.flip_x = false;
+        if keys.just_pressed(KeyCode::ArrowDown) {
+            grid.sub_y_mut();
+            *transform = grid.transform(CHARACTER_Z_INDEX);
+            game_time.counter += GameTime::base_walk_time();
         }
-        *transform = grid.transform(CHARACTER_Z_INDEX);
-        game_time.counter += GameTime::base_walk_time();
+
+        if keys.just_pressed(KeyCode::ArrowLeft) {
+            grid.sub_x_mut();
+            if *facing_direction != FacingDirection::West {
+                *facing_direction = FacingDirection::West;
+                sprite.flip_x = true;
+            }
+            *transform = grid.transform(CHARACTER_Z_INDEX);
+            game_time.counter += GameTime::base_walk_time();
+        }
+
+        if keys.just_pressed(KeyCode::ArrowRight) {
+            grid.add_x_mut();
+            if *facing_direction != FacingDirection::East {
+                *facing_direction = FacingDirection::East;
+                sprite.flip_x = false;
+            }
+            *transform = grid.transform(CHARACTER_Z_INDEX);
+            game_time.counter += GameTime::base_walk_time();
+        }
     }
 
     gameplay_state.set(GameplayState::Awaiting);
