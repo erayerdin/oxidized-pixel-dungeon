@@ -16,37 +16,27 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
+use bevy_asset_loader::prelude::*;
 
 use crate::{
     core::constants::CHARACTER_Z_INDEX, grid::components::grid::Grid, mob::components::HeroClass,
 };
 
-#[derive(Debug, Resource)]
+#[derive(Debug, Resource, AssetCollection)]
 pub(crate) struct HeroAssets {
+    #[asset(path = "spd/sprites/warrior.png")]
     warrior_image_handle: Handle<Image>,
+    #[asset(path = "spd/sprites/mage.png")]
     mage_image_handle: Handle<Image>,
+    #[asset(path = "spd/sprites/rogue.png")]
     rogue_image_handle: Handle<Image>,
+    #[asset(path = "spd/sprites/huntress.png")]
     huntress_image_handle: Handle<Image>,
+    #[asset(path = "spd/sprites/duelist.png")]
     duelist_image_handle: Handle<Image>,
 }
 
 impl HeroAssets {
-    pub(crate) fn new(
-        warrior_image_handle: Handle<Image>,
-        mage_image_handle: Handle<Image>,
-        rogue_image_handle: Handle<Image>,
-        huntress_image_handle: Handle<Image>,
-        duelist_image_handle: Handle<Image>,
-    ) -> Self {
-        Self {
-            warrior_image_handle,
-            mage_image_handle,
-            rogue_image_handle,
-            huntress_image_handle,
-            duelist_image_handle,
-        }
-    }
-
     pub(crate) fn layout(&self) -> TextureAtlasLayout {
         TextureAtlasLayout::from_grid(
             Vec2::new(11.0, 15.0),
@@ -89,4 +79,11 @@ impl HeroAssets {
             ..default()
         }
     }
+}
+
+#[derive(Debug, Clone, Eq, PartialEq, Hash, Default, States)]
+pub(crate) enum HeroAssetsLoadState {
+    #[default]
+    Loading,
+    Loaded,
 }

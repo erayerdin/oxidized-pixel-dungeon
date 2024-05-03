@@ -20,10 +20,12 @@ pub(crate) mod resources;
 mod systems;
 
 use bevy::prelude::*;
+use bevy_asset_loader::prelude::*;
 
 use crate::mob::{
     components::HeroClass,
-    systems::{hero_assets_init_system, player_init_system},
+    resources::{HeroAssets, HeroAssetsLoadState},
+    systems::player_init_system,
 };
 
 pub struct MobPlugin;
@@ -32,6 +34,12 @@ impl Plugin for MobPlugin {
     fn build(&self, app: &mut App) {
         debug!("Initializing MobPlugin...");
         app.register_type::<HeroClass>()
-            .add_systems(Startup, (player_init_system, hero_assets_init_system));
+            .init_state::<HeroAssetsLoadState>()
+            .add_loading_state(
+                LoadingState::new(HeroAssetsLoadState::Loading)
+                    .continue_to_state(HeroAssetsLoadState::Loaded)
+                    .load_collection::<HeroAssets>(),
+            )
+            .add_systems(OnEnter(HeroAssetsLoadState::Loaded), player_init_system);
     }
 }

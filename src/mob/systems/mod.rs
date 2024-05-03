@@ -15,8 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod assets;
 mod player;
 
-pub(crate) use assets::hero_assets_init_system;
 pub(crate) use player::player_init_system;
