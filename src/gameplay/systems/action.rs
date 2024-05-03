@@ -17,13 +17,15 @@
 
 use bevy::prelude::*;
 
-use crate::{grid::components::grid::Grid, player::components::Player};
+use crate::{
+    core::components::FacingDirection, grid::components::grid::Grid, player::components::Player,
+};
 
 pub(crate) fn move_action_system(
     keys: Res<ButtonInput<KeyCode>>,
-    mut grid_query: Query<&mut Grid, With<Player>>,
+    mut grid_query: Query<(&mut Grid, &mut FacingDirection), With<Player>>,
 ) {
-    for mut grid in grid_query.iter_mut() {
+    for (mut grid, mut facing_direction) in grid_query.iter_mut() {
         if keys.just_pressed(KeyCode::ArrowUp) {
             grid.add_y_mut();
         }
@@ -32,9 +34,11 @@ pub(crate) fn move_action_system(
         }
         if keys.just_pressed(KeyCode::ArrowLeft) {
             grid.sub_x_mut();
+            *facing_direction = FacingDirection::West;
         }
         if keys.just_pressed(KeyCode::ArrowRight) {
             grid.add_x_mut();
+            *facing_direction = FacingDirection::East;
         }
     }
 }
