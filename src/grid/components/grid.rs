@@ -40,19 +40,19 @@ impl Grid {
         )
     }
 
-    pub(crate) fn add_x(&self) -> Grid {
-        Grid::new(self.x.checked_add(1).unwrap_or(self.x), self.y)
+    pub(crate) fn add_y_mut(&mut self) {
+        self.y = self.y.checked_add(1).unwrap_or(self.y);
     }
 
-    pub(crate) fn add_y(&self) -> Grid {
-        Grid::new(self.x, self.y.checked_add(1).unwrap_or(self.y))
+    pub(crate) fn sub_y_mut(&mut self) {
+        self.y = self.y.checked_sub(1).unwrap_or(self.y);
     }
 
-    pub(crate) fn sub_x(&self) -> Grid {
-        Grid::new(self.x.checked_sub(1).unwrap_or(self.x), self.y)
+    pub(crate) fn add_x_mut(&mut self) {
+        self.x = self.x.checked_add(1).unwrap_or(self.x);
     }
 
-    pub(crate) fn sub_y(&self) -> Grid {
-        Grid::new(self.x, self.y.checked_sub(1).unwrap_or(self.y))
+    pub(crate) fn sub_x_mut(&mut self) {
+        self.x = self.x.checked_sub(1).unwrap_or(self.x);
     }
 }
