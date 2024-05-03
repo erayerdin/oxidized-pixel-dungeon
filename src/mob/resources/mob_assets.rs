@@ -54,6 +54,16 @@ impl HeroAssets {
         texture_atlas_layouts.add(self.layout())
     }
 
+    pub(crate) fn image_handle(&self, hero_class: &HeroClass) -> Handle<Image> {
+        match hero_class {
+            HeroClass::Warrior => self.warrior_image_handle.clone_weak(),
+            HeroClass::Mage => self.mage_image_handle.clone_weak(),
+            HeroClass::Rogue => self.rogue_image_handle.clone_weak(),
+            HeroClass::Huntress => self.huntress_image_handle.clone_weak(),
+            HeroClass::Duelist => self.duelist_image_handle.clone_weak(),
+        }
+    }
+
     pub(crate) fn sprite_sheet_bundle(
         &self,
         hero_class: &HeroClass,
@@ -61,16 +71,8 @@ impl HeroAssets {
         texture_atlas_layouts: &mut ResMut<Assets<TextureAtlasLayout>>,
         texture_atlas_index: usize,
     ) -> SpriteSheetBundle {
-        let image_handle = match hero_class {
-            HeroClass::Warrior => self.warrior_image_handle.clone_weak(),
-            HeroClass::Mage => self.mage_image_handle.clone_weak(),
-            HeroClass::Rogue => self.rogue_image_handle.clone_weak(),
-            HeroClass::Huntress => self.huntress_image_handle.clone_weak(),
-            HeroClass::Duelist => self.duelist_image_handle.clone_weak(),
-        };
-
         SpriteSheetBundle {
-            texture: image_handle,
+            texture: self.image_handle(hero_class),
             atlas: TextureAtlas {
                 layout: self.layout_handle(texture_atlas_layouts),
                 index: texture_atlas_index,
