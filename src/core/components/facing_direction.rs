@@ -17,7 +17,7 @@
 
 use bevy::prelude::*;
 
-#[derive(Debug, Default, Component, Eq, PartialEq)]
+#[derive(Debug, Default, Component, Eq, PartialEq, Reflect)]
 pub(crate) enum FacingDirection {
     #[default]
     East,
