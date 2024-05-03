@@ -15,6 +15,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod hero;
+use bevy::{asset::AssetPath, prelude::*};
 
-pub(crate) use hero::{Hero, HeroClass};
+#[derive(Debug, Component)]
+pub(crate) struct Hero;
+
+#[derive(Debug, Component)]
+pub(crate) enum HeroClass {
+    Warrior,
+}
+
+impl<'a> From<&HeroClass> for AssetPath<'a> {
+    fn from(value: &HeroClass) -> Self {
+        match value {
+            HeroClass::Warrior => "spd/sprites/warrior.png".into(),
+        }
+    }
+}
