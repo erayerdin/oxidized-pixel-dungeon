@@ -18,7 +18,7 @@
 use bevy::prelude::*;
 use bevy_inspector_egui::quick::StateInspectorPlugin;
 
-use self::{resources::GameTime, states::GameplayState};
+use self::{resources::GameTime, states::GameplayState, systems::walk_action_system};
 
 pub(crate) mod constants;
 pub(crate) mod resources;
@@ -33,6 +33,7 @@ impl Plugin for GameplayPlugin {
             .register_type::<GameplayState>()
             .add_plugins(StateInspectorPlugin::<GameplayState>::default())
             .init_resource::<GameTime>()
-            .register_type::<GameTime>();
+            .register_type::<GameTime>()
+            .add_systems(Update, walk_action_system);
     }
 }
