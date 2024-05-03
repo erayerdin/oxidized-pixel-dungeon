@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod character;
+use bevy::prelude::*;
 
-pub(crate) use character::Character;
+#[derive(Debug, Component)]
+pub(crate) struct Character;
