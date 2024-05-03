@@ -19,9 +19,9 @@ use bevy::prelude::*;
 
 #[derive(Debug, Resource)]
 pub(crate) struct HeroAssets {
-    pub(crate) warrior_atlas: Handle<Image>,
-    pub(crate) mage_atlas: Handle<Image>,
-    pub(crate) rogue_atlas: Handle<Image>,
-    pub(crate) huntress_atlas: Handle<Image>,
-    pub(crate) duelist_atlas: Handle<Image>,
+    warrior_image_handle: Handle<Image>,
+    mage_image_handle: Handle<Image>,
+    rogue_image_handle: Handle<Image>,
+    huntress_image_handle: Handle<Image>,
+    duelist_image_handle: Handle<Image>,
 }
