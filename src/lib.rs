@@ -18,4 +18,4 @@
 pub mod core;
 pub mod gameplay;
 pub mod grid;
-pub mod player;
+pub mod mob;

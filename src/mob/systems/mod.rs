@@ -20,7 +20,7 @@ use bevy::prelude::*;
 use crate::{
     core::components::{Character, FacingDirection},
     grid::components::grid::Grid,
-    player::components::{Player, PlayerClass},
+    mob::components::{Player, PlayerClass},
 };
 
 pub(crate) fn player_init_system(

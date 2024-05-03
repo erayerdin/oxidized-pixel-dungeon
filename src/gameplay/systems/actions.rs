@@ -21,7 +21,7 @@ use crate::{
     core::{components::FacingDirection, constants::CHARACTER_Z_INDEX},
     gameplay::states::GameplayState,
     grid::components::grid::Grid,
-    player::components::Player,
+    mob::components::Player,
 };
 
 pub(crate) fn walk_action_system(
