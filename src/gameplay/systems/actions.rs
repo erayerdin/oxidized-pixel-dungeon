@@ -19,7 +19,7 @@ use bevy::prelude::*;
 
 use crate::{
     core::{components::FacingDirection, constants::CHARACTER_Z_INDEX},
-    gameplay::states::GameplayState,
+    gameplay::{resources::GameTime, states::GameplayState},
     grid::components::grid::Grid,
     mob::components::Hero,
 };
@@ -27,19 +27,23 @@ use crate::{
 pub(crate) fn walk_action_system(
     keys: Res<ButtonInput<KeyCode>>,
     mut gameplay_state: ResMut<NextState<GameplayState>>,
+    mut game_time: ResMut<GameTime>,
     mut query: Query<(&mut Transform, &mut Grid, &mut FacingDirection, &mut Sprite), With<Hero>>,
 ) {
     gameplay_state.set(GameplayState::Transitioning);
 
     let (mut transform, mut grid, mut facing_direction, mut sprite) = query.single_mut();
 
-    // set grid
     if keys.just_pressed(KeyCode::ArrowUp) {
         grid.add_y_mut();
+        *transform = grid.transform(CHARACTER_Z_INDEX);
+        game_time.counter += GameTime::base_walk_time();
     }
 
     if keys.just_pressed(KeyCode::ArrowDown) {
         grid.sub_y_mut();
+        *transform = grid.transform(CHARACTER_Z_INDEX);
+        game_time.counter += GameTime::base_walk_time();
     }
 
     if keys.just_pressed(KeyCode::ArrowLeft) {
@@ -48,6 +52,8 @@ pub(crate) fn walk_action_system(
             *facing_direction = FacingDirection::West;
             sprite.flip_x = true;
         }
+        *transform = grid.transform(CHARACTER_Z_INDEX);
+        game_time.counter += GameTime::base_walk_time();
     }
 
     if keys.just_pressed(KeyCode::ArrowRight) {
@@ -56,10 +62,9 @@ pub(crate) fn walk_action_system(
             *facing_direction = FacingDirection::East;
             sprite.flip_x = false;
         }
+        *transform = grid.transform(CHARACTER_Z_INDEX);
+        game_time.counter += GameTime::base_walk_time();
     }
-
-    // apply transform
-    *transform = grid.transform(CHARACTER_Z_INDEX);
 
     gameplay_state.set(GameplayState::Awaiting);
 }

@@ -24,6 +24,12 @@ pub(crate) struct GameTime {
     pub(crate) counter: f32,
 }
 
+impl GameTime {
+    pub(crate) const fn base_walk_time() -> f32 {
+        1.0
+    }
+}
+
 impl Default for GameTime {
     fn default() -> Self {
         Self { counter: 0.0 }
