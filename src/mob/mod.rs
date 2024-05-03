@@ -21,7 +21,10 @@ mod systems;
 
 use bevy::prelude::*;
 
-use crate::mob::{components::HeroClass, systems::player_init_system};
+use crate::mob::{
+    components::HeroClass,
+    systems::{hero_assets_init_system, player_init_system},
+};
 
 pub struct MobPlugin;
 
@@ -29,6 +32,6 @@ impl Plugin for MobPlugin {
     fn build(&self, app: &mut App) {
         debug!("Initializing MobPlugin...");
         app.register_type::<HeroClass>()
-            .add_systems(Startup, player_init_system);
+            .add_systems(Startup, (player_init_system, hero_assets_init_system));
     }
 }
