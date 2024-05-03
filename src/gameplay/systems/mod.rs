@@ -14,12 +14,3 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
-
-mod action;
-mod gameplay_state;
-mod sprite;
-
-pub(crate) use action::move_action_system;
-pub(crate) use gameplay_state::gameplay_state_transitioning_setter_system;
-pub(crate) use sprite::sprite_facing_direction_system;
-pub(crate) use sprite::sprite_move_system;

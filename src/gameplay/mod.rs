@@ -18,14 +18,7 @@
 use bevy::prelude::*;
 use bevy_inspector_egui::quick::StateInspectorPlugin;
 
-use self::{
-    resources::GameTime,
-    states::GameplayState,
-    systems::{
-        gameplay_state_transitioning_setter_system, move_action_system,
-        sprite_facing_direction_system, sprite_move_system,
-    },
-};
+use self::{resources::GameTime, states::GameplayState};
 
 pub(crate) mod constants;
 pub(crate) mod resources;
@@ -40,16 +33,6 @@ impl Plugin for GameplayPlugin {
             .register_type::<GameplayState>()
             .add_plugins(StateInspectorPlugin::<GameplayState>::default())
             .init_resource::<GameTime>()
-            .register_type::<GameTime>()
-            .add_systems(
-                Update,
-                (
-                    gameplay_state_transitioning_setter_system
-                        .run_if(in_state(GameplayState::Awaiting)),
-                    move_action_system.run_if(in_state(GameplayState::Awaiting)),
-                    sprite_move_system.run_if(in_state(GameplayState::Transitioning)),
-                    sprite_facing_direction_system,
-                ),
-            );
+            .register_type::<GameTime>();
     }
 }
