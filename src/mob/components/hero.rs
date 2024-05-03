@@ -20,15 +20,23 @@ use bevy::{asset::AssetPath, prelude::*};
 #[derive(Debug, Component)]
 pub(crate) struct Hero;
 
-#[derive(Debug, Component)]
+#[derive(Debug, Component, Reflect)]
 pub(crate) enum HeroClass {
     Warrior,
+    Mage,
+    Rogue,
+    Huntress,
+    Duelist,
 }
 
 impl<'a> From<&HeroClass> for AssetPath<'a> {
     fn from(value: &HeroClass) -> Self {
         match value {
             HeroClass::Warrior => "spd/sprites/warrior.png".into(),
+            HeroClass::Mage => "spd/sprites/mage.png".into(),
+            HeroClass::Rogue => "spd/sprites/rogue.png".into(),
+            HeroClass::Huntress => "spd/sprites/huntress.png".into(),
+            HeroClass::Duelist => "spd/sprites/duelist.png".into(),
         }
     }
 }
