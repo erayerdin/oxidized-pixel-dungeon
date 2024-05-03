@@ -18,7 +18,7 @@
 use bevy::prelude::*;
 
 use crate::{
-    core::components::Character,
+    core::components::{Character, FacingDirection},
     grid::components::grid::Grid,
     player::components::{Player, PlayerClass},
 };
@@ -49,6 +49,7 @@ pub(crate) fn player_init_system(
         Character,
         Player,
         player_class,
+        FacingDirection::default(),
         SpriteSheetBundle {
             texture,
             atlas: TextureAtlas {
