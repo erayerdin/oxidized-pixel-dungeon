@@ -18,3 +18,6 @@
 mod player;
 
 pub(crate) use player::player_init_system;
+
+#[cfg(debug_assertions)]
+pub(crate) use player::player_texture_change_system;

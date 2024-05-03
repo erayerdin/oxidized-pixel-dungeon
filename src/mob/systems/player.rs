@@ -47,3 +47,15 @@ pub(crate) fn player_init_system(
         grid,
     ));
 }
+
+#[cfg(debug_assertions)]
+pub(crate) fn player_texture_change_system(
+    mut query: Query<(&mut Handle<Image>, &HeroClass), (With<Hero>, Changed<HeroClass>)>,
+    hero_assets: Option<Res<HeroAssets>>,
+) {
+    if let Some(hero_assets) = hero_assets {
+        for (mut handle, hero_class) in query.iter_mut() {
+            *handle = hero_assets.image_handle(hero_class);
+        }
+    }
+}

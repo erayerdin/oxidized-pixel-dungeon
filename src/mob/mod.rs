@@ -25,7 +25,7 @@ use bevy_asset_loader::prelude::*;
 use crate::mob::{
     components::HeroClass,
     resources::{HeroAssets, HeroAssetsLoadState},
-    systems::player_init_system,
+    systems::{player_init_system, player_texture_change_system},
 };
 
 pub struct MobPlugin;
@@ -41,5 +41,9 @@ impl Plugin for MobPlugin {
                     .load_collection::<HeroAssets>(),
             )
             .add_systems(OnEnter(HeroAssetsLoadState::Loaded), player_init_system);
+
+        if cfg!(debug_assertions) {
+            app.add_systems(Update, player_texture_change_system);
+        }
     }
 }
