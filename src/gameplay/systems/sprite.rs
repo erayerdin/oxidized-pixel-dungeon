@@ -18,45 +18,17 @@
 use bevy::prelude::*;
 
 use crate::{
-    core::components::Character,
-    // gameplay::states::GameplayState,
-    grid::{components::grid::Grid, constants::GRID_SIZE},
+    core::components::Character, gameplay::states::GameplayState, grid::components::grid::Grid,
 };
 
 pub(crate) fn sprite_move_system(
-    time: Res<Time>,
     mut query: Query<(&mut Transform, &Grid), With<Character>>,
-    // mut gameplay_state: ResMut<NextState<GameplayState>>,
+    mut gameplay_state: ResMut<NextState<GameplayState>>,
 ) {
     for (mut transform, grid) in query.iter_mut() {
         let grid_transform = grid.transform(2.0);
-        let grid_vec3 = grid_transform.translation;
-        let transform_vec3 = transform.translation;
-
-        if transform_vec3.x < grid_vec3.x {
-            transform.translation.x += (GRID_SIZE as f32 * time.delta_seconds()) * 8.0;
-        }
-        if transform_vec3.x > grid_vec3.x {
-            transform.translation.x -= (GRID_SIZE as f32 * time.delta_seconds()) * 8.0;
-        }
-        if transform_vec3.y < grid_vec3.y {
-            transform.translation.y += (GRID_SIZE as f32 * time.delta_seconds()) * 8.0;
-        }
-        if transform_vec3.y > grid_vec3.y {
-            transform.translation.y -= (GRID_SIZE as f32 * time.delta_seconds()) * 8.0;
-        }
-
-        // let difference = [
-        //     transform_vec3.x - grid_vec3.x,
-        //     transform_vec3.y - grid_vec3.y,
-        // ]
-        // .iter()
-        // .sum::<f32>()
-        // .abs();
-
-        // if difference < 0.02 {
-        //     transform.translation = grid_vec3;
-        //     gameplay_state.set(GameplayState::Awaiting);
-        // }
+        transform.translation = grid_transform.translation;
     }
+
+    gameplay_state.set(GameplayState::Awaiting);
 }
