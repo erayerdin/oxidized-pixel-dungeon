@@ -19,7 +19,7 @@ use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
 
 #[derive(Debug, Resource, AssetCollection)]
-pub(crate) struct UserInterfaceAssets {
+pub struct UserInterfaceAssets {
     #[asset(path = "spd/fonts/pixel_font.ttf")]
     pixel_font_asset_handle: Handle<Font>,
     #[asset(path = "original/interfaces/button1.png")]
@@ -27,7 +27,7 @@ pub(crate) struct UserInterfaceAssets {
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash, Default, States)]
-pub(crate) enum UserInterfaceAssetsLoadState {
+pub enum UserInterfaceAssetsLoadState {
     #[default]
     LoadingState,
     LoadedState,

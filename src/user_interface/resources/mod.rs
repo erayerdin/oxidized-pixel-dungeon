@@ -17,4 +17,4 @@
 
 mod user_interface_assets;
 
-pub(crate) use user_interface_assets::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
+pub use user_interface_assets::{UserInterfaceAssets, UserInterfaceAssetsLoadState};

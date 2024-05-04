@@ -17,16 +17,43 @@
 
 use bevy::prelude::*;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use oxidized_pixel_dungeon::{core::CorePlugin, user_interface::UserInterfacePlugin};
+use oxidized_pixel_dungeon::{
+    core::CorePlugin,
+    user_interface::{UserInterfaceAssetsLoadState, UserInterfacePlugin},
+};
 
 fn main() {
     let mut app = App::new();
 
-    app.add_plugins((CorePlugin, UserInterfacePlugin));
+    app.add_plugins((CorePlugin, UserInterfacePlugin))
+        .add_systems(
+            OnEnter(UserInterfaceAssetsLoadState::LoadedState),
+            systems::layout_init_system,
+        );
 
     if cfg!(debug_assertions) {
         app.add_plugins(WorldInspectorPlugin::new());
     }
 
     app.run();
+}
+
+mod systems {
+    use bevy::prelude::*;
+    use oxidized_pixel_dungeon::user_interface::UserInterfaceAssets;
+
+    pub fn layout_init_system(
+        mut commands: Commands,
+        user_interface_assets: Res<UserInterfaceAssets>,
+    ) {
+        commands.spawn(NodeBundle {
+            background_color: Color::RED.into(),
+            style: Style {
+                width: Val::Percent(100.0),
+                height: Val::Percent(100.0),
+                ..default()
+            },
+            ..default()
+        });
+    }
 }

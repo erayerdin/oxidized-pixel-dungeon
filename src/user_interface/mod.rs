@@ -20,7 +20,7 @@ pub(crate) mod resources;
 use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
 
-use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
+pub use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
 
 pub struct UserInterfacePlugin;
 
