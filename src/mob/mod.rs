@@ -23,9 +23,9 @@ use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
 
 use crate::mob::{
-    components::HeroClass,
+    components::{HeroClass, HeroTier},
     resources::{HeroAssets, HeroAssetsLoadState},
-    systems::{player_init_system, player_texture_change_system},
+    systems::{player_init_system, player_texture_change_system, player_tier_change_system},
 };
 
 pub struct MobPlugin;
@@ -34,13 +34,15 @@ impl Plugin for MobPlugin {
     fn build(&self, app: &mut App) {
         debug!("Initializing MobPlugin...");
         app.register_type::<HeroClass>()
+            .register_type::<HeroTier>()
             .init_state::<HeroAssetsLoadState>()
             .add_loading_state(
                 LoadingState::new(HeroAssetsLoadState::Loading)
                     .continue_to_state(HeroAssetsLoadState::Loaded)
                     .load_collection::<HeroAssets>(),
             )
-            .add_systems(OnEnter(HeroAssetsLoadState::Loaded), player_init_system);
+            .add_systems(OnEnter(HeroAssetsLoadState::Loaded), player_init_system)
+            .add_systems(Update, player_tier_change_system);
 
         if cfg!(debug_assertions) {
             app.add_systems(Update, player_texture_change_system);
