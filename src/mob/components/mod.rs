@@ -17,4 +17,4 @@
 
 mod hero;
 
-pub(crate) use hero::{Hero, HeroClass};
+pub(crate) use hero::{Hero, HeroClass, HeroTier};

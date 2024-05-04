@@ -21,7 +21,7 @@ use crate::{
     core::components::{Character, FacingDirection},
     grid::components::grid::Grid,
     mob::{
-        components::{Hero, HeroClass},
+        components::{Hero, HeroClass, HeroTier},
         resources::HeroAssets,
     },
 };
@@ -42,6 +42,7 @@ pub(crate) fn player_init_system(
         Character,
         Hero,
         hero_class,
+        HeroTier::default(),
         FacingDirection::default(),
         hero_assets.sprite_sheet_bundle(&hero_class, &grid, &mut texture_atlas_layouts, 0),
         grid,

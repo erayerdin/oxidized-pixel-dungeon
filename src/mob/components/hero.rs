@@ -40,3 +40,13 @@ impl<'a> From<&HeroClass> for AssetPath<'a> {
         }
     }
 }
+
+/// Defined by the armor the hero is wearing.
+#[derive(Debug, Component, Reflect)]
+pub(crate) struct HeroTier(pub(crate) u8);
+
+impl Default for HeroTier {
+    fn default() -> Self {
+        Self(0)
+    }
+}
