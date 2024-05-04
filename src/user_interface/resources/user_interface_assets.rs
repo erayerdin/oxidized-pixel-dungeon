@@ -20,6 +20,8 @@ use bevy_asset_loader::prelude::*;
 
 #[derive(Debug, Resource, AssetCollection)]
 pub(crate) struct UserInterfaceAssets {
+    #[asset(path = "spd/fonts/pixel_font.ttf")]
+    pixel_font_asset_handle: Handle<Font>,
     #[asset(path = "original/interfaces/button1.png")]
     button1_asset_handle: Handle<Image>,
 }
