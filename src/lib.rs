@@ -16,4 +16,6 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 pub mod core;
-mod grid;
+pub mod gameplay;
+pub mod grid;
+pub mod mob;

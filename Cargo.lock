@@ -170,6 +170,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.82"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f538837af36e6f6a9be0faa67f9a314f8119e4e4b5867c6ab40ed60360142519"
+
+[[package]]
 name = "approx"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -434,6 +440,29 @@ dependencies = [
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "web-sys",
+]
+
+[[package]]
+name = "bevy_asset_loader"
+version = "0.20.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1de44dae5bfabc6311a687982a0eb77b70bd3b2f9f88de7351999810d76b275a"
+dependencies = [
+ "anyhow",
+ "bevy",
+ "bevy_asset_loader_derive",
+ "path-slash",
+]
+
+[[package]]
+name = "bevy_asset_loader_derive"
+version = "0.20.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ca8bf363b0d5287bcbd17cc3ad5b94b5f668d5cb4af74df301f1bde24fd6fea7"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.60",
 ]
 
 [[package]]
@@ -3026,6 +3055,7 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "bevy-inspector-egui",
+ "bevy_asset_loader",
  "bevy_pancam",
  "bevy_prototype_lyon",
  "rayon",
@@ -3065,6 +3095,12 @@ name = "paste"
 version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "de3145af08024dea9fa9914f381a17b8fc6034dfb00f3a84013f7ff43f29ed4c"
+
+[[package]]
+name = "path-slash"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1e91099d4268b0e11973f036e885d652fb0b21fedcf69738c627f94db6a44f42"
 
 [[package]]
 name = "percent-encoding"

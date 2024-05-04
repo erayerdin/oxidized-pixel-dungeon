@@ -15,29 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use bevy::prelude::*;
-use bevy_inspector_egui::prelude::*;
+mod hero;
 
-#[derive(Debug, Resource, Reflect, InspectorOptions)]
-#[reflect(Resource, InspectorOptions)]
-pub(crate) struct GameConfig {
-    grid_visibility: Visibility,
-}
-
-impl GameConfig {
-    pub(crate) fn grid_visibility(&self) -> Visibility {
-        self.grid_visibility
-    }
-}
-
-impl Default for GameConfig {
-    fn default() -> Self {
-        Self {
-            grid_visibility: Visibility::Hidden,
-        }
-    }
-}
-
-pub(crate) fn has_game_config_changed(game_config: Res<GameConfig>) -> bool {
-    game_config.is_changed()
-}
+pub(crate) use hero::{Hero, HeroClass, HeroTier};

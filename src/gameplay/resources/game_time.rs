@@ -16,17 +16,22 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use oxidized_pixel_dungeon::{core::CorePlugin, grid::GridPlugin};
 
-fn main() {
-    let mut app = App::new();
+/// In-game time that defines the turns.
+#[derive(Debug, Resource, Reflect)]
+#[reflect(Resource)]
+pub(crate) struct GameTime {
+    pub(crate) counter: f32,
+}
 
-    app.add_plugins((CorePlugin, GridPlugin));
-
-    if cfg!(debug_assertions) {
-        app.add_plugins(WorldInspectorPlugin::new());
+impl GameTime {
+    pub(crate) const fn base_walk_time() -> f32 {
+        1.0
     }
+}
 
-    app.run();
+impl Default for GameTime {
+    fn default() -> Self {
+        Self { counter: 0.0 }
+    }
 }

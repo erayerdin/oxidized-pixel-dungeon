@@ -15,16 +15,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod resources;
+pub(crate) mod components;
+pub(crate) mod constants;
+pub(crate) mod systems;
 
 use bevy::{log::LogPlugin, prelude::*};
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use bevy_pancam::{PanCam, PanCamPlugin};
-use bevy_prototype_lyon::prelude::*;
+use bevy_pancam::PanCamPlugin;
+use bevy_prototype_lyon::plugin::ShapePlugin;
 
-use crate::grid::GridPlugin;
-
-use self::resources::game_config::GameConfig;
+use self::{components::FacingDirection, systems::camera_init_system};
 
 pub struct CorePlugin;
 
@@ -44,23 +43,12 @@ impl Plugin for CorePlugin {
             }
         });
 
-        app.add_plugins((default_plugins, PanCamPlugin, ShapePlugin))
-            .insert_resource(GameConfig::default())
-            .add_systems(Startup, init_system)
-            .add_plugins(GridPlugin);
-
-        if cfg!(debug_assertions) {
-            app.register_type::<GameConfig>()
-                .add_plugins(WorldInspectorPlugin::new());
-        }
+        app.add_plugins((
+            default_plugins.set(ImagePlugin::default_nearest()),
+            PanCamPlugin,
+            ShapePlugin,
+        ))
+        .register_type::<FacingDirection>()
+        .add_systems(Startup, camera_init_system);
     }
-}
-
-fn init_system(mut commands: Commands) {
-    debug!("Running CorePlugin::init_system");
-    commands.spawn(Camera2dBundle::default()).insert(PanCam {
-        grab_buttons: vec![MouseButton::Middle],
-        enabled: true,
-        ..default()
-    });
 }

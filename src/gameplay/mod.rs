@@ -16,17 +16,23 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use oxidized_pixel_dungeon::{core::CorePlugin, grid::GridPlugin};
+use bevy_inspector_egui::quick::StateInspectorPlugin;
 
-fn main() {
-    let mut app = App::new();
+use self::{resources::GameTime, states::GameplayState, systems::walk_action_system};
 
-    app.add_plugins((CorePlugin, GridPlugin));
+pub(crate) mod resources;
+pub(crate) mod states;
+pub(crate) mod systems;
 
-    if cfg!(debug_assertions) {
-        app.add_plugins(WorldInspectorPlugin::new());
+pub struct GameplayPlugin;
+
+impl Plugin for GameplayPlugin {
+    fn build(&self, app: &mut App) {
+        app.init_state::<GameplayState>()
+            .register_type::<GameplayState>()
+            .add_plugins(StateInspectorPlugin::<GameplayState>::default())
+            .init_resource::<GameTime>()
+            .register_type::<GameTime>()
+            .add_systems(Update, walk_action_system);
     }
-
-    app.run();
 }

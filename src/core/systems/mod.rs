@@ -16,17 +16,13 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use oxidized_pixel_dungeon::{core::CorePlugin, grid::GridPlugin};
+use bevy_pancam::PanCam;
 
-fn main() {
-    let mut app = App::new();
-
-    app.add_plugins((CorePlugin, GridPlugin));
-
-    if cfg!(debug_assertions) {
-        app.add_plugins(WorldInspectorPlugin::new());
-    }
-
-    app.run();
+pub(crate) fn camera_init_system(mut commands: Commands) {
+    debug!("Running CorePlugin::init_system");
+    commands.spawn(Camera2dBundle::default()).insert(PanCam {
+        grab_buttons: vec![MouseButton::Middle],
+        enabled: true,
+        ..default()
+    });
 }

@@ -15,18 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use bevy::prelude::*;
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use oxidized_pixel_dungeon::{core::CorePlugin, grid::GridPlugin};
+mod character;
+mod facing_direction;
 
-fn main() {
-    let mut app = App::new();
-
-    app.add_plugins((CorePlugin, GridPlugin));
-
-    if cfg!(debug_assertions) {
-        app.add_plugins(WorldInspectorPlugin::new());
-    }
-
-    app.run();
-}
+pub(crate) use character::Character;
+pub(crate) use facing_direction::FacingDirection;

@@ -16,17 +16,10 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use oxidized_pixel_dungeon::{core::CorePlugin, grid::GridPlugin};
 
-fn main() {
-    let mut app = App::new();
-
-    app.add_plugins((CorePlugin, GridPlugin));
-
-    if cfg!(debug_assertions) {
-        app.add_plugins(WorldInspectorPlugin::new());
-    }
-
-    app.run();
+#[derive(Debug, Default, Component, Eq, PartialEq, Reflect)]
+pub(crate) enum FacingDirection {
+    #[default]
+    East,
+    West,
 }

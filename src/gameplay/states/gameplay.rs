@@ -16,17 +16,13 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use oxidized_pixel_dungeon::{core::CorePlugin, grid::GridPlugin};
 
-fn main() {
-    let mut app = App::new();
-
-    app.add_plugins((CorePlugin, GridPlugin));
-
-    if cfg!(debug_assertions) {
-        app.add_plugins(WorldInspectorPlugin::new());
-    }
-
-    app.run();
+/// State of gameplay.
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, States, Reflect)]
+pub(crate) enum GameplayState {
+    /// Awaiting user input.
+    #[default]
+    Awaiting,
+    /// In transition.
+    Transitioning,
 }

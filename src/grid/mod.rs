@@ -17,21 +17,16 @@
 
 pub mod components;
 pub(crate) mod constants;
-mod systems;
 
+use crate::grid::components::grid::Grid;
 use bevy::prelude::*;
 
-use crate::{
-    core::resources::game_config::has_game_config_changed,
-    grid::systems::{grid_init_system, paint::grid_paint_system},
-};
-
-pub(super) struct GridPlugin;
+pub struct GridPlugin;
 
 impl Plugin for GridPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         debug!("Initializing GridPlugin...");
-        app.add_systems(Startup, grid_init_system)
-            .add_systems(Update, grid_paint_system.run_if(has_game_config_changed));
+
+        app.register_type::<Grid>();
     }
 }
