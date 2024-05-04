@@ -15,22 +15,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod resources;
-
 use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
 
-use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
+#[derive(Debug, Resource, AssetCollection)]
+pub(crate) struct UserInterfaceAssets {
+    #[asset(path = "original/interfaces/button1.png")]
+    button1_asset_handle: Handle<Image>,
+}
 
-pub struct UserInterfacePlugin;
-
-impl Plugin for UserInterfacePlugin {
-    fn build(&self, app: &mut App) {
-        app.init_state::<UserInterfaceAssetsLoadState>()
-            .add_loading_state(
-                LoadingState::new(UserInterfaceAssetsLoadState::default())
-                    .continue_to_state(UserInterfaceAssetsLoadState::LoadedState)
-                    .load_collection::<UserInterfaceAssets>(),
-            );
-    }
+#[derive(Debug, Clone, Eq, PartialEq, Hash, Default, States)]
+pub(crate) enum UserInterfaceAssetsLoadState {
+    #[default]
+    LoadingState,
+    LoadedState,
 }
