@@ -16,17 +16,9 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use oxidized_pixel_dungeon::{core::CorePlugin, user_interface::UserInterfacePlugin};
 
-fn main() {
-    let mut app = App::new();
+pub struct UserInterfacePlugin;
 
-    app.add_plugins((CorePlugin, UserInterfacePlugin));
-
-    if cfg!(debug_assertions) {
-        app.add_plugins(WorldInspectorPlugin::new());
-    }
-
-    app.run();
+impl Plugin for UserInterfacePlugin {
+    fn build(&self, _: &mut App) {}
 }

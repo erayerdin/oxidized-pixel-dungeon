@@ -19,3 +19,4 @@ pub mod core;
 pub mod gameplay;
 pub mod grid;
 pub mod mob;
+pub mod user_interface;
