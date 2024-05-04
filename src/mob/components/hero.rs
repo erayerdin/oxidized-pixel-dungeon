@@ -42,19 +42,12 @@ impl<'a> From<&HeroClass> for AssetPath<'a> {
 }
 
 /// Defined by the armor the hero is wearing.
-#[derive(Debug, Component, Reflect)]
+#[derive(Debug, Default, Component, Reflect)]
 pub(crate) struct HeroTier(pub(crate) u8);
 
 impl HeroTier {
     pub(crate) fn texture_atlas_index(&self) -> u8 {
-        // TODO export constant
         const TEXTURE_COLUMN_LENGTH: u8 = 21;
         self.0 * TEXTURE_COLUMN_LENGTH
-    }
-}
-
-impl Default for HeroTier {
-    fn default() -> Self {
-        Self(0)
     }
 }
