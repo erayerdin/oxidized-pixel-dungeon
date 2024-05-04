@@ -26,19 +26,19 @@ use crate::{
     },
 };
 
-pub(crate) fn player_init_system(
+pub(crate) fn hero_init_system(
     mut commands: Commands,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
     hero_assets: Res<HeroAssets>,
 ) {
-    debug!("Initializing player...");
+    debug!("Initializing hero...");
 
     let hero_class = HeroClass::Warrior;
 
     let grid = Grid::new(0, 0);
 
     commands.spawn((
-        Name::new("Player"),
+        Name::new("Hero"),
         Character,
         Hero,
         hero_class,
@@ -49,9 +49,8 @@ pub(crate) fn player_init_system(
     ));
 }
 
-pub(crate) fn player_tier_change_system(
+pub(crate) fn hero_tier_change_system(
     mut query: Query<(&mut TextureAtlas, &HeroTier), (With<Hero>, Changed<HeroTier>)>,
-    // hero_assets: Option<Res<HeroAssets>>,
 ) {
     for (mut texture_atlas, hero_tier) in query.iter_mut() {
         texture_atlas.index = hero_tier.texture_atlas_index() as usize;
@@ -59,7 +58,7 @@ pub(crate) fn player_tier_change_system(
 }
 
 #[cfg(debug_assertions)]
-pub(crate) fn player_texture_change_system(
+pub(crate) fn hero_texture_change_system(
     mut query: Query<(&mut Handle<Image>, &HeroClass), (With<Hero>, Changed<HeroClass>)>,
     hero_assets: Option<Res<HeroAssets>>,
 ) {

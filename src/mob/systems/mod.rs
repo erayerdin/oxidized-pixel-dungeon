@@ -15,9 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod player;
+mod hero;
 
-pub(crate) use player::{player_init_system, player_tier_change_system};
+pub(crate) use hero::{hero_init_system, hero_tier_change_system};
 
 #[cfg(debug_assertions)]
-pub(crate) use player::player_texture_change_system;
+pub(crate) use hero::hero_texture_change_system;
