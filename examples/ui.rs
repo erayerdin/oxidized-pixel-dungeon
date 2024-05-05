@@ -40,7 +40,10 @@ fn main() {
 
 mod systems {
     use bevy::prelude::*;
-    use oxidized_pixel_dungeon::user_interface::{widgets::button1_widget, UserInterfaceAssets};
+    use oxidized_pixel_dungeon::user_interface::{
+        widgets::{button1_widget, Button1WidgetPropsBuilder},
+        UserInterfaceAssets,
+    };
 
     pub fn layout_init_system(
         mut commands: Commands,
@@ -60,12 +63,22 @@ mod systems {
                 ..default()
             })
             .with_children(|parent| {
-                button1_widget(parent, &user_interface_assets, "Button", None);
                 button1_widget(
                     parent,
                     &user_interface_assets,
-                    "Yellow Color Text",
-                    Some(Color::YELLOW),
+                    Button1WidgetPropsBuilder::default()
+                        .text("Normal Text")
+                        .build()
+                        .unwrap(),
+                );
+                button1_widget(
+                    parent,
+                    &user_interface_assets,
+                    Button1WidgetPropsBuilder::default()
+                        .text("Yello text")
+                        .text_color(Color::YELLOW)
+                        .build()
+                        .unwrap(),
                 );
             });
     }

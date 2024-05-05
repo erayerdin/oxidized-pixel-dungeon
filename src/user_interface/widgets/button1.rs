@@ -16,6 +16,7 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
+use derive_builder::Builder;
 
 use crate::user_interface::{components::Widget, UserInterfaceAssets};
 
@@ -23,12 +24,28 @@ const BUTTON_PADDING_PX_VAL: f32 = 15.0; // must be dividable by 3
 const BUTTON_PADDING_UI_RECT: UiRect = UiRect::all(Val::Px(BUTTON_PADDING_PX_VAL));
 const BUTTON_CORNER_SCALE: f32 = BUTTON_PADDING_PX_VAL / 3.0;
 
+#[derive(Debug, Builder)]
+pub struct Button1WidgetProps {
+    #[builder(setter(custom))]
+    text: String,
+    #[builder(default = "Color::WHITE")]
+    text_color: Color,
+}
+
+impl Button1WidgetPropsBuilder {
+    pub fn text(&mut self, text: impl Into<String>) -> &mut Self {
+        self.text = Some(text.into());
+        self
+    }
+}
+
 pub fn button1_widget(
     parent: &mut ChildBuilder,
     user_interface_assets: &Res<UserInterfaceAssets>,
-    text: impl Into<String>,
-    text_color: Option<Color>,
+    props: Button1WidgetProps,
 ) {
+    let (text, text_color) = (props.text, props.text_color);
+
     parent
         .spawn(NodeBundle {
             background_color: Color::BLACK.with_a(0.5).into(),
@@ -72,7 +89,7 @@ pub fn button1_widget(
                             TextStyle {
                                 font: user_interface_assets.pixel_font_asset_handle.clone_weak(),
                                 font_size: 36.0,
-                                color: text_color.unwrap_or(Color::WHITE),
+                                color: text_color,
                             },
                         ),
                         Widget,

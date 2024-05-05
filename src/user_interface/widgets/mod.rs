@@ -19,4 +19,4 @@
 
 mod button1;
 
-pub use button1::button1_widget;
+pub use button1::{button1_widget, Button1WidgetPropsBuilder};
