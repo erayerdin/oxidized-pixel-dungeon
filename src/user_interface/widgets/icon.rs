@@ -18,10 +18,12 @@
 use bevy::prelude::*;
 use derive_builder::Builder;
 
-use crate::user_interface::UserInterfaceAssets;
+use crate::user_interface::{components::Widget, UserInterfaceAssets};
 
 #[derive(Debug, Clone)]
-pub enum Icon {}
+pub enum Icon {
+    Downstairs,
+}
 
 #[derive(Debug, Builder)]
 pub struct IconWidgetProps {
@@ -36,4 +38,12 @@ pub fn icon_widget(
     props: IconWidgetProps,
 ) {
     let IconWidgetProps { icon, scale } = props;
+
+    parent.spawn((
+        ImageBundle {
+            image: UiImage::from(user_interface_assets.icons_asset_handle.clone_weak()),
+            ..default()
+        },
+        Widget,
+    ));
 }

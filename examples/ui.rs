@@ -41,7 +41,9 @@ fn main() {
 mod systems {
     use bevy::prelude::*;
     use oxidized_pixel_dungeon::user_interface::{
-        widgets::{button1_widget, icon_widget, Button1WidgetPropsBuilder, IconWidgetPropsBuilder},
+        widgets::{
+            button1_widget, icon_widget, Button1WidgetPropsBuilder, Icon, IconWidgetPropsBuilder,
+        },
         UserInterfaceAssets,
     };
 
@@ -92,7 +94,10 @@ mod systems {
                 icon_widget(
                     parent,
                     &user_interface_assets,
-                    IconWidgetPropsBuilder::default().build().unwrap(),
+                    IconWidgetPropsBuilder::default()
+                        .icon(Icon::Downstairs)
+                        .build()
+                        .unwrap(),
                 );
             });
     }

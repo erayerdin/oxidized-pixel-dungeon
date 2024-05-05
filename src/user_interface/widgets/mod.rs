@@ -21,4 +21,4 @@ mod button1;
 mod icon;
 
 pub use button1::{button1_widget, Button1WidgetPropsBuilder};
-pub use icon::{icon_widget, IconWidgetPropsBuilder};
+pub use icon::{icon_widget, Icon, IconWidgetPropsBuilder};
