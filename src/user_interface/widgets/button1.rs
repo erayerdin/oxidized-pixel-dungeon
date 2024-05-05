@@ -49,15 +49,18 @@ pub fn button1_widget(
     let (text, font_color, font_size) = (props.text, props.font_color, props.font_size);
 
     parent
-        .spawn(NodeBundle {
-            background_color: Color::BLACK.with_a(0.5).into(),
-            style: Style {
-                width: Val::Auto,
-                height: Val::Auto,
+        .spawn((
+            NodeBundle {
+                background_color: Color::BLACK.with_a(0.5).into(),
+                style: Style {
+                    width: Val::Auto,
+                    height: Val::Auto,
+                    ..default()
+                },
                 ..default()
             },
-            ..default()
-        })
+            Name::new("Button1"),
+        ))
         .with_children(|parent| {
             parent
                 .spawn((
