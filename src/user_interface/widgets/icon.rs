@@ -15,10 +15,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-// since this module is exported via debug_assertions, it is safe to export as pub
+use bevy::prelude::*;
+use derive_builder::Builder;
 
-mod button1;
-mod icon;
+use crate::user_interface::UserInterfaceAssets;
 
-pub use button1::{button1_widget, Button1WidgetPropsBuilder};
-pub use icon::{icon_widget, IconWidgetPropsBuilder};
+#[derive(Debug, Clone)]
+pub enum Icon {}
+
+#[derive(Debug, Builder)]
+pub struct IconWidgetProps {
+    icon: Icon,
+    #[builder(default = "1.0")]
+    scale: f32,
+}
+
+pub fn icon_widget(
+    parent: &mut ChildBuilder,
+    user_interface_assets: &Res<UserInterfaceAssets>,
+    props: IconWidgetProps,
+) {
+    let IconWidgetProps { icon, scale } = props;
+}
