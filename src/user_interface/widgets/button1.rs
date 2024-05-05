@@ -19,6 +19,10 @@ use bevy::prelude::*;
 
 use crate::user_interface::{components::Widget, UserInterfaceAssets};
 
+const BUTTON_PADDING_PX_VAL: f32 = 15.0; // must be dividable by 3
+const BUTTON_PADDING_UI_RECT: UiRect = UiRect::all(Val::Px(BUTTON_PADDING_PX_VAL));
+const BUTTON_CORNER_SCALE: f32 = BUTTON_PADDING_PX_VAL / 3.0;
+
 pub fn button1_widget(
     parent: &mut ChildBuilder,
     user_interface_assets: &Res<UserInterfaceAssets>,
@@ -43,7 +47,7 @@ pub fn button1_widget(
                             height: Val::Auto,
                             justify_content: JustifyContent::Center,
                             align_items: AlignItems::Center,
-                            padding: UiRect::all(Val::Px(8.0)),
+                            padding: BUTTON_PADDING_UI_RECT,
                             ..default()
                         },
                         image: user_interface_assets
@@ -56,7 +60,7 @@ pub fn button1_widget(
                         border: BorderRect::square(2.0),
                         center_scale_mode: SliceScaleMode::Stretch,
                         sides_scale_mode: SliceScaleMode::Stretch,
-                        max_corner_scale: 1.0,
+                        max_corner_scale: BUTTON_CORNER_SCALE,
                     }),
                     Widget,
                 ))
