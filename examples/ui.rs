@@ -75,8 +75,8 @@ mod systems {
                     parent,
                     &user_interface_assets,
                     Button1WidgetPropsBuilder::default()
-                        .text("Yello text")
-                        .text_color(Color::YELLOW)
+                        .text("Yellow text")
+                        .font_color(Color::YELLOW)
                         .build()
                         .unwrap(),
                 );
