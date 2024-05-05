@@ -40,20 +40,26 @@ fn main() {
 
 mod systems {
     use bevy::prelude::*;
-    use oxidized_pixel_dungeon::user_interface::UserInterfaceAssets;
+    use oxidized_pixel_dungeon::user_interface::{widgets::button1_widget, UserInterfaceAssets};
 
     pub fn layout_init_system(
         mut commands: Commands,
         user_interface_assets: Res<UserInterfaceAssets>,
     ) {
-        commands.spawn(NodeBundle {
-            background_color: Color::RED.into(),
-            style: Style {
-                width: Val::Percent(100.0),
-                height: Val::Percent(100.0),
+        commands
+            .spawn(NodeBundle {
+                background_color: Color::RED.into(),
+                style: Style {
+                    width: Val::Percent(100.0),
+                    height: Val::Percent(100.0),
+                    justify_content: JustifyContent::Center,
+                    align_items: AlignItems::Center,
+                    ..default()
+                },
                 ..default()
-            },
-            ..default()
-        });
+            })
+            .with_children(|parent| {
+                button1_widget(parent, &user_interface_assets, "Hello");
+            });
     }
 }

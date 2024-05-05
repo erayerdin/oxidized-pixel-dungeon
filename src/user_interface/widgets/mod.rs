@@ -19,4 +19,4 @@
 
 mod button1;
 
-pub use button1::Button1Widget;
+pub use button1::button1_widget;

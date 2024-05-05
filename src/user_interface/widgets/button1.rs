@@ -15,12 +15,63 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub struct Button1Widget {
-    text: String,
-}
+use bevy::prelude::*;
 
-impl Button1Widget {
-    pub fn new(text: impl Into<String>) -> Self {
-        Self { text: text.into() }
-    }
+use crate::user_interface::{components::Widget, UserInterfaceAssets};
+
+pub fn button1_widget(
+    parent: &mut ChildBuilder,
+    user_interface_assets: &Res<UserInterfaceAssets>,
+    text: impl Into<String>,
+) {
+    parent
+        .spawn(NodeBundle {
+            background_color: Color::BLACK.with_a(0.5).into(),
+            style: Style {
+                width: Val::Auto,
+                height: Val::Auto,
+                ..default()
+            },
+            ..default()
+        })
+        .with_children(|parent| {
+            parent
+                .spawn((
+                    ButtonBundle {
+                        style: Style {
+                            width: Val::Auto,
+                            height: Val::Auto,
+                            justify_content: JustifyContent::Center,
+                            align_items: AlignItems::Center,
+                            padding: UiRect::all(Val::Px(8.0)),
+                            ..default()
+                        },
+                        image: user_interface_assets
+                            .button1_asset_handle
+                            .clone_weak()
+                            .into(),
+                        ..default()
+                    },
+                    ImageScaleMode::Sliced(TextureSlicer {
+                        border: BorderRect::square(2.0),
+                        center_scale_mode: SliceScaleMode::Stretch,
+                        sides_scale_mode: SliceScaleMode::Stretch,
+                        max_corner_scale: 1.0,
+                    }),
+                    Widget,
+                ))
+                .with_children(|parent| {
+                    parent.spawn((
+                        TextBundle::from_section(
+                            text,
+                            TextStyle {
+                                font: user_interface_assets.pixel_font_asset_handle.clone_weak(),
+                                font_size: 36.0,
+                                color: Color::WHITE,
+                            },
+                        ),
+                        Widget,
+                    ));
+                });
+        });
 }
