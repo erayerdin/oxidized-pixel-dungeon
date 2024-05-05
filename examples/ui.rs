@@ -52,6 +52,7 @@ mod systems {
                 style: Style {
                     width: Val::Percent(100.0),
                     height: Val::Percent(100.0),
+                    flex_direction: FlexDirection::Column,
                     justify_content: JustifyContent::Center,
                     align_items: AlignItems::Center,
                     ..default()
@@ -59,7 +60,13 @@ mod systems {
                 ..default()
             })
             .with_children(|parent| {
-                button1_widget(parent, &user_interface_assets, "Hello");
+                button1_widget(parent, &user_interface_assets, "Button", None);
+                button1_widget(
+                    parent,
+                    &user_interface_assets,
+                    "Yellow Color Text",
+                    Some(Color::YELLOW),
+                );
             });
     }
 }

@@ -27,6 +27,7 @@ pub fn button1_widget(
     parent: &mut ChildBuilder,
     user_interface_assets: &Res<UserInterfaceAssets>,
     text: impl Into<String>,
+    text_color: Option<Color>,
 ) {
     parent
         .spawn(NodeBundle {
@@ -71,7 +72,7 @@ pub fn button1_widget(
                             TextStyle {
                                 font: user_interface_assets.pixel_font_asset_handle.clone_weak(),
                                 font_size: 36.0,
-                                color: Color::WHITE,
+                                color: text_color.unwrap_or(Color::WHITE),
                             },
                         ),
                         Widget,
