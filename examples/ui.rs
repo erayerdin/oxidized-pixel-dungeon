@@ -80,6 +80,15 @@ mod systems {
                         .build()
                         .unwrap(),
                 );
+                button1_widget(
+                    parent,
+                    &user_interface_assets,
+                    Button1WidgetPropsBuilder::default()
+                        .text("Bigger font")
+                        .font_size(20.0)
+                        .build()
+                        .unwrap(),
+                );
             });
     }
 }

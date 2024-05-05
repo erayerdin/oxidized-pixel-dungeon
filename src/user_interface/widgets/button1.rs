@@ -30,6 +30,8 @@ pub struct Button1WidgetProps {
     text: String,
     #[builder(default = "Color::WHITE")]
     text_color: Color,
+    #[builder(default = "16.0")]
+    font_size: f32,
 }
 
 impl Button1WidgetPropsBuilder {
@@ -44,7 +46,7 @@ pub fn button1_widget(
     user_interface_assets: &Res<UserInterfaceAssets>,
     props: Button1WidgetProps,
 ) {
-    let (text, text_color) = (props.text, props.text_color);
+    let (text, text_color, font_size) = (props.text, props.text_color, props.font_size);
 
     parent
         .spawn(NodeBundle {
@@ -88,7 +90,7 @@ pub fn button1_widget(
                             text,
                             TextStyle {
                                 font: user_interface_assets.pixel_font_asset_handle.clone_weak(),
-                                font_size: 36.0,
+                                font_size,
                                 color: text_color,
                             },
                         ),
