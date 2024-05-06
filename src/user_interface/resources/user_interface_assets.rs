@@ -24,8 +24,8 @@ pub struct UserInterfaceAssets {
     pub(crate) pixel_font_asset_handle: Handle<Font>,
     #[asset(path = "original/interfaces/button1.png")]
     pub(crate) button1_asset_handle: Handle<Image>,
-    #[asset(path = "spd/interfaces/icons.png")]
-    pub(crate) icons_asset_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/icons/gold-coins.png")]
+    pub(crate) gold_coin_icon_handle: Handle<Image>,
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash, Default, States)]
