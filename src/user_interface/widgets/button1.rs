@@ -20,6 +20,8 @@ use derive_builder::Builder;
 
 use crate::user_interface::{components::Widget, UserInterfaceAssets};
 
+use super::{icon::IconWidgetProps, icon_widget, Icon, IconWidgetPropsBuilder};
+
 const BUTTON_PADDING_PX_VAL: f32 = 15.0; // must be dividable by 3
 const BUTTON_PADDING_UI_RECT: UiRect = UiRect::all(Val::Px(BUTTON_PADDING_PX_VAL));
 const BUTTON_CORNER_SCALE: f32 = BUTTON_PADDING_PX_VAL / 3.0;
@@ -28,6 +30,8 @@ const BUTTON_CORNER_SCALE: f32 = BUTTON_PADDING_PX_VAL / 3.0;
 pub struct Button1WidgetProps {
     #[builder(setter(custom))]
     text: String,
+    #[builder(default = "None")]
+    icon: Option<Icon>,
     #[builder(default = "Color::WHITE")]
     font_color: Color,
     #[builder(default = "16.0")]
@@ -46,7 +50,12 @@ pub fn button1_widget(
     user_interface_assets: &Res<UserInterfaceAssets>,
     props: Button1WidgetProps,
 ) {
-    let (text, font_color, font_size) = (props.text, props.font_color, props.font_size);
+    let Button1WidgetProps {
+        text,
+        icon,
+        font_color,
+        font_size,
+    } = props;
 
     parent
         .spawn((
@@ -88,6 +97,17 @@ pub fn button1_widget(
                     Widget,
                 ))
                 .with_children(|parent| {
+                    if let Some(icon) = icon {
+                        icon_widget(
+                            parent,
+                            user_interface_assets,
+                            IconWidgetPropsBuilder::default()
+                                .icon(icon)
+                                .build()
+                                .unwrap(),
+                        )
+                    }
+
                     parent.spawn((
                         TextBundle::from_section(
                             text,

@@ -78,6 +78,15 @@ mod systems {
                     parent,
                     &user_interface_assets,
                     Button1WidgetPropsBuilder::default()
+                        .text("Button with Icon")
+                        .icon(Some(Icon::GoldCoins))
+                        .build()
+                        .unwrap(),
+                );
+                button1_widget(
+                    parent,
+                    &user_interface_assets,
+                    Button1WidgetPropsBuilder::default()
                         .text("Yellow text")
                         .font_color(Color::YELLOW)
                         .build()
