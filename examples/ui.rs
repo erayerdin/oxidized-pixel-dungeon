@@ -60,6 +60,7 @@ mod systems {
                     flex_direction: FlexDirection::Column,
                     justify_content: JustifyContent::Center,
                     align_items: AlignItems::Center,
+                    row_gap: Val::Px(8.0),
                     ..default()
                 },
                 ..default()
