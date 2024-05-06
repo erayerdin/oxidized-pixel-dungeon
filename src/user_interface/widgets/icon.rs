@@ -26,9 +26,12 @@ pub enum Icon {
 }
 
 impl Icon {
-    fn image_handle(&self, user_interface_assets: &Res<UserInterfaceAssets>) -> Handle<Image> {
+    fn ui_image(&self, user_interface_assets: &Res<UserInterfaceAssets>) -> UiImage {
         match self {
-            Icon::GoldCoins => user_interface_assets.gold_coin_icon_handle.clone_weak(),
+            Icon::GoldCoins => user_interface_assets
+                .gold_coin_icon_handle
+                .clone_weak()
+                .into(),
         }
     }
 }
@@ -36,8 +39,8 @@ impl Icon {
 #[derive(Debug, Builder)]
 pub struct IconWidgetProps {
     icon: Icon,
-    #[builder(default = "1.0")]
-    scale: f32,
+    #[builder(default = "16.0")]
+    size: f32,
 }
 
 pub fn icon_widget(
@@ -45,11 +48,18 @@ pub fn icon_widget(
     user_interface_assets: &Res<UserInterfaceAssets>,
     props: IconWidgetProps,
 ) {
-    let IconWidgetProps { icon, scale } = props;
+    let IconWidgetProps { icon, size } = props;
+
+    let ui_image = icon.ui_image(user_interface_assets);
 
     parent.spawn((
         ImageBundle {
-            image: UiImage::from(icon.image_handle(user_interface_assets)),
+            image: ui_image,
+            style: Style {
+                width: Val::Px(size),
+                height: Val::Px(size),
+                ..default()
+            },
             ..default()
         },
         Widget,

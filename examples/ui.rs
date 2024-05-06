@@ -101,7 +101,24 @@ mod systems {
                         .unwrap(),
                 );
                 parent.spawn(TextBundle::from_section(
-                    "Icon 1x",
+                    "Original Icon",
+                    TextStyle {
+                        font_size: 12.0,
+                        color: Color::WHITE,
+                        ..default()
+                    },
+                ));
+                icon_widget(
+                    parent,
+                    &user_interface_assets,
+                    IconWidgetPropsBuilder::default()
+                        .icon(Icon::GoldCoins)
+                        .size(32.0)
+                        .build()
+                        .unwrap(),
+                );
+                parent.spawn(TextBundle::from_section(
+                    "Upscaled Icon",
                     TextStyle {
                         font_size: 12.0,
                         color: Color::WHITE,
