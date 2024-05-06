@@ -96,10 +96,18 @@ mod systems {
                     parent,
                     &user_interface_assets,
                     IconWidgetPropsBuilder::default()
-                        .icon(Icon::Downstairs)
+                        .icon(Icon::GoldCoins)
                         .build()
                         .unwrap(),
                 );
+                parent.spawn(TextBundle::from_section(
+                    "Icon 1x",
+                    TextStyle {
+                        font_size: 12.0,
+                        color: Color::WHITE,
+                        ..default()
+                    },
+                ));
             });
     }
 }

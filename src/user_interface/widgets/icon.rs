@@ -22,7 +22,15 @@ use crate::user_interface::{components::Widget, UserInterfaceAssets};
 
 #[derive(Debug, Clone)]
 pub enum Icon {
-    Downstairs,
+    GoldCoins,
+}
+
+impl Icon {
+    fn image_handle(&self, user_interface_assets: &Res<UserInterfaceAssets>) -> Handle<Image> {
+        match self {
+            Icon::GoldCoins => user_interface_assets.gold_coin_icon_handle.clone_weak(),
+        }
+    }
 }
 
 #[derive(Debug, Builder)]
@@ -41,7 +49,7 @@ pub fn icon_widget(
 
     parent.spawn((
         ImageBundle {
-            image: UiImage::from(user_interface_assets.icons_asset_handle.clone_weak()),
+            image: UiImage::from(icon.image_handle(user_interface_assets)),
             ..default()
         },
         Widget,
