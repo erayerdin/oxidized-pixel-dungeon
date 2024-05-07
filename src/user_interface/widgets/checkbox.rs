@@ -83,7 +83,9 @@ pub fn checkbox_widget(
                     ..default()
                 },
                 Interaction::Pressed,
-                Checkbox(checked),
+                // for some reason, checkbox_check_system runs once despite Change<Interaction> not triggering
+                // so it inverts the value provided below, keep it as is
+                Checkbox(!checked),
                 Widget,
             ));
 
