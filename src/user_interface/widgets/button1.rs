@@ -97,19 +97,35 @@ pub fn button1_widget(
                     Widget,
                 ))
                 .with_children(|parent| {
+                    let mut text_margin = UiRect::ZERO;
+
                     if let Some(icon_widget_props) = icon_widget_props {
                         icon_widget(parent, user_interface_assets, icon_widget_props);
+                        text_margin = UiRect::left(Val::Px(8.0));
                     }
 
                     parent.spawn((
-                        TextBundle::from_section(
-                            text,
-                            TextStyle {
-                                font: user_interface_assets.pixel_font_asset_handle.clone_weak(),
-                                font_size,
-                                color: font_color,
+                        TextBundle {
+                            text: Text {
+                                sections: vec![TextSection::new(
+                                    text,
+                                    TextStyle {
+                                        font: user_interface_assets
+                                            .pixel_font_asset_handle
+                                            .clone_weak(),
+                                        font_size,
+                                        color: font_color,
+                                    },
+                                )],
+                                justify: JustifyText::Center,
+                                linebreak_behavior: bevy::text::BreakLineOn::WordBoundary,
                             },
-                        ),
+                            style: Style {
+                                margin: text_margin,
+                                ..default()
+                            },
+                            ..default()
+                        },
                         Widget,
                     ));
                 });
