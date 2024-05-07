@@ -41,4 +41,17 @@ pub fn checkbox_widget(
     props: CheckboxWidgetProps,
 ) {
     let CheckboxWidgetProps { text, checked } = props;
+
+    parent.spawn(ImageBundle {
+        image: UiImage::from(if checked {
+            user_interface_assets
+                .checkbox_checked_asset_handle
+                .clone_weak()
+        } else {
+            user_interface_assets
+                .checkbox_unchecked_asset_handle
+                .clone_weak()
+        }),
+        ..default()
+    });
 }
