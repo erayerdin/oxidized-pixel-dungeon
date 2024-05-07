@@ -42,7 +42,8 @@ mod systems {
     use bevy::prelude::*;
     use oxidized_pixel_dungeon::user_interface::{
         widgets::{
-            button1_widget, icon_widget, Button1WidgetPropsBuilder, Icon, IconWidgetPropsBuilder,
+            button1_widget, checkbox_widget, icon_widget, Button1WidgetPropsBuilder,
+            CheckboxWidgetPropsBuilder, Icon, IconWidgetPropsBuilder,
         },
         UserInterfaceAssets,
     };
@@ -139,6 +140,23 @@ mod systems {
                         ..default()
                     },
                 ));
+                checkbox_widget(
+                    parent,
+                    &user_interface_assets,
+                    CheckboxWidgetPropsBuilder::default()
+                        .text("Unchecked checkbox")
+                        .build()
+                        .unwrap(),
+                );
+                checkbox_widget(
+                    parent,
+                    &user_interface_assets,
+                    CheckboxWidgetPropsBuilder::default()
+                        .text("Checked checkbox")
+                        .checked(true)
+                        .build()
+                        .unwrap(),
+                );
             });
     }
 }

@@ -15,12 +15,30 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-// since this module is exported via debug_assertions, it is safe to export as pub
+use bevy::prelude::*;
+use derive_builder::Builder;
 
-mod button1;
-mod checkbox;
-mod icon;
+use crate::user_interface::UserInterfaceAssets;
 
-pub use button1::{button1_widget, Button1WidgetPropsBuilder};
-pub use checkbox::{checkbox_widget, CheckboxWidgetPropsBuilder};
-pub use icon::{icon_widget, Icon, IconWidgetPropsBuilder};
+#[derive(Debug, Builder)]
+pub struct CheckboxWidgetProps {
+    #[builder(setter(custom))]
+    text: String,
+    #[builder(default = "false")]
+    checked: bool,
+}
+
+impl CheckboxWidgetPropsBuilder {
+    pub fn text(&mut self, text: impl Into<String>) -> &mut Self {
+        self.text = Some(text.into());
+        self
+    }
+}
+
+pub fn checkbox_widget(
+    parent: &mut ChildBuilder,
+    user_interface_assets: &Res<UserInterfaceAssets>,
+    props: CheckboxWidgetProps,
+) {
+    let CheckboxWidgetProps { text, checked } = props;
+}
