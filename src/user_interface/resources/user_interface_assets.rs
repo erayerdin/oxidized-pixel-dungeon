@@ -20,10 +20,17 @@ use bevy_asset_loader::prelude::*;
 
 #[derive(Debug, Resource, AssetCollection)]
 pub struct UserInterfaceAssets {
+    // Fonts
     #[asset(path = "spd/fonts/pixel_font.ttf")]
     pub(crate) pixel_font_asset_handle: Handle<Font>,
+    // UI Elements
     #[asset(path = "original/interfaces/button1.png")]
     pub(crate) button1_asset_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/checkbox-unchecked.png")]
+    pub(crate) checkbox_unchecked_asset_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/checkbox-checked.png")]
+    pub(crate) checkbox_checked_asset_handle: Handle<Image>,
+    // Icons
     #[asset(path = "original/interfaces/icons/gold-coins.png")]
     pub(crate) gold_coin_icon_handle: Handle<Image>,
 }
