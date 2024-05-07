@@ -18,7 +18,7 @@
 use bevy::prelude::*;
 use derive_builder::Builder;
 
-use crate::user_interface::UserInterfaceAssets;
+use crate::user_interface::{components::Widget, UserInterfaceAssets};
 
 #[derive(Debug, Builder)]
 pub struct CheckboxWidgetProps {
@@ -26,6 +26,8 @@ pub struct CheckboxWidgetProps {
     text: String,
     #[builder(default = "false")]
     checked: bool,
+    #[builder(default = "16.0")]
+    size: f32,
 }
 
 impl CheckboxWidgetPropsBuilder {
@@ -40,18 +42,59 @@ pub fn checkbox_widget(
     user_interface_assets: &Res<UserInterfaceAssets>,
     props: CheckboxWidgetProps,
 ) {
-    let CheckboxWidgetProps { text, checked } = props;
+    let CheckboxWidgetProps {
+        text,
+        checked,
+        size,
+    } = props;
 
-    parent.spawn(ImageBundle {
-        image: UiImage::from(if checked {
-            user_interface_assets
-                .checkbox_checked_asset_handle
-                .clone_weak()
-        } else {
-            user_interface_assets
-                .checkbox_unchecked_asset_handle
-                .clone_weak()
-        }),
-        ..default()
-    });
+    parent
+        .spawn((
+            NodeBundle {
+                style: Style {
+                    width: Val::Auto,
+                    height: Val::Auto,
+                    ..default()
+                },
+                ..default()
+            },
+            Widget,
+        ))
+        .with_children(|parent| {
+            parent.spawn((
+                ImageBundle {
+                    image: UiImage::from(if checked {
+                        user_interface_assets
+                            .checkbox_checked_asset_handle
+                            .clone_weak()
+                    } else {
+                        user_interface_assets
+                            .checkbox_unchecked_asset_handle
+                            .clone_weak()
+                    }),
+                    style: Style {
+                        width: Val::Px(size),
+                        height: Val::Px(size),
+                        ..default()
+                    },
+                    ..default()
+                },
+                Widget,
+            ));
+
+            parent.spawn((
+                TextBundle {
+                    text: Text::from_section(
+                        text,
+                        TextStyle {
+                            font: user_interface_assets.pixel_font_asset_handle.clone_weak(),
+                            font_size: size,
+                            color: Color::WHITE,
+                        },
+                    ),
+                    ..default()
+                },
+                Widget,
+            ));
+        });
 }

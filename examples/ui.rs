@@ -157,6 +157,16 @@ mod systems {
                         .build()
                         .unwrap(),
                 );
+                checkbox_widget(
+                    parent,
+                    &user_interface_assets,
+                    CheckboxWidgetPropsBuilder::default()
+                        .text("Bigger checkbox")
+                        .checked(true)
+                        .size(32.0)
+                        .build()
+                        .unwrap(),
+                );
             });
     }
 }
