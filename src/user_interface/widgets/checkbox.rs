@@ -37,6 +37,9 @@ impl CheckboxWidgetPropsBuilder {
     }
 }
 
+#[derive(Debug, Component)]
+pub struct Checkbox(pub bool);
+
 pub fn checkbox_widget(
     parent: &mut ChildBuilder,
     user_interface_assets: &Res<UserInterfaceAssets>,
@@ -79,6 +82,8 @@ pub fn checkbox_widget(
                     },
                     ..default()
                 },
+                Interaction::Pressed,
+                Checkbox(checked),
                 Widget,
             ));
 

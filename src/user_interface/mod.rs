@@ -17,6 +17,7 @@
 
 pub(crate) mod components;
 pub(crate) mod resources;
+pub(crate) mod systems;
 
 #[cfg(debug_assertions)]
 pub mod widgets;
@@ -28,6 +29,7 @@ use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
 
 pub use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
+use self::systems::checkbox_check_system;
 
 pub struct UserInterfacePlugin;
 
@@ -38,6 +40,7 @@ impl Plugin for UserInterfacePlugin {
                 LoadingState::new(UserInterfaceAssetsLoadState::default())
                     .continue_to_state(UserInterfaceAssetsLoadState::LoadedState)
                     .load_collection::<UserInterfaceAssets>(),
-            );
+            )
+            .add_systems(Update, checkbox_check_system);
     }
 }

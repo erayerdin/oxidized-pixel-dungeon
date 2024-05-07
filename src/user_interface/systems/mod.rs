@@ -15,12 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-// since this module is exported via debug_assertions, it is safe to export as pub
-
-mod button1;
 mod checkbox;
-mod icon;
 
-pub use button1::{button1_widget, Button1WidgetPropsBuilder};
-pub use checkbox::{checkbox_widget, Checkbox, CheckboxWidgetPropsBuilder};
-pub use icon::{icon_widget, Icon, IconWidgetPropsBuilder};
+pub(crate) use checkbox::checkbox_check_system;
