@@ -36,7 +36,7 @@ impl Icon {
     }
 }
 
-#[derive(Debug, Builder)]
+#[derive(Debug, Clone, Builder)]
 pub struct IconWidgetProps {
     icon: Icon,
     #[builder(default = "16.0")]

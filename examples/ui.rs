@@ -70,7 +70,7 @@ mod systems {
                     parent,
                     &user_interface_assets,
                     Button1WidgetPropsBuilder::default()
-                        .text("Normal Text")
+                        .text("Button with Normal Text")
                         .build()
                         .unwrap(),
                 );
@@ -79,7 +79,12 @@ mod systems {
                     &user_interface_assets,
                     Button1WidgetPropsBuilder::default()
                         .text("Button with Icon")
-                        .icon(Some(Icon::GoldCoins))
+                        .icon_widget_props(Some(
+                            IconWidgetPropsBuilder::default()
+                                .icon(Icon::GoldCoins)
+                                .build()
+                                .unwrap(),
+                        ))
                         .build()
                         .unwrap(),
                 );

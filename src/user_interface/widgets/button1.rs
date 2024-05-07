@@ -20,7 +20,7 @@ use derive_builder::Builder;
 
 use crate::user_interface::{components::Widget, UserInterfaceAssets};
 
-use super::{icon::IconWidgetProps, icon_widget, Icon, IconWidgetPropsBuilder};
+use super::{icon::IconWidgetProps, icon_widget};
 
 const BUTTON_PADDING_PX_VAL: f32 = 15.0; // must be dividable by 3
 const BUTTON_PADDING_UI_RECT: UiRect = UiRect::all(Val::Px(BUTTON_PADDING_PX_VAL));
@@ -31,7 +31,7 @@ pub struct Button1WidgetProps {
     #[builder(setter(custom))]
     text: String,
     #[builder(default = "None")]
-    icon: Option<Icon>,
+    icon_widget_props: Option<IconWidgetProps>,
     #[builder(default = "Color::WHITE")]
     font_color: Color,
     #[builder(default = "16.0")]
@@ -52,7 +52,7 @@ pub fn button1_widget(
 ) {
     let Button1WidgetProps {
         text,
-        icon,
+        icon_widget_props,
         font_color,
         font_size,
     } = props;
@@ -97,15 +97,8 @@ pub fn button1_widget(
                     Widget,
                 ))
                 .with_children(|parent| {
-                    if let Some(icon) = icon {
-                        icon_widget(
-                            parent,
-                            user_interface_assets,
-                            IconWidgetPropsBuilder::default()
-                                .icon(icon)
-                                .build()
-                                .unwrap(),
-                        )
+                    if let Some(icon_widget_props) = icon_widget_props {
+                        icon_widget(parent, user_interface_assets, icon_widget_props);
                     }
 
                     parent.spawn((
