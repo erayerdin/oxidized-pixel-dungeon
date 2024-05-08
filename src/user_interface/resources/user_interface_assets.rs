@@ -33,6 +33,20 @@ pub struct UserInterfaceAssets {
     // Icons
     #[asset(path = "original/interfaces/icons/gold-coins.png")]
     pub(crate) gold_coin_icon_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/icons/cogs.png")]
+    pub(crate) cogs_icon_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/icons/crest-of-blade.png")]
+    pub(crate) crest_of_blade_icon_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/icons/downstairs.png")]
+    pub(crate) downstairs_icon_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/icons/front-facing-scroll.png")]
+    pub(crate) front_facing_scroll_icon_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/icons/ouroboros-arrows.png")]
+    pub(crate) ouroboros_arrows_icon_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/icons/ranking-ladders.png")]
+    pub(crate) ranking_ladders_icon_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/icons/shattered-block.png")]
+    pub(crate) shattered_block_icon_handle: Handle<Image>,
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash, Default, States)]

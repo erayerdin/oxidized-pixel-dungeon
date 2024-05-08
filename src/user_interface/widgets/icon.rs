@@ -23,6 +23,13 @@ use crate::user_interface::{components::Widget, UserInterfaceAssets};
 #[derive(Debug, Clone)]
 pub enum Icon {
     GoldCoins,
+    Cogs,
+    CrestOfBlade,
+    Downstairs,
+    FrontFacingScroll,
+    OuroborosArrows,
+    RankingLadders,
+    ShatteredBlock,
 }
 
 impl Icon {
@@ -30,6 +37,31 @@ impl Icon {
         match self {
             Icon::GoldCoins => user_interface_assets
                 .gold_coin_icon_handle
+                .clone_weak()
+                .into(),
+            Icon::Cogs => user_interface_assets.cogs_icon_handle.clone_weak().into(),
+            Icon::CrestOfBlade => user_interface_assets
+                .crest_of_blade_icon_handle
+                .clone_weak()
+                .into(),
+            Icon::Downstairs => user_interface_assets
+                .downstairs_icon_handle
+                .clone_weak()
+                .into(),
+            Icon::FrontFacingScroll => user_interface_assets
+                .front_facing_scroll_icon_handle
+                .clone_weak()
+                .into(),
+            Icon::OuroborosArrows => user_interface_assets
+                .ouroboros_arrows_icon_handle
+                .clone_weak()
+                .into(),
+            Icon::RankingLadders => user_interface_assets
+                .ranking_ladders_icon_handle
+                .clone_weak()
+                .into(),
+            Icon::ShatteredBlock => user_interface_assets
+                .shattered_block_icon_handle
                 .clone_weak()
                 .into(),
         }
