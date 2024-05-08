@@ -90,7 +90,7 @@ pub fn button1_widget(
                         ..default()
                     },
                     ImageScaleMode::Sliced(TextureSlicer {
-                        border: BorderRect::square(2.0),
+                        border: BorderRect::square(3.0),
                         center_scale_mode: SliceScaleMode::Stretch,
                         sides_scale_mode: SliceScaleMode::Stretch,
                         max_corner_scale: BUTTON_CORNER_SCALE,
