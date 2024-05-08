@@ -22,9 +22,9 @@ use crate::user_interface::{components::Widget, UserInterfaceAssets};
 
 use super::{icon::IconWidgetProps, icon_widget};
 
-const BUTTON_PADDING_PX_VAL: f32 = 15.0; // must be dividable by 3
+const BUTTON_PADDING_PX_VAL: f32 = 8.0;
 const BUTTON_PADDING_UI_RECT: UiRect = UiRect::all(Val::Px(BUTTON_PADDING_PX_VAL));
-const BUTTON_CORNER_SCALE: f32 = BUTTON_PADDING_PX_VAL / 3.0;
+const BUTTON_CORNER_SCALE: f32 = BUTTON_PADDING_PX_VAL / 8.0;
 
 #[derive(Debug, Builder)]
 pub struct Button1WidgetProps {
