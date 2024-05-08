@@ -70,7 +70,7 @@ mod components {
 mod systems {
     use bevy::prelude::*;
     use oxidized_pixel_dungeon::user_interface::{
-        widgets::{button1_widget, Button1WidgetPropsBuilder},
+        widgets::{button1_widget, Button1WidgetPropsBuilder, Icon, IconWidgetPropsBuilder},
         UserInterfaceAssets,
     };
 
@@ -120,6 +120,12 @@ mod systems {
                                     StartTheGameButton,
                                     Button1WidgetPropsBuilder::default()
                                         .text("Start the Game")
+                                        .icon_widget_props(Some(
+                                            IconWidgetPropsBuilder::default()
+                                                .icon(Icon::Downstairs)
+                                                .build()
+                                                .unwrap(),
+                                        ))
                                         .build()
                                         .unwrap(),
                                 );
@@ -129,6 +135,12 @@ mod systems {
                                     SupportTheGameButton,
                                     Button1WidgetPropsBuilder::default()
                                         .text("Support the Game")
+                                        .icon_widget_props(Some(
+                                            IconWidgetPropsBuilder::default()
+                                                .icon(Icon::GoldCoins)
+                                                .build()
+                                                .unwrap(),
+                                        ))
                                         .font_color(Color::YELLOW)
                                         .build()
                                         .unwrap(),
@@ -151,6 +163,12 @@ mod systems {
                                     RankingButton,
                                     Button1WidgetPropsBuilder::default()
                                         .text("Ranking")
+                                        .icon_widget_props(Some(
+                                            IconWidgetPropsBuilder::default()
+                                                .icon(Icon::RankingLadders)
+                                                .build()
+                                                .unwrap(),
+                                        ))
                                         .build()
                                         .unwrap(),
                                 );
@@ -160,6 +178,12 @@ mod systems {
                                     NewsButton,
                                     Button1WidgetPropsBuilder::default()
                                         .text("News")
+                                        .icon_widget_props(Some(
+                                            IconWidgetPropsBuilder::default()
+                                                .icon(Icon::FrontFacingScroll)
+                                                .build()
+                                                .unwrap(),
+                                        ))
                                         .build()
                                         .unwrap(),
                                 );
@@ -169,6 +193,12 @@ mod systems {
                                     SettingsButton,
                                     Button1WidgetPropsBuilder::default()
                                         .text("Settings")
+                                        .icon_widget_props(Some(
+                                            IconWidgetPropsBuilder::default()
+                                                .icon(Icon::Cogs)
+                                                .build()
+                                                .unwrap(),
+                                        ))
                                         .build()
                                         .unwrap(),
                                 );
@@ -190,6 +220,12 @@ mod systems {
                                     BadgesButton,
                                     Button1WidgetPropsBuilder::default()
                                         .text("Badges")
+                                        .icon_widget_props(Some(
+                                            IconWidgetPropsBuilder::default()
+                                                .icon(Icon::CrestOfBlade)
+                                                .build()
+                                                .unwrap(),
+                                        ))
                                         .build()
                                         .unwrap(),
                                 );
@@ -199,6 +235,12 @@ mod systems {
                                     ChangesButton,
                                     Button1WidgetPropsBuilder::default()
                                         .text("Changes")
+                                        .icon_widget_props(Some(
+                                            IconWidgetPropsBuilder::default()
+                                                .icon(Icon::OuroborosArrows)
+                                                .build()
+                                                .unwrap(),
+                                        ))
                                         .build()
                                         .unwrap(),
                                 );
@@ -208,6 +250,12 @@ mod systems {
                                     AboutButton,
                                     Button1WidgetPropsBuilder::default()
                                         .text("About")
+                                        .icon_widget_props(Some(
+                                            IconWidgetPropsBuilder::default()
+                                                .icon(Icon::ShatteredBlock)
+                                                .build()
+                                                .unwrap(),
+                                        ))
                                         .build()
                                         .unwrap(),
                                 );
