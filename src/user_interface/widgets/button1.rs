@@ -48,6 +48,7 @@ impl Button1WidgetPropsBuilder {
 pub fn button1_widget(
     parent: &mut ChildBuilder,
     user_interface_assets: &Res<UserInterfaceAssets>,
+    marker_component: impl Component,
     props: Button1WidgetProps,
 ) {
     let Button1WidgetProps {
@@ -94,6 +95,7 @@ pub fn button1_widget(
                         sides_scale_mode: SliceScaleMode::Stretch,
                         max_corner_scale: BUTTON_CORNER_SCALE,
                     }),
+                    marker_component,
                     Widget,
                 ))
                 .with_children(|parent| {

@@ -38,6 +38,12 @@ fn main() {
     app.run();
 }
 
+mod components {
+    use bevy::prelude::*;
+
+    #[derive(Debug, Component)]
+    pub struct MyButton;
+}
 mod systems {
     use bevy::prelude::*;
     use oxidized_pixel_dungeon::user_interface::{
@@ -47,6 +53,8 @@ mod systems {
         },
         UserInterfaceAssets,
     };
+
+    use crate::components::MyButton;
 
     pub fn layout_init_system(
         mut commands: Commands,
@@ -70,6 +78,7 @@ mod systems {
                 button1_widget(
                     parent,
                     &user_interface_assets,
+                    MyButton,
                     Button1WidgetPropsBuilder::default()
                         .text("Button with Normal Text")
                         .build()
@@ -78,6 +87,7 @@ mod systems {
                 button1_widget(
                     parent,
                     &user_interface_assets,
+                    MyButton,
                     Button1WidgetPropsBuilder::default()
                         .text("Button with Icon")
                         .icon_widget_props(Some(
@@ -92,6 +102,7 @@ mod systems {
                 button1_widget(
                     parent,
                     &user_interface_assets,
+                    MyButton,
                     Button1WidgetPropsBuilder::default()
                         .text("Yellow text")
                         .font_color(Color::YELLOW)
@@ -101,6 +112,7 @@ mod systems {
                 button1_widget(
                     parent,
                     &user_interface_assets,
+                    MyButton,
                     Button1WidgetPropsBuilder::default()
                         .text("Bigger font")
                         .font_size(20.0)
