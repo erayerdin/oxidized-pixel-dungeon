@@ -62,6 +62,7 @@ pub fn icon_widget(
             },
             ..default()
         },
+        Name::new("Icon"),
         Widget,
     ));
 }

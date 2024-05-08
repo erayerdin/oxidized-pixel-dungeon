@@ -61,6 +61,7 @@ pub fn checkbox_widget(
                 },
                 ..default()
             },
+            Name::new("Checkbox"),
             Widget,
         ))
         .with_children(|parent| {
