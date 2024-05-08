@@ -21,15 +21,18 @@ use oxidized_pixel_dungeon::{
     core::CorePlugin,
     user_interface::{UserInterfaceAssetsLoadState, UserInterfacePlugin},
 };
+use resources::Counter;
 
 fn main() {
     let mut app = App::new();
 
     app.add_plugins((CorePlugin, UserInterfacePlugin))
+        .init_resource::<Counter>()
         .add_systems(
             OnEnter(UserInterfaceAssetsLoadState::LoadedState),
             systems::layout_init_system,
-        );
+        )
+        .add_systems(Update, systems::counter_system);
 
     if cfg!(debug_assertions) {
         app.add_plugins(WorldInspectorPlugin::new());
@@ -38,11 +41,21 @@ fn main() {
     app.run();
 }
 
+mod resources {
+    use bevy::prelude::*;
+
+    #[derive(Debug, Resource, Default)]
+    pub struct Counter(pub u32);
+}
+
 mod components {
     use bevy::prelude::*;
 
     #[derive(Debug, Component)]
     pub struct MyButton;
+
+    #[derive(Debug, Component)]
+    pub struct CounterText;
 }
 mod systems {
     use bevy::prelude::*;
@@ -54,11 +67,35 @@ mod systems {
         UserInterfaceAssets,
     };
 
-    use crate::components::MyButton;
+    use crate::{
+        components::{CounterText, MyButton},
+        resources::Counter,
+    };
+
+    pub fn counter_system(
+        mut counter: ResMut<Counter>,
+        mut button_query: Query<&Interaction, (Changed<Interaction>, With<MyButton>)>,
+        mut counter_text_query: Query<&mut Text, With<CounterText>>,
+    ) {
+        for interaction in button_query.iter_mut() {
+            if interaction == &Interaction::Pressed {
+                counter.0 += 1;
+                let mut counter_text = counter_text_query.single_mut();
+                *counter_text = Text::from_section(
+                    format!("Counter: {}", counter.0),
+                    TextStyle {
+                        color: Color::WHITE,
+                        ..default()
+                    },
+                );
+            }
+        }
+    }
 
     pub fn layout_init_system(
         mut commands: Commands,
         user_interface_assets: Res<UserInterfaceAssets>,
+        counter: Res<Counter>,
     ) {
         commands
             .spawn(NodeBundle {
@@ -75,6 +112,16 @@ mod systems {
                 ..default()
             })
             .with_children(|parent| {
+                parent.spawn((
+                    TextBundle::from_section(
+                        format!("Counter: {}", counter.0),
+                        TextStyle {
+                            color: Color::WHITE,
+                            ..default()
+                        },
+                    ),
+                    CounterText,
+                ));
                 button1_widget(
                     parent,
                     &user_interface_assets,
