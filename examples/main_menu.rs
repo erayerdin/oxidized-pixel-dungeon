@@ -21,7 +21,7 @@ use oxidized_pixel_dungeon::{
     core::CorePlugin,
     user_interface::{UserInterfaceAssetsLoadState, UserInterfacePlugin},
 };
-use systems::init_system;
+use systems::{parallax_init_system, parallax_play_system, ui_init_system};
 
 fn main() {
     let mut app = App::new();
@@ -29,8 +29,9 @@ fn main() {
     app.add_plugins((CorePlugin, UserInterfacePlugin))
         .add_systems(
             OnEnter(UserInterfaceAssetsLoadState::LoadedState),
-            init_system,
-        );
+            (ui_init_system, parallax_init_system),
+        )
+        .add_systems(Update, parallax_play_system);
 
     if cfg!(debug_assertions) {
         app.add_plugins(WorldInspectorPlugin::new());
@@ -69,6 +70,7 @@ mod components {
 
 mod systems {
     use bevy::prelude::*;
+    use bevy_parallax::{CreateParallaxEvent, LayerData, LayerSpeed, ParallaxMoveEvent};
     use oxidized_pixel_dungeon::user_interface::{
         widgets::{button1_widget, Button1WidgetPropsBuilder, Icon, IconWidgetPropsBuilder},
         UserInterfaceAssets,
@@ -79,7 +81,39 @@ mod systems {
         StartTheGameButton, SupportTheGameButton,
     };
 
-    pub fn init_system(mut commands: Commands, user_interface_assets: Res<UserInterfaceAssets>) {
+    pub fn parallax_play_system(
+        mut move_event_writer: EventWriter<ParallaxMoveEvent>,
+        camera_query: Query<Entity, With<Camera>>,
+    ) {
+        for camera in camera_query.iter() {
+            move_event_writer.send(ParallaxMoveEvent {
+                translation: Vec2::new(0.0, 1.0),
+                rotation: 0.,
+                camera,
+            });
+        }
+    }
+
+    pub fn parallax_init_system(
+        camera_query: Query<Entity, With<Camera2d>>,
+        mut create_parallax: EventWriter<CreateParallaxEvent>,
+    ) {
+        create_parallax.send(CreateParallaxEvent {
+            layers_data: vec![LayerData {
+                speed: LayerSpeed::Vertical(2.0),
+                path: "spd/interfaces/arcs2.png".into(),
+                tile_size: Vec2::new(64.0, 64.0),
+                cols: 1,
+                rows: 1,
+                scale: Vec2::splat(1.0),
+                z: 0.0,
+                ..default()
+            }],
+            camera: camera_query.single(),
+        });
+    }
+
+    pub fn ui_init_system(mut commands: Commands, user_interface_assets: Res<UserInterfaceAssets>) {
         commands
             .spawn(NodeBundle {
                 style: Style {
