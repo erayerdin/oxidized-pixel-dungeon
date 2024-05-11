@@ -50,6 +50,7 @@ impl Plugin for CorePlugin {
             ShapePlugin,
             ParallaxPlugin,
         ))
+        .insert_resource(ClearColor(Color::BLACK))
         .register_type::<FacingDirection>()
         .add_systems(Startup, camera_init_system);
     }
