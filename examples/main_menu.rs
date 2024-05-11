@@ -88,7 +88,7 @@ mod systems {
         for camera in camera_query.iter() {
             move_event_writer.send(ParallaxMoveEvent {
                 translation: Vec2::new(0.0, 1.0),
-                rotation: 0.,
+                rotation: 0.0,
                 camera,
             });
         }
@@ -99,16 +99,28 @@ mod systems {
         mut create_parallax: EventWriter<CreateParallaxEvent>,
     ) {
         create_parallax.send(CreateParallaxEvent {
-            layers_data: vec![LayerData {
-                speed: LayerSpeed::Vertical(2.0),
-                path: "spd/interfaces/arcs2.png".into(),
-                tile_size: Vec2::new(64.0, 64.0),
-                cols: 1,
-                rows: 1,
-                scale: Vec2::splat(1.0),
-                z: 0.0,
-                ..default()
-            }],
+            layers_data: vec![
+                LayerData {
+                    speed: LayerSpeed::Horizontal(0.5),
+                    path: "spd/interfaces/arcs2.png".into(),
+                    tile_size: Vec2::new(64.0, 64.0),
+                    cols: 1,
+                    rows: 1,
+                    scale: Vec2::splat(1.0),
+                    z: 0.0,
+                    ..default()
+                },
+                LayerData {
+                    speed: LayerSpeed::Horizontal(1.0),
+                    path: "spd/interfaces/arcs2.png".into(),
+                    tile_size: Vec2::new(64.0, 64.0),
+                    cols: 1,
+                    rows: 1,
+                    scale: Vec2::splat(2.0),
+                    z: 1.0,
+                    ..default()
+                },
+            ],
             camera: camera_query.single(),
         });
     }
