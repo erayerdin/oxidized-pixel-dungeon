@@ -21,6 +21,7 @@ pub(crate) mod systems;
 
 use bevy::{log::LogPlugin, prelude::*};
 use bevy_pancam::PanCamPlugin;
+use bevy_parallax::ParallaxPlugin;
 use bevy_prototype_lyon::plugin::ShapePlugin;
 
 use self::{components::FacingDirection, systems::camera_init_system};
@@ -47,6 +48,7 @@ impl Plugin for CorePlugin {
             default_plugins.set(ImagePlugin::default_nearest()),
             PanCamPlugin,
             ShapePlugin,
+            ParallaxPlugin,
         ))
         .register_type::<FacingDirection>()
         .add_systems(Startup, camera_init_system);
