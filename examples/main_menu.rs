@@ -133,11 +133,18 @@ mod systems {
                     height: Val::Percent(100.0),
                     justify_content: JustifyContent::Center,
                     align_items: AlignItems::Center,
+                    flex_direction: FlexDirection::Column,
+                    row_gap: Val::Percent(10.0),
                     ..default()
                 },
                 ..default()
             })
             .with_children(|parent| {
+                parent.spawn(ImageBundle {
+                    image: UiImage::from(user_interface_assets.banner1_handle.clone_weak()),
+                    ..default()
+                });
+
                 parent
                     .spawn(NodeBundle {
                         style: Style {

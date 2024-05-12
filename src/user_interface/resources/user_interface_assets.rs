@@ -49,7 +49,7 @@ pub struct UserInterfaceAssets {
     pub(crate) shattered_block_icon_handle: Handle<Image>,
     // Images
     #[asset(path = "original/interfaces/banner1.png")]
-    pub(crate) banner1_handle: Handle<Image>,
+    pub banner1_handle: Handle<Image>,
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash, Default, States)]
