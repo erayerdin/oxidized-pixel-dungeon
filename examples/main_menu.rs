@@ -101,7 +101,7 @@ mod systems {
         create_parallax.send(CreateParallaxEvent {
             layers_data: vec![
                 LayerData {
-                    speed: LayerSpeed::Horizontal(0.5),
+                    speed: LayerSpeed::Horizontal(-0.5),
                     path: "spd/interfaces/arcs2.png".into(),
                     tile_size: Vec2::new(64.0, 64.0),
                     cols: 1,
@@ -111,7 +111,7 @@ mod systems {
                     ..default()
                 },
                 LayerData {
-                    speed: LayerSpeed::Horizontal(1.0),
+                    speed: LayerSpeed::Horizontal(-1.0),
                     path: "spd/interfaces/arcs2.png".into(),
                     tile_size: Vec2::new(64.0, 64.0),
                     cols: 1,
