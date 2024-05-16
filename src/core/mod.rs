@@ -17,7 +17,7 @@
 
 pub(crate) mod components;
 pub(crate) mod constants;
-pub(crate) mod states;
+pub mod states;
 pub(crate) mod systems;
 
 use bevy::{log::LogPlugin, prelude::*};

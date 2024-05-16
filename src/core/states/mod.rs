@@ -17,4 +17,4 @@
 
 mod app;
 
-pub(crate) use app::AppState;
+pub use app::AppState;
