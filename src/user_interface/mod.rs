@@ -28,8 +28,10 @@ pub(crate) mod widgets;
 use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
 
+use crate::core::states::AppState;
+
 pub use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
-use self::systems::checkbox_check_system;
+use self::systems::{checkbox_check_system, main_menu};
 
 pub struct UserInterfacePlugin;
 
@@ -41,6 +43,14 @@ impl Plugin for UserInterfacePlugin {
                     .continue_to_state(UserInterfaceAssetsLoadState::LoadedState)
                     .load_collection::<UserInterfaceAssets>(),
             )
-            .add_systems(Update, checkbox_check_system);
+            .add_systems(Update, checkbox_check_system)
+            .add_systems(
+                OnEnter(UserInterfaceAssetsLoadState::LoadedState),
+                (
+                    main_menu::ui_init_system.run_if(in_state(AppState::MainMenu)),
+                    main_menu::parallax_init_system.run_if(in_state(AppState::MainMenu)),
+                ),
+            )
+            .add_systems(Update, main_menu::parallax_play_system);
     }
 }
