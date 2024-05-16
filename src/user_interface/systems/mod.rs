@@ -16,5 +16,6 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 mod checkbox;
+pub(crate) mod main_menu;
 
 pub(crate) use checkbox::checkbox_check_system;
