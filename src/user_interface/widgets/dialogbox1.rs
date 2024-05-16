@@ -15,11 +15,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod button1;
-mod checkbox;
-mod dialogbox1;
-mod icon;
+use bevy::prelude::*;
+use derive_builder::Builder;
 
-pub use button1::{button1_widget, Button1WidgetPropsBuilder};
-pub use checkbox::{checkbox_widget, Checkbox, CheckboxWidgetPropsBuilder};
-pub use icon::{icon_widget, Icon, IconWidgetPropsBuilder};
+use crate::user_interface::UserInterfaceAssets;
+
+#[derive(Debug, Builder)]
+pub struct Dialogbox1WidgetProps {
+    title: String, // TODO temp field
+}
+
+pub fn dialogbox1_widget(
+    parent: &mut ChildBuilder,
+    user_interface_assets: &Res<UserInterfaceAssets>,
+    pros: Dialogbox1WidgetProps,
+) {
+}
