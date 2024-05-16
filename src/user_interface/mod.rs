@@ -15,15 +15,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod components;
-pub(crate) mod resources;
-pub(crate) mod systems;
+pub mod components;
+pub mod resources;
+pub mod systems;
 
 #[cfg(debug_assertions)]
 pub mod widgets;
 
 #[cfg(not(debug_assertions))]
-pub(crate) mod widgets;
+pub mod widgets;
 
 use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;

@@ -17,7 +17,7 @@
 
 mod hero;
 
-pub(crate) use hero::{hero_init_system, hero_tier_change_system};
+pub use hero::{hero_init_system, hero_tier_change_system};
 
 #[cfg(debug_assertions)]
-pub(crate) use hero::hero_texture_change_system;
+pub use hero::hero_texture_change_system;

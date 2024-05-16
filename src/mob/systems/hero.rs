@@ -26,7 +26,7 @@ use crate::{
     },
 };
 
-pub(crate) fn hero_init_system(
+pub fn hero_init_system(
     mut commands: Commands,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
     hero_assets: Res<HeroAssets>,
@@ -49,7 +49,7 @@ pub(crate) fn hero_init_system(
     ));
 }
 
-pub(crate) fn hero_tier_change_system(
+pub fn hero_tier_change_system(
     mut query: Query<(&mut TextureAtlas, &HeroTier), (With<Hero>, Changed<HeroTier>)>,
 ) {
     for (mut texture_atlas, hero_tier) in query.iter_mut() {
@@ -58,7 +58,7 @@ pub(crate) fn hero_tier_change_system(
 }
 
 #[cfg(debug_assertions)]
-pub(crate) fn hero_texture_change_system(
+pub fn hero_texture_change_system(
     mut query: Query<(&mut Handle<Image>, &HeroClass), (With<Hero>, Changed<HeroClass>)>,
     hero_assets: Option<Res<HeroAssets>>,
 ) {

@@ -19,7 +19,7 @@ use bevy::prelude::*;
 use bevy_pancam::PanCam;
 use bevy_parallax::ParallaxCameraComponent;
 
-pub(crate) fn camera_init_system(mut commands: Commands) {
+pub fn camera_init_system(mut commands: Commands) {
     debug!("Running CorePlugin::init_system");
     commands
         .spawn(Camera2dBundle::default())

@@ -17,4 +17,4 @@
 
 mod game_time;
 
-pub(crate) use game_time::GameTime;
+pub use game_time::GameTime;

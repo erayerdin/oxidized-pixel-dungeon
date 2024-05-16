@@ -19,7 +19,7 @@ use bevy::prelude::*;
 
 use crate::user_interface::{components::Widget, widgets::Checkbox, UserInterfaceAssets};
 
-pub(crate) fn checkbox_check_system(
+pub fn checkbox_check_system(
     mut query: Query<
         (&Interaction, &mut UiImage, &mut Checkbox),
         (With<Widget>, Changed<Interaction>),

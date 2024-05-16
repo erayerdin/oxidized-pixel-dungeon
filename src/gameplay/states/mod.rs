@@ -17,4 +17,4 @@
 
 mod gameplay;
 
-pub(crate) use gameplay::GameplayState;
+pub use gameplay::GameplayState;

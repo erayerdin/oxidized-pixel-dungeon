@@ -17,4 +17,4 @@
 
 mod camera;
 
-pub(crate) use camera::camera_init_system;
+pub use camera::camera_init_system;

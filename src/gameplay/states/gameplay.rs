@@ -19,7 +19,7 @@ use bevy::prelude::*;
 
 /// State of gameplay.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, States, Reflect)]
-pub(crate) enum GameplayState {
+pub enum GameplayState {
     /// Awaiting user input.
     #[default]
     Awaiting,

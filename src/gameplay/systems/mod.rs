@@ -17,4 +17,4 @@
 
 mod actions;
 
-pub(crate) use actions::walk_action_system;
+pub use actions::walk_action_system;

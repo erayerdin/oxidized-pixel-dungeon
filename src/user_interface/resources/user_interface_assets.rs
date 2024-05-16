@@ -22,31 +22,31 @@ use bevy_asset_loader::prelude::*;
 pub struct UserInterfaceAssets {
     // Fonts
     #[asset(path = "spd/fonts/pixel_font.ttf")]
-    pub(crate) pixel_font_asset_handle: Handle<Font>,
+    pub pixel_font_asset_handle: Handle<Font>,
     // UI Elements
     #[asset(path = "original/interfaces/button1.png")]
-    pub(crate) button1_asset_handle: Handle<Image>,
+    pub button1_asset_handle: Handle<Image>,
     #[asset(path = "original/interfaces/checkbox-unchecked.png")]
-    pub(crate) checkbox_unchecked_asset_handle: Handle<Image>,
+    pub checkbox_unchecked_asset_handle: Handle<Image>,
     #[asset(path = "original/interfaces/checkbox-checked.png")]
-    pub(crate) checkbox_checked_asset_handle: Handle<Image>,
+    pub checkbox_checked_asset_handle: Handle<Image>,
     // Icons
     #[asset(path = "original/interfaces/icons/gold-coins.png")]
-    pub(crate) gold_coin_icon_handle: Handle<Image>,
+    pub gold_coin_icon_handle: Handle<Image>,
     #[asset(path = "original/interfaces/icons/cogs.png")]
-    pub(crate) cogs_icon_handle: Handle<Image>,
+    pub cogs_icon_handle: Handle<Image>,
     #[asset(path = "original/interfaces/icons/crest-of-blade.png")]
-    pub(crate) crest_of_blade_icon_handle: Handle<Image>,
+    pub crest_of_blade_icon_handle: Handle<Image>,
     #[asset(path = "original/interfaces/icons/downstairs.png")]
-    pub(crate) downstairs_icon_handle: Handle<Image>,
+    pub downstairs_icon_handle: Handle<Image>,
     #[asset(path = "original/interfaces/icons/front-facing-scroll.png")]
-    pub(crate) front_facing_scroll_icon_handle: Handle<Image>,
+    pub front_facing_scroll_icon_handle: Handle<Image>,
     #[asset(path = "original/interfaces/icons/ouroboros-arrows.png")]
-    pub(crate) ouroboros_arrows_icon_handle: Handle<Image>,
+    pub ouroboros_arrows_icon_handle: Handle<Image>,
     #[asset(path = "original/interfaces/icons/ranking-ladders.png")]
-    pub(crate) ranking_ladders_icon_handle: Handle<Image>,
+    pub ranking_ladders_icon_handle: Handle<Image>,
     #[asset(path = "original/interfaces/icons/shattered-block.png")]
-    pub(crate) shattered_block_icon_handle: Handle<Image>,
+    pub shattered_block_icon_handle: Handle<Image>,
     // Images
     #[asset(path = "original/interfaces/banner1.png")]
     pub banner1_handle: Handle<Image>,

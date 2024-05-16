@@ -23,28 +23,28 @@ use bevy::prelude::*;
 use bevy_parallax::{CreateParallaxEvent, LayerData, LayerSpeed, ParallaxMoveEvent};
 
 #[derive(Debug, Component)]
-pub(crate) struct StartTheGameButton;
+pub struct StartTheGameButton;
 
 #[derive(Debug, Component)]
-pub(crate) struct SupportTheGameButton;
+pub struct SupportTheGameButton;
 
 #[derive(Debug, Component)]
-pub(crate) struct RankingButton;
+pub struct RankingButton;
 
 #[derive(Debug, Component)]
-pub(crate) struct NewsButton;
+pub struct NewsButton;
 
 #[derive(Debug, Component)]
-pub(crate) struct SettingsButton;
+pub struct SettingsButton;
 
 #[derive(Debug, Component)]
-pub(crate) struct BadgesButton;
+pub struct BadgesButton;
 
 #[derive(Debug, Component)]
-pub(crate) struct ChangesButton;
+pub struct ChangesButton;
 
 #[derive(Debug, Component)]
-pub(crate) struct AboutButton;
+pub struct AboutButton;
 
 pub fn parallax_play_system(
     mut move_event_writer: EventWriter<ParallaxMoveEvent>,

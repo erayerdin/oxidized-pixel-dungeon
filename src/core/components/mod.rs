@@ -18,5 +18,5 @@
 mod character;
 mod facing_direction;
 
-pub(crate) use character::Character;
-pub(crate) use facing_direction::FacingDirection;
+pub use character::Character;
+pub use facing_direction::FacingDirection;

@@ -16,7 +16,7 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 pub mod components;
-pub(crate) mod constants;
+pub mod constants;
 
 use crate::grid::components::grid::Grid;
 use bevy::prelude::*;
