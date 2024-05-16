@@ -23,4 +23,6 @@ pub enum AppState {
     MainMenu,
     LoadingLevel,
     InGame,
+    #[cfg(debug_assertions)]
+    None,
 }

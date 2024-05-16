@@ -18,7 +18,7 @@
 use bevy::prelude::*;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use oxidized_pixel_dungeon::{
-    core::CorePlugin,
+    core::{states::AppState, CorePlugin},
     user_interface::{UserInterfaceAssetsLoadState, UserInterfacePlugin},
 };
 use resources::Counter;
@@ -33,6 +33,8 @@ fn main() {
             systems::layout_init_system,
         )
         .add_systems(Update, systems::counter_system);
+
+    app.insert_state(AppState::None);
 
     if cfg!(debug_assertions) {
         app.add_plugins(WorldInspectorPlugin::new());
