@@ -17,6 +17,7 @@
 
 pub(crate) mod components;
 pub(crate) mod constants;
+pub(crate) mod states;
 pub(crate) mod systems;
 
 use bevy::{log::LogPlugin, prelude::*};
@@ -24,7 +25,7 @@ use bevy_pancam::PanCamPlugin;
 use bevy_parallax::ParallaxPlugin;
 use bevy_prototype_lyon::plugin::ShapePlugin;
 
-use self::{components::FacingDirection, systems::camera_init_system};
+use self::{components::FacingDirection, states::AppState, systems::camera_init_system};
 
 pub struct CorePlugin;
 
@@ -51,6 +52,8 @@ impl Plugin for CorePlugin {
             ParallaxPlugin,
         ))
         .insert_resource(ClearColor(Color::BLACK))
+        .init_state::<AppState>()
+        .register_type::<AppState>()
         .register_type::<FacingDirection>()
         .add_systems(Startup, camera_init_system);
     }
