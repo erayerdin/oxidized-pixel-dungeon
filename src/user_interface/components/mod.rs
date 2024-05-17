@@ -19,3 +19,6 @@ use bevy::prelude::*;
 
 #[derive(Debug, Component)]
 pub struct Widget;
+
+#[derive(Debug, Component)]
+pub struct DialogBox;

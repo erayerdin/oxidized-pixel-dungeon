@@ -18,7 +18,10 @@
 use bevy::prelude::*;
 use derive_builder::Builder;
 
-use crate::user_interface::{components::Widget, UserInterfaceAssets};
+use crate::user_interface::{
+    components::{DialogBox, Widget},
+    UserInterfaceAssets,
+};
 
 #[derive(Debug, Component)]
 pub struct DialogBox1;
@@ -63,6 +66,7 @@ pub fn dialogbox1_widget<F>(
             }),
             marker_component,
             DialogBox1,
+            DialogBox,
             Widget,
         ))
         .with_children(|parent| {
