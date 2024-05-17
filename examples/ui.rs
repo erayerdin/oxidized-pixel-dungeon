@@ -58,6 +58,12 @@ mod components {
 
     #[derive(Debug, Component)]
     pub struct CounterText;
+
+    #[derive(Debug, Component)]
+    pub struct NormalDialog;
+
+    #[derive(Debug, Component)]
+    pub struct LargeDialog;
 }
 mod systems {
     use bevy::prelude::*;
@@ -72,7 +78,7 @@ mod systems {
     };
 
     use crate::{
-        components::{CounterText, MyButton},
+        components::{CounterText, LargeDialog, MyButton, NormalDialog},
         resources::Counter,
     };
 
@@ -233,6 +239,7 @@ mod systems {
                 dialogbox1_widget(
                     parent,
                     &user_interface_assets,
+                    NormalDialog,
                     Dialogbox1WidgetPropsBuilder::default()
                         .with_children(|parent| {
                             parent.spawn((
@@ -258,6 +265,7 @@ mod systems {
                 dialogbox1_widget(
                     parent,
                     &user_interface_assets,
+                    LargeDialog,
                     Dialogbox1WidgetPropsBuilder::default()
                         .scale(4.0)
                         .with_children(|parent| {

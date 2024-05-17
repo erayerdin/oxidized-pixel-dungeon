@@ -33,6 +33,7 @@ where
 pub fn dialogbox1_widget<F>(
     parent: &mut ChildBuilder,
     user_interface_assets: &Res<UserInterfaceAssets>,
+    marker_component: impl Component,
     props: Dialogbox1WidgetProps<F>,
 ) where
     F: Fn(&mut ChildBuilder),
@@ -57,6 +58,7 @@ pub fn dialogbox1_widget<F>(
                 sides_scale_mode: SliceScaleMode::Stretch,
                 max_corner_scale: scale,
             }),
+            marker_component,
             Widget,
         ))
         .with_children(|parent| {
