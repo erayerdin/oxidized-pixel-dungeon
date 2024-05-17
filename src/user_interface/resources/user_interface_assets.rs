@@ -26,6 +26,8 @@ pub struct UserInterfaceAssets {
     // UI Elements
     #[asset(path = "original/interfaces/button1.png")]
     pub button1_asset_handle: Handle<Image>,
+    #[asset(path = "original/interfaces/dialogbox1.png")]
+    pub dialogbox1_asset_handle: Handle<Image>,
     #[asset(path = "original/interfaces/checkbox-unchecked.png")]
     pub checkbox_unchecked_asset_handle: Handle<Image>,
     #[asset(path = "original/interfaces/checkbox-checked.png")]
