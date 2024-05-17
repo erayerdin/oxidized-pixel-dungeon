@@ -62,9 +62,11 @@ mod components {
 mod systems {
     use bevy::prelude::*;
     use oxidized_pixel_dungeon::user_interface::{
+        components::Widget,
         widgets::{
-            button1_widget, checkbox_widget, icon_widget, Button1WidgetPropsBuilder,
-            CheckboxWidgetPropsBuilder, Icon, IconWidgetPropsBuilder,
+            button1_widget, checkbox_widget, dialogbox1_widget, icon_widget,
+            Button1WidgetPropsBuilder, CheckboxWidgetPropsBuilder, Dialogbox1WidgetPropsBuilder,
+            Icon, IconWidgetPropsBuilder,
         },
         UserInterfaceAssets,
     };
@@ -225,6 +227,57 @@ mod systems {
                         .text("Bigger checkbox")
                         .checked(true)
                         .size(32.0)
+                        .build()
+                        .unwrap(),
+                );
+                dialogbox1_widget(
+                    parent,
+                    &user_interface_assets,
+                    Dialogbox1WidgetPropsBuilder::default()
+                        .with_children(|parent| {
+                            parent.spawn((
+                                TextBundle {
+                                    text: Text::from_section(
+                                        "This is a dialog box.",
+                                        TextStyle {
+                                            font: user_interface_assets
+                                                .pixel_font_asset_handle
+                                                .clone_weak(),
+                                            font_size: 16.0,
+                                            color: Color::WHITE,
+                                        },
+                                    ),
+                                    ..default()
+                                },
+                                Widget,
+                            ));
+                        })
+                        .build()
+                        .unwrap(),
+                );
+                dialogbox1_widget(
+                    parent,
+                    &user_interface_assets,
+                    Dialogbox1WidgetPropsBuilder::default()
+                        .scale(4.0)
+                        .with_children(|parent| {
+                            parent.spawn((
+                                TextBundle {
+                                    text: Text::from_section(
+                                        "This is a very big dialog box.",
+                                        TextStyle {
+                                            font: user_interface_assets
+                                                .pixel_font_asset_handle
+                                                .clone_weak(),
+                                            font_size: 16.0,
+                                            color: Color::WHITE,
+                                        },
+                                    ),
+                                    ..default()
+                                },
+                                Widget,
+                            ));
+                        })
                         .build()
                         .unwrap(),
                 );

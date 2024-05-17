@@ -18,16 +18,56 @@
 use bevy::prelude::*;
 use derive_builder::Builder;
 
-use crate::user_interface::UserInterfaceAssets;
+use crate::user_interface::{components::Widget, UserInterfaceAssets};
 
 #[derive(Debug, Builder)]
-pub struct Dialogbox1WidgetProps {
-    title: String, // TODO temp field
+pub struct Dialogbox1WidgetProps<F>
+where
+    F: Fn(&mut ChildBuilder),
+{
+    #[builder(default = "1.0")]
+    scale: f32,
+    with_children: F,
 }
 
-pub fn dialogbox1_widget(
+pub fn dialogbox1_widget<F>(
     parent: &mut ChildBuilder,
     user_interface_assets: &Res<UserInterfaceAssets>,
-    pros: Dialogbox1WidgetProps,
-) {
+    props: Dialogbox1WidgetProps<F>,
+) where
+    F: Fn(&mut ChildBuilder),
+{
+    let Dialogbox1WidgetProps {
+        with_children,
+        scale,
+    } = props;
+
+    parent
+        .spawn((
+            ImageBundle {
+                image: user_interface_assets
+                    .dialogbox1_asset_handle
+                    .clone_weak()
+                    .into(),
+                ..default()
+            },
+            ImageScaleMode::Sliced(TextureSlicer {
+                border: BorderRect::square(5.0),
+                center_scale_mode: SliceScaleMode::Stretch,
+                sides_scale_mode: SliceScaleMode::Stretch,
+                max_corner_scale: scale,
+            }),
+            Widget,
+        ))
+        .with_children(|parent| {
+            parent
+                .spawn(NodeBundle {
+                    style: Style {
+                        padding: UiRect::all(Val::Px(5.0 * scale)),
+                        ..default()
+                    },
+                    ..default()
+                })
+                .with_children(with_children);
+        });
 }
