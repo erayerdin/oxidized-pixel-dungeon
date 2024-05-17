@@ -70,6 +70,7 @@ pub fn button1_widget(
                 ..default()
             },
             Name::new("Button1"),
+            Widget,
         ))
         .with_children(|parent| {
             parent
