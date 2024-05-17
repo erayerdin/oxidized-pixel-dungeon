@@ -17,8 +17,9 @@
 
 use bevy::prelude::*;
 
-#[derive(Debug, Component)]
-pub struct Widget;
+use super::components::DialogBox;
 
-#[derive(Debug, PartialEq, Eq, Hash, Clone, Component)]
-pub struct DialogBox;
+#[derive(Debug, Default, PartialEq, Eq, Hash, Clone, States)]
+pub struct DialogVisibility {
+    pub dialog: Option<DialogBox>,
+}

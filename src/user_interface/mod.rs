@@ -17,6 +17,7 @@
 
 pub mod components;
 pub mod resources;
+pub mod states;
 pub mod systems;
 
 #[cfg(debug_assertions)]
@@ -31,7 +32,10 @@ use bevy_asset_loader::prelude::*;
 use crate::core::states::AppState;
 
 pub use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
-use self::systems::{checkbox_check_system, main_menu};
+use self::{
+    states::DialogVisibility,
+    systems::{checkbox_check_system, main_menu},
+};
 
 pub struct UserInterfacePlugin;
 
@@ -43,6 +47,7 @@ impl Plugin for UserInterfacePlugin {
                     .continue_to_state(UserInterfaceAssetsLoadState::LoadedState)
                     .load_collection::<UserInterfaceAssets>(),
             )
+            .init_state::<DialogVisibility>()
             .add_systems(Update, checkbox_check_system)
             .add_systems(
                 OnEnter(UserInterfaceAssetsLoadState::LoadedState),
