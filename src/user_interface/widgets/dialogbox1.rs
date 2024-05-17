@@ -61,13 +61,16 @@ pub fn dialogbox1_widget<F>(
         ))
         .with_children(|parent| {
             parent
-                .spawn(NodeBundle {
-                    style: Style {
-                        padding: UiRect::all(Val::Px(5.0 * scale)),
+                .spawn((
+                    NodeBundle {
+                        style: Style {
+                            padding: UiRect::all(Val::Px(5.0 * scale)),
+                            ..default()
+                        },
                         ..default()
                     },
-                    ..default()
-                })
+                    Widget,
+                ))
                 .with_children(with_children);
         });
 }
