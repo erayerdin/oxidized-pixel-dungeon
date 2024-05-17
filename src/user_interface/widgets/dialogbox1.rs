@@ -20,6 +20,9 @@ use derive_builder::Builder;
 
 use crate::user_interface::{components::Widget, UserInterfaceAssets};
 
+#[derive(Debug, Component)]
+pub struct DialogBox1;
+
 #[derive(Debug, Builder)]
 pub struct Dialogbox1WidgetProps<F>
 where
@@ -59,6 +62,7 @@ pub fn dialogbox1_widget<F>(
                 max_corner_scale: scale,
             }),
             marker_component,
+            DialogBox1,
             Widget,
         ))
         .with_children(|parent| {
