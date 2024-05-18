@@ -69,7 +69,7 @@ mod systems {
     use bevy::prelude::*;
     use oxidized_pixel_dungeon::user_interface::{
         components::Widget,
-        widgets::{
+        widgets::primitives::{
             button1_widget, checkbox_widget, dialogbox1_widget, icon_widget,
             Button1WidgetPropsBuilder, CheckboxWidgetPropsBuilder, Dialogbox1WidgetPropsBuilder,
             Icon, IconWidgetPropsBuilder,

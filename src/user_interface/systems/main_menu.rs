@@ -16,7 +16,9 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use crate::user_interface::{
-    widgets::{button1_widget, Button1WidgetPropsBuilder, Icon, IconWidgetPropsBuilder},
+    widgets::primitives::{
+        button1_widget, Button1WidgetPropsBuilder, Icon, IconWidgetPropsBuilder,
+    },
     UserInterfaceAssets,
 };
 use bevy::prelude::*;

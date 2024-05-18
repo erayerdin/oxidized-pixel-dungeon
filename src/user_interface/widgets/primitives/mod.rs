@@ -15,4 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod primitives;
+mod button1;
+mod checkbox;
+mod dialogbox1;
+mod icon;
+
+pub use button1::{button1_widget, Button1WidgetPropsBuilder};
+pub use checkbox::{checkbox_widget, Checkbox, CheckboxWidgetPropsBuilder};
+pub use dialogbox1::{dialogbox1_widget, DialogBox1, Dialogbox1WidgetPropsBuilder};
+pub use icon::{icon_widget, Icon, IconWidgetPropsBuilder};
