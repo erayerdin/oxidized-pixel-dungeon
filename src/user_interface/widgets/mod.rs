@@ -16,3 +16,6 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 pub mod primitives;
+mod to_be_implemented_dialogbox;
+
+pub use to_be_implemented_dialogbox::to_be_implemented_dialogbox;

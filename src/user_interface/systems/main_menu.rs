@@ -16,8 +16,9 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use crate::user_interface::{
-    widgets::primitives::{
-        button1_widget, Button1WidgetPropsBuilder, Icon, IconWidgetPropsBuilder,
+    widgets::{
+        primitives::{button1_widget, Button1WidgetPropsBuilder, Icon, IconWidgetPropsBuilder},
+        to_be_implemented_dialogbox,
     },
     UserInterfaceAssets,
 };
@@ -47,6 +48,30 @@ pub struct ChangesButton;
 
 #[derive(Debug, Component)]
 pub struct AboutButton;
+
+pub trait OnPressed: Component + Sized {
+    fn on_pressed(
+        commands: Commands,
+        user_interface_assets: Option<Res<UserInterfaceAssets>>,
+        interaction_query: Query<&Interaction, (Changed<Interaction>, With<Self>)>,
+    );
+}
+
+impl OnPressed for StartTheGameButton {
+    fn on_pressed(
+        mut commands: Commands,
+        user_interface_assets: Option<Res<UserInterfaceAssets>>,
+        interaction_query: Query<&Interaction, (Changed<Interaction>, With<Self>)>,
+    ) {
+        if let Some(ref user_interface_assets) = user_interface_assets {
+            for interaction in interaction_query.iter() {
+                if *interaction == Interaction::Pressed {
+                    to_be_implemented_dialogbox(&mut commands, user_interface_assets);
+                }
+            }
+        }
+    }
+}
 
 pub fn parallax_play_system(
     mut move_event_writer: EventWriter<ParallaxMoveEvent>,

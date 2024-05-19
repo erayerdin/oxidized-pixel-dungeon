@@ -34,6 +34,7 @@ use crate::core::states::AppState;
 pub use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
 use self::{
     states::DialogVisibility,
+    systems::main_menu::OnPressed,
     systems::{checkbox_check_system, main_menu},
 };
 
@@ -56,6 +57,7 @@ impl Plugin for UserInterfacePlugin {
                     main_menu::parallax_init_system.run_if(in_state(AppState::MainMenu)),
                 ),
             )
-            .add_systems(Update, main_menu::parallax_play_system);
+            .add_systems(Update, main_menu::parallax_play_system)
+            .add_systems(Update, main_menu::StartTheGameButton::on_pressed);
     }
 }
