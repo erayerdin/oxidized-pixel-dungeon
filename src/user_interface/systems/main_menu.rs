@@ -51,18 +51,8 @@ pub struct ChangesButton;
 pub struct AboutButton;
 
 impl OnPressed for StartTheGameButton {
-    fn on_pressed(
-        mut commands: Commands,
-        user_interface_assets: Option<Res<UserInterfaceAssets>>,
-        interaction_query: Query<&Interaction, (Changed<Interaction>, With<Self>)>,
-    ) {
-        if let Some(ref user_interface_assets) = user_interface_assets {
-            for interaction in interaction_query.iter() {
-                if *interaction == Interaction::Pressed {
-                    to_be_implemented_dialogbox(&mut commands, user_interface_assets);
-                }
-            }
-        }
+    fn invoke(commands: &mut Commands, user_interface_assets: &Res<UserInterfaceAssets>) {
+        to_be_implemented_dialogbox(commands, user_interface_assets);
     }
 }
 
