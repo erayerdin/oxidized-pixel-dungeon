@@ -19,11 +19,6 @@ pub mod components;
 pub mod resources;
 pub mod states;
 pub mod systems;
-
-#[cfg(debug_assertions)]
-pub mod widgets;
-
-#[cfg(not(debug_assertions))]
 pub mod widgets;
 
 use bevy::prelude::*;
