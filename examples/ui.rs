@@ -84,10 +84,10 @@ mod systems {
 
     pub fn counter_system(
         mut counter: ResMut<Counter>,
-        mut button_query: Query<&Interaction, (Changed<Interaction>, With<MyButton>)>,
+        button_query: Query<&Interaction, (Changed<Interaction>, With<MyButton>)>,
         mut counter_text_query: Query<&mut Text, With<CounterText>>,
     ) {
-        for interaction in button_query.iter_mut() {
+        for interaction in button_query.iter() {
             if interaction == &Interaction::Pressed {
                 counter.0 += 1;
                 let mut counter_text = counter_text_query.single_mut();
