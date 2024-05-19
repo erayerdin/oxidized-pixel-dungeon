@@ -16,6 +16,7 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 pub mod components;
+pub mod interactions;
 pub mod resources;
 pub mod states;
 pub mod systems;
@@ -28,8 +29,8 @@ use crate::core::states::AppState;
 
 pub use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
 use self::{
+    interactions::OnPressed,
     states::DialogVisibility,
-    systems::main_menu::OnPressed,
     systems::{checkbox_check_system, main_menu},
 };
 

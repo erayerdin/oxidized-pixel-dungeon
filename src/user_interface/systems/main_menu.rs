@@ -16,6 +16,7 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use crate::user_interface::{
+    interactions::OnPressed,
     widgets::{
         primitives::{button1_widget, Button1WidgetPropsBuilder, Icon, IconWidgetPropsBuilder},
         to_be_implemented_dialogbox,
@@ -48,14 +49,6 @@ pub struct ChangesButton;
 
 #[derive(Debug, Component)]
 pub struct AboutButton;
-
-pub trait OnPressed: Component + Sized {
-    fn on_pressed(
-        commands: Commands,
-        user_interface_assets: Option<Res<UserInterfaceAssets>>,
-        interaction_query: Query<&Interaction, (Changed<Interaction>, With<Self>)>,
-    );
-}
 
 impl OnPressed for StartTheGameButton {
     fn on_pressed(
