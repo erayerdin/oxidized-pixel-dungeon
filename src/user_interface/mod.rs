@@ -53,7 +53,10 @@ impl Plugin for UserInterfacePlugin {
             )
             .add_systems(
                 Update,
-                (main_menu::parallax_play_system, checkbox_check_system),
+                (
+                    main_menu::parallax_play_system.run_if(in_state(AppState::MainMenu)),
+                    checkbox_check_system,
+                ),
             )
             .register_on_pressed::<main_menu::StartTheGameButton>();
     }
