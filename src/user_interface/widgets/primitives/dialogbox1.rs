@@ -31,8 +31,6 @@ pub struct Dialogbox1WidgetProps<F>
 where
     F: Fn(&mut ChildBuilder),
 {
-    #[builder(default = "Visibility::Hidden")]
-    visibility: Visibility,
     #[builder(default = "1.0")]
     scale: f32,
     with_children: F,
@@ -47,7 +45,6 @@ pub fn dialogbox1_widget<F>(
     F: Fn(&mut ChildBuilder),
 {
     let Dialogbox1WidgetProps {
-        visibility,
         scale,
         with_children,
     } = props;
@@ -55,7 +52,6 @@ pub fn dialogbox1_widget<F>(
     parent
         .spawn((
             ImageBundle {
-                visibility,
                 image: user_interface_assets
                     .dialogbox1_asset_handle
                     .clone_weak()

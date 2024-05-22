@@ -48,7 +48,6 @@ pub fn to_be_implemented_dialogbox(
                 user_interface_assets,
                 ToBeImplementedDialogbox,
                 Dialogbox1WidgetPropsBuilder::default()
-                    .visibility(Visibility::Visible)
                     .scale(2.0)
                     .with_children(|parent| {
                         parent.spawn(TextBundle::from_section(

@@ -241,7 +241,6 @@ mod systems {
                     &user_interface_assets,
                     NormalDialog,
                     Dialogbox1WidgetPropsBuilder::default()
-                        .visibility(Visibility::Inherited)
                         .with_children(|parent| {
                             parent.spawn((
                                 TextBundle {
@@ -268,7 +267,6 @@ mod systems {
                     &user_interface_assets,
                     LargeDialog,
                     Dialogbox1WidgetPropsBuilder::default()
-                        .visibility(Visibility::Inherited)
                         .scale(4.0)
                         .with_children(|parent| {
                             parent.spawn((
