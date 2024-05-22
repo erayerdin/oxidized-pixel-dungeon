@@ -15,9 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod checkbox;
-pub mod main_menu;
-mod overlay;
+use bevy::prelude::*;
 
-pub use checkbox::checkbox_check_system;
-pub use overlay::overlay_painter_system;
+use crate::user_interface::components::Overlay;
+
+pub fn overlay_painter_system(mut bg_color_query: Query<&mut BackgroundColor, With<Overlay>>) {
+    for mut color in bg_color_query.iter_mut() {
+        *color = BackgroundColor(Color::BLACK.with_a(0.5));
+    }
+}
