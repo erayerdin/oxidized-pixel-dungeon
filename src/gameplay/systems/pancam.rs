@@ -15,8 +15,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod actions;
-mod pancam;
+use bevy::prelude::*;
+use bevy_pancam::PanCam;
 
-pub use actions::walk_action_system;
-pub use pancam::{disable_pancam_system, enable_pancam_system};
+pub fn enable_pancam_system(mut pancam_query: Query<&mut PanCam>) {
+    for mut pancam in pancam_query.iter_mut() {
+        pancam.enabled = true;
+    }
+}
+
+pub fn disable_pancam_system(mut pancam_query: Query<&mut PanCam>) {
+    for mut pancam in pancam_query.iter_mut() {
+        pancam.enabled = false;
+    }
+}

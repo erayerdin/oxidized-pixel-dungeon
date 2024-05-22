@@ -18,7 +18,13 @@
 use bevy::prelude::*;
 use bevy_inspector_egui::quick::StateInspectorPlugin;
 
-use self::{resources::GameTime, states::GameplayState, systems::walk_action_system};
+use crate::core::states::AppState;
+
+use self::{
+    resources::GameTime,
+    states::GameplayState,
+    systems::{disable_pancam_system, enable_pancam_system, walk_action_system},
+};
 
 pub mod resources;
 pub mod states;
@@ -33,6 +39,8 @@ impl Plugin for GameplayPlugin {
             .add_plugins(StateInspectorPlugin::<GameplayState>::default())
             .init_resource::<GameTime>()
             .register_type::<GameTime>()
+            .add_systems(OnEnter(AppState::InGame), enable_pancam_system)
+            .add_systems(OnExit(AppState::InGame), disable_pancam_system)
             .add_systems(Update, walk_action_system);
     }
 }
