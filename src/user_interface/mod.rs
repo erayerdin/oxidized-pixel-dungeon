@@ -45,7 +45,6 @@ impl Plugin for UserInterfacePlugin {
                     .load_collection::<UserInterfaceAssets>(),
             )
             .init_state::<DialogVisibility>()
-            .add_systems(Update, checkbox_check_system)
             .add_systems(
                 OnEnter(UserInterfaceAssetsLoadState::LoadedState),
                 (
@@ -53,7 +52,10 @@ impl Plugin for UserInterfacePlugin {
                     main_menu::parallax_init_system.run_if(in_state(AppState::MainMenu)),
                 ),
             )
-            .add_systems(Update, main_menu::parallax_play_system)
+            .add_systems(
+                Update,
+                (main_menu::parallax_play_system, checkbox_check_system),
+            )
             .register_on_pressed::<main_menu::StartTheGameButton>();
     }
 }
