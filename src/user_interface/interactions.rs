@@ -36,3 +36,14 @@ pub trait OnPressed: Component + Sized {
 
     fn invoke(commands: &mut Commands, user_interface_assets: &Res<UserInterfaceAssets>);
 }
+
+pub trait InteractionExt {
+    fn register_on_pressed<T: OnPressed>(&mut self) -> &mut Self;
+}
+
+impl InteractionExt for App {
+    fn register_on_pressed<T: OnPressed>(&mut self) -> &mut Self {
+        self.add_systems(Update, T::on_pressed);
+        self
+    }
+}

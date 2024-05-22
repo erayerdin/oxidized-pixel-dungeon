@@ -29,7 +29,7 @@ use crate::core::states::AppState;
 
 pub use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
 use self::{
-    interactions::OnPressed,
+    interactions::InteractionExt,
     states::DialogVisibility,
     systems::{checkbox_check_system, main_menu},
 };
@@ -54,6 +54,6 @@ impl Plugin for UserInterfacePlugin {
                 ),
             )
             .add_systems(Update, main_menu::parallax_play_system)
-            .add_systems(Update, main_menu::StartTheGameButton::on_pressed);
+            .register_on_pressed::<main_menu::StartTheGameButton>();
     }
 }
