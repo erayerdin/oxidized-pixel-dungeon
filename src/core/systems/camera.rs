@@ -25,7 +25,7 @@ pub fn camera_init_system(mut commands: Commands) {
         .spawn(Camera2dBundle::default())
         .insert(PanCam {
             grab_buttons: vec![MouseButton::Middle],
-            enabled: true,
+            enabled: false,
             ..default()
         })
         .insert(ParallaxCameraComponent::default());
