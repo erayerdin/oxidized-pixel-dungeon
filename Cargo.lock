@@ -507,6 +507,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_blur_regions"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6b2a9726acbc3a8b12f815f6a2431205d767693ce98322f3336270db2590a605"
+dependencies = [
+ "bevy",
+ "bevy_egui 0.26.0",
+]
+
+[[package]]
 name = "bevy_core"
 version = "0.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -611,6 +621,27 @@ dependencies = [
  "bevy",
  "egui 0.26.2",
  "web-sys",
+]
+
+[[package]]
+name = "bevy_egui"
+version = "0.26.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "44197ead4c9e40303fa5056be44de593f17151bd08d1d9dbe7b127700e1b9d01"
+dependencies = [
+ "arboard",
+ "bevy",
+ "console_log",
+ "crossbeam-channel",
+ "egui 0.26.2",
+ "js-sys",
+ "log",
+ "thread_local",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+ "webbrowser",
+ "winit",
 ]
 
 [[package]]
@@ -3140,6 +3171,7 @@ dependencies = [
  "bevy-inspector-egui",
  "bevy-parallax",
  "bevy_asset_loader",
+ "bevy_blur_regions",
  "bevy_pancam",
  "bevy_prototype_lyon",
  "derive_builder",
