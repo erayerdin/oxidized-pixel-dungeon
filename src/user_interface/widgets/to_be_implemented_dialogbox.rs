@@ -17,7 +17,7 @@
 
 use bevy::prelude::*;
 
-use crate::user_interface::UserInterfaceAssets;
+use crate::user_interface::{components::Overlay, UserInterfaceAssets};
 
 use super::primitives::{dialogbox1_widget, Dialogbox1WidgetPropsBuilder};
 
@@ -29,16 +29,19 @@ pub fn to_be_implemented_dialogbox(
     user_interface_assets: &Res<UserInterfaceAssets>,
 ) {
     commands
-        .spawn(NodeBundle {
-            style: Style {
-                width: Val::Percent(100.0),
-                height: Val::Percent(100.0),
-                justify_content: JustifyContent::Center,
-                align_items: AlignItems::Center,
+        .spawn((
+            NodeBundle {
+                style: Style {
+                    width: Val::Percent(100.0),
+                    height: Val::Percent(100.0),
+                    justify_content: JustifyContent::Center,
+                    align_items: AlignItems::Center,
+                    ..default()
+                },
                 ..default()
             },
-            ..default()
-        })
+            Overlay,
+        ))
         .with_children(|parent| {
             dialogbox1_widget(
                 parent,

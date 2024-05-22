@@ -22,3 +22,6 @@ pub struct Widget;
 
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Component)]
 pub struct DialogBox;
+
+#[derive(Debug, Component)]
+pub struct Overlay;
