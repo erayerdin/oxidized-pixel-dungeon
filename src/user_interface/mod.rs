@@ -18,7 +18,6 @@
 pub mod components;
 pub mod interactions;
 pub mod resources;
-pub mod states;
 pub mod systems;
 pub mod widgets;
 
@@ -31,7 +30,6 @@ use crate::core::states::AppState;
 pub use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
 use self::{
     interactions::InteractionExt,
-    states::DialogVisibility,
     systems::{checkbox_check_system, main_menu},
 };
 
@@ -46,7 +44,6 @@ impl Plugin for UserInterfacePlugin {
                     .continue_to_state(UserInterfaceAssetsLoadState::LoadedState)
                     .load_collection::<UserInterfaceAssets>(),
             )
-            .init_state::<DialogVisibility>()
             .add_systems(
                 OnEnter(UserInterfaceAssetsLoadState::LoadedState),
                 (
