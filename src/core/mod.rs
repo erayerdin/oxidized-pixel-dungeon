@@ -22,7 +22,6 @@ pub mod systems;
 
 use bevy::{log::LogPlugin, prelude::*};
 use bevy_pancam::PanCamPlugin;
-use bevy_parallax::ParallaxPlugin;
 use bevy_prototype_lyon::plugin::ShapePlugin;
 
 use self::{components::FacingDirection, states::AppState, systems::camera_init_system};
@@ -49,7 +48,6 @@ impl Plugin for CorePlugin {
             default_plugins.set(ImagePlugin::default_nearest()),
             PanCamPlugin,
             ShapePlugin,
-            ParallaxPlugin,
         ))
         .insert_resource(ClearColor(Color::BLACK))
         .init_state::<AppState>()

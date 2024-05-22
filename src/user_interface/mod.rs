@@ -24,6 +24,7 @@ pub mod widgets;
 
 use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
+use bevy_parallax::ParallaxPlugin;
 
 use crate::core::states::AppState;
 
@@ -38,7 +39,8 @@ pub struct UserInterfacePlugin;
 
 impl Plugin for UserInterfacePlugin {
     fn build(&self, app: &mut App) {
-        app.init_state::<UserInterfaceAssetsLoadState>()
+        app.add_plugins(ParallaxPlugin)
+            .init_state::<UserInterfaceAssetsLoadState>()
             .add_loading_state(
                 LoadingState::new(UserInterfaceAssetsLoadState::default())
                     .continue_to_state(UserInterfaceAssetsLoadState::LoadedState)
