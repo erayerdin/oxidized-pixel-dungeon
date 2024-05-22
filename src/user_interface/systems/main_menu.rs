@@ -29,6 +29,12 @@ use bevy_parallax::{CreateParallaxEvent, LayerData, LayerSpeed, ParallaxMoveEven
 #[derive(Debug, Component)]
 pub struct StartTheGameButton;
 
+impl OnPressed for StartTheGameButton {
+    fn invoke(commands: &mut Commands, user_interface_assets: &Res<UserInterfaceAssets>) {
+        to_be_implemented_dialogbox(commands, user_interface_assets);
+    }
+}
+
 #[derive(Debug, Component)]
 pub struct SupportTheGameButton;
 
@@ -49,12 +55,6 @@ pub struct ChangesButton;
 
 #[derive(Debug, Component)]
 pub struct AboutButton;
-
-impl OnPressed for StartTheGameButton {
-    fn invoke(commands: &mut Commands, user_interface_assets: &Res<UserInterfaceAssets>) {
-        to_be_implemented_dialogbox(commands, user_interface_assets);
-    }
-}
 
 pub fn parallax_play_system(
     mut move_event_writer: EventWriter<ParallaxMoveEvent>,
