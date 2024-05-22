@@ -10,7 +10,6 @@ bevy = "0.13.2"
 bevy-inspector-egui = "0.24.0"
 bevy-parallax = { version = "0.9.0", features = ["bevy-inspector-egui"] }
 bevy_asset_loader = "0.20.1"
-bevy_blur_regions = { version = "0.2.0", features = ["egui"] }
 bevy_pancam = { version = "0.11.1", features = ["bevy_egui"] }
 bevy_prototype_lyon = "0.11.0"
 derive_builder = { version = "0.20.0", features = ["clippy"] }
