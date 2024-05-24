@@ -30,7 +30,7 @@ use crate::core::states::AppState;
 pub use self::resources::{UserInterfaceAssets, UserInterfaceAssetsLoadState};
 use self::{
     interactions::InteractionExt,
-    systems::{checkbox_check_system, main_menu, overlay_painter_system},
+    systems::{checkbox_check_system, main_menu, overlay_dismiss_system, overlay_painter_system},
 };
 
 pub struct UserInterfacePlugin;
@@ -57,6 +57,7 @@ impl Plugin for UserInterfacePlugin {
                     main_menu::parallax_play_system.run_if(in_state(AppState::MainMenu)),
                     checkbox_check_system,
                     overlay_painter_system,
+                    overlay_dismiss_system,
                 ),
             )
             .register_on_pressed::<main_menu::StartTheGameButton>();

@@ -41,6 +41,7 @@ pub fn to_be_implemented_dialogbox(
                 ..default()
             },
             Overlay,
+            Interaction::None,
         ))
         .with_children(|parent| {
             dialogbox1_widget(

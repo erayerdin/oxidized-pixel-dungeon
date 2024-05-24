@@ -24,3 +24,14 @@ pub fn overlay_painter_system(mut bg_color_query: Query<&mut BackgroundColor, Wi
         *color = BackgroundColor(Color::BLACK.with_a(0.5));
     }
 }
+
+pub fn overlay_dismiss_system(
+    mut commands: Commands,
+    query: Query<(Entity, &Interaction), (With<Overlay>, Changed<Interaction>)>,
+) {
+    for (entity, interaction) in query.iter() {
+        if *interaction == Interaction::Pressed {
+            commands.entity(entity).despawn_recursive();
+        }
+    }
+}

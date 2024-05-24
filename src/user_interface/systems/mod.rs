@@ -20,4 +20,4 @@ pub mod main_menu;
 mod overlay;
 
 pub use checkbox::checkbox_check_system;
-pub use overlay::overlay_painter_system;
+pub use overlay::{overlay_dismiss_system, overlay_painter_system};
