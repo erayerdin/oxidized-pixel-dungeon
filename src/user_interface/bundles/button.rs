@@ -23,3 +23,12 @@ pub struct InteractableButtonBundle {
     pub interactable: Interactable,
     pub button: ButtonBundle,
 }
+
+impl From<ButtonBundle> for InteractableButtonBundle {
+    fn from(value: ButtonBundle) -> Self {
+        Self {
+            interactable: Interactable::default(),
+            button: value,
+        }
+    }
+}
