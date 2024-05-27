@@ -25,3 +25,7 @@ pub struct DialogBox;
 
 #[derive(Debug, Component)]
 pub struct Overlay;
+
+#[derive(Debug, Component)]
+/// Defines whether a specific UI element accepts interaction or not.
+pub struct Interactable(pub bool);
