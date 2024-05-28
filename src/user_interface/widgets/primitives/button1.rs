@@ -18,7 +18,9 @@
 use bevy::prelude::*;
 use derive_builder::Builder;
 
-use crate::user_interface::{components::Widget, UserInterfaceAssets};
+use crate::user_interface::{
+    bundles::InteractableButtonBundle, components::Widget, UserInterfaceAssets,
+};
 
 use super::{icon::IconWidgetProps, icon_widget};
 
@@ -75,7 +77,7 @@ pub fn button1_widget(
         .with_children(|parent| {
             parent
                 .spawn((
-                    ButtonBundle {
+                    InteractableButtonBundle::from(ButtonBundle {
                         style: Style {
                             width: Val::Auto,
                             height: Val::Auto,
@@ -89,7 +91,7 @@ pub fn button1_widget(
                             .clone_weak()
                             .into(),
                         ..default()
-                    },
+                    }),
                     ImageScaleMode::Sliced(TextureSlicer {
                         border: BorderRect::square(3.0),
                         center_scale_mode: SliceScaleMode::Stretch,
