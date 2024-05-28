@@ -26,6 +26,14 @@ pub struct DialogBox;
 #[derive(Debug, Component)]
 pub struct Overlay;
 
-#[derive(Debug, Default, Component)]
+#[derive(Debug, Component)]
 /// Defines whether a specific UI element accepts interaction or not.
+/// `Default` implementation is set to `true` rather than std standard,
+/// which is `false`.
 pub struct Interactable(pub bool);
+
+impl Default for Interactable {
+    fn default() -> Self {
+        Self(true)
+    }
+}
