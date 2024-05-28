@@ -16,6 +16,7 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use crate::user_interface::{
+    components::Interactable,
     interactions::OnPressed,
     widgets::{
         primitives::{button1_widget, Button1WidgetPropsBuilder, Icon, IconWidgetPropsBuilder},
@@ -30,7 +31,12 @@ use bevy_parallax::{CreateParallaxEvent, LayerData, LayerSpeed, ParallaxMoveEven
 pub struct StartTheGameButton;
 
 impl OnPressed for StartTheGameButton {
-    fn invoke(commands: &mut Commands, user_interface_assets: &Res<UserInterfaceAssets>) {
+    fn invoke(
+        commands: &mut Commands,
+        user_interface_assets: &Res<UserInterfaceAssets>,
+        interactable: &mut Interactable,
+    ) {
+        interactable.0 = false;
         to_be_implemented_dialogbox(commands, user_interface_assets);
     }
 }

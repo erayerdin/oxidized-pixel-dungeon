@@ -23,18 +23,25 @@ pub trait OnPressed: Component + Sized {
     fn on_pressed(
         mut commands: Commands,
         user_interface_assets: Option<Res<UserInterfaceAssets>>,
-        interaction_query: Query<(&Interaction, &Interactable), (Changed<Interaction>, With<Self>)>,
+        mut interaction_query: Query<
+            (&Interaction, &mut Interactable),
+            (Changed<Interaction>, With<Self>),
+        >,
     ) {
         if let Some(ref user_interface_assets) = user_interface_assets {
-            for (interaction, interactable) in interaction_query.iter() {
+            for (interaction, mut interactable) in interaction_query.iter_mut() {
                 if *interaction == Interaction::Pressed && interactable.0 {
-                    Self::invoke(&mut commands, user_interface_assets);
+                    Self::invoke(&mut commands, user_interface_assets, &mut interactable);
                 }
             }
         }
     }
 
-    fn invoke(commands: &mut Commands, user_interface_assets: &Res<UserInterfaceAssets>);
+    fn invoke(
+        commands: &mut Commands,
+        user_interface_assets: &Res<UserInterfaceAssets>,
+        interactable: &mut Interactable,
+    );
 }
 
 pub trait InteractionExt {
