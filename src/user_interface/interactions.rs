@@ -17,17 +17,17 @@
 
 use bevy::prelude::*;
 
-use super::UserInterfaceAssets;
+use super::{components::Interactable, UserInterfaceAssets};
 
 pub trait OnPressed: Component + Sized {
     fn on_pressed(
         mut commands: Commands,
         user_interface_assets: Option<Res<UserInterfaceAssets>>,
-        interaction_query: Query<&Interaction, (Changed<Interaction>, With<Self>)>,
+        interaction_query: Query<(&Interaction, &Interactable), (Changed<Interaction>, With<Self>)>,
     ) {
         if let Some(ref user_interface_assets) = user_interface_assets {
-            for interaction in interaction_query.iter() {
-                if *interaction == Interaction::Pressed {
+            for (interaction, interactable) in interaction_query.iter() {
+                if *interaction == Interaction::Pressed && interactable.0 {
                     Self::invoke(&mut commands, user_interface_assets);
                 }
             }
