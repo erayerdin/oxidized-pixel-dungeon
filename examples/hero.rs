@@ -28,7 +28,7 @@ fn main() {
     let mut app = App::new();
 
     app.add_plugins((CorePlugin, GridPlugin, MobPlugin, GameplayPlugin));
-    app.insert_state(AppState::None);
+    app.insert_state(AppState::InGame);
 
     if cfg!(debug_assertions) {
         app.add_plugins(WorldInspectorPlugin::new());
