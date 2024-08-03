@@ -23,7 +23,7 @@ use crate::{
 };
 
 #[derive(Debug, Resource, AssetCollection)]
-pub(crate) struct HeroAssets {
+pub struct HeroAssets {
     #[asset(path = "spd/sprites/warrior.png")]
     warrior_image_handle: Handle<Image>,
     #[asset(path = "spd/sprites/mage.png")]
@@ -37,7 +37,7 @@ pub(crate) struct HeroAssets {
 }
 
 impl HeroAssets {
-    pub(crate) fn layout(&self) -> TextureAtlasLayout {
+    pub fn layout(&self) -> TextureAtlasLayout {
         TextureAtlasLayout::from_grid(
             Vec2::new(11.0, 15.0),
             21,
@@ -47,14 +47,14 @@ impl HeroAssets {
         )
     }
 
-    pub(crate) fn layout_handle(
+    pub fn layout_handle(
         &self,
         texture_atlas_layouts: &mut ResMut<Assets<TextureAtlasLayout>>,
     ) -> Handle<TextureAtlasLayout> {
         texture_atlas_layouts.add(self.layout())
     }
 
-    pub(crate) fn image_handle(&self, hero_class: &HeroClass) -> Handle<Image> {
+    pub fn image_handle(&self, hero_class: &HeroClass) -> Handle<Image> {
         match hero_class {
             HeroClass::Warrior => self.warrior_image_handle.clone_weak(),
             HeroClass::Mage => self.mage_image_handle.clone_weak(),
@@ -64,7 +64,7 @@ impl HeroAssets {
         }
     }
 
-    pub(crate) fn sprite_sheet_bundle(
+    pub fn sprite_sheet_bundle(
         &self,
         hero_class: &HeroClass,
         grid: &Grid,
@@ -84,7 +84,7 @@ impl HeroAssets {
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash, Default, States)]
-pub(crate) enum HeroAssetsLoadState {
+pub enum HeroAssetsLoadState {
     #[default]
     Loading,
     Loaded,

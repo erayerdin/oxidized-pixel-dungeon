@@ -17,4 +17,4 @@
 
 mod mob_assets;
 
-pub(crate) use mob_assets::{HeroAssets, HeroAssetsLoadState};
+pub use mob_assets::{HeroAssets, HeroAssetsLoadState};

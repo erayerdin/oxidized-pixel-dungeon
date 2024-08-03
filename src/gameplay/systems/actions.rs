@@ -24,7 +24,7 @@ use crate::{
     mob::components::Hero,
 };
 
-pub(crate) fn walk_action_system(
+pub fn walk_action_system(
     keys: Res<ButtonInput<KeyCode>>,
     mut gameplay_state: ResMut<NextState<GameplayState>>,
     mut game_time: ResMut<GameTime>,

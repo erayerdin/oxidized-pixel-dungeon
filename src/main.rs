@@ -17,12 +17,14 @@
 
 use bevy::prelude::*;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use oxidized_pixel_dungeon::{core::CorePlugin, grid::GridPlugin};
+use oxidized_pixel_dungeon::{
+    core::CorePlugin, grid::GridPlugin, user_interface::UserInterfacePlugin,
+};
 
 fn main() {
     let mut app = App::new();
 
-    app.add_plugins((CorePlugin, GridPlugin));
+    app.add_plugins((CorePlugin, GridPlugin, UserInterfacePlugin));
 
     if cfg!(debug_assertions) {
         app.add_plugins(WorldInspectorPlugin::new());

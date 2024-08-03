@@ -20,12 +20,12 @@ use bevy::prelude::*;
 /// In-game time that defines the turns.
 #[derive(Debug, Resource, Reflect)]
 #[reflect(Resource)]
-pub(crate) struct GameTime {
-    pub(crate) counter: f32,
+pub struct GameTime {
+    pub counter: f32,
 }
 
 impl GameTime {
-    pub(crate) const fn base_walk_time() -> f32 {
+    pub const fn base_walk_time() -> f32 {
         1.0
     }
 }

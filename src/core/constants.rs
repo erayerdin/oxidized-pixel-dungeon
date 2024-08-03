@@ -15,4 +15,4 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) const CHARACTER_Z_INDEX: f32 = 2.0;
+pub const CHARACTER_Z_INDEX: f32 = 2.0;

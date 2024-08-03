@@ -18,10 +18,10 @@
 use bevy::{asset::AssetPath, prelude::*};
 
 #[derive(Debug, Component)]
-pub(crate) struct Hero;
+pub struct Hero;
 
 #[derive(Debug, Copy, Clone, Component, Reflect)]
-pub(crate) enum HeroClass {
+pub enum HeroClass {
     Warrior,
     Mage,
     Rogue,
@@ -43,10 +43,10 @@ impl<'a> From<&HeroClass> for AssetPath<'a> {
 
 /// Defined by the armor the hero is wearing.
 #[derive(Debug, Default, Component, Reflect)]
-pub(crate) struct HeroTier(pub(crate) u8);
+pub struct HeroTier(pub u8);
 
 impl HeroTier {
-    pub(crate) fn texture_atlas_index(&self) -> u8 {
+    pub fn texture_atlas_index(&self) -> u8 {
         const TEXTURE_COLUMN_LENGTH: u8 = 21;
         self.0 * TEXTURE_COLUMN_LENGTH
     }

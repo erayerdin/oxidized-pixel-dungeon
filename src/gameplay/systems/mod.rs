@@ -16,5 +16,7 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 mod actions;
+mod pancam;
 
-pub(crate) use actions::walk_action_system;
+pub use actions::walk_action_system;
+pub use pancam::{disable_pancam_system, enable_pancam_system};

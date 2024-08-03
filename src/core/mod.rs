@@ -15,15 +15,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub(crate) mod components;
-pub(crate) mod constants;
-pub(crate) mod systems;
+pub mod components;
+pub mod constants;
+pub mod states;
+pub mod systems;
 
 use bevy::{log::LogPlugin, prelude::*};
 use bevy_pancam::PanCamPlugin;
 use bevy_prototype_lyon::plugin::ShapePlugin;
 
-use self::{components::FacingDirection, systems::camera_init_system};
+use self::{components::FacingDirection, states::AppState, systems::camera_init_system};
 
 pub struct CorePlugin;
 
@@ -48,6 +49,9 @@ impl Plugin for CorePlugin {
             PanCamPlugin,
             ShapePlugin,
         ))
+        .insert_resource(ClearColor(Color::BLACK))
+        .init_state::<AppState>()
+        .register_type::<AppState>()
         .register_type::<FacingDirection>()
         .add_systems(Startup, camera_init_system);
     }
