@@ -84,7 +84,7 @@ pub fn parallax_init_system(
             LayerData {
                 speed: LayerSpeed::Vertical(0.5),
                 path: "spd/interfaces/arcs1.png".into(),
-                tile_size: Vec2::new(32.0, 32.0),
+                tile_size: UVec2::new(32, 32),
                 cols: 1,
                 rows: 1,
                 scale: Vec2::splat(1.0),
@@ -94,7 +94,7 @@ pub fn parallax_init_system(
             LayerData {
                 speed: LayerSpeed::Horizontal(1.0),
                 path: "spd/interfaces/arcs2.png".into(),
-                tile_size: Vec2::new(64.0, 64.0),
+                tile_size: UVec2::new(64, 64),
                 cols: 1,
                 rows: 1,
                 scale: Vec2::splat(2.0),
@@ -175,7 +175,7 @@ pub fn ui_init_system(mut commands: Commands, user_interface_assets: Res<UserInt
                                             .build()
                                             .unwrap(),
                                     ))
-                                    .font_color(Color::YELLOW)
+                                    .font_color(Color::srgba(1.0, 1.0, 0.0, 1.0))
                                     .build()
                                     .unwrap(),
                             );

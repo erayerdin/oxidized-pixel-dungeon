@@ -63,7 +63,7 @@ pub fn button1_widget(
     parent
         .spawn((
             NodeBundle {
-                background_color: Color::BLACK.with_a(0.5).into(),
+                background_color: Color::srgba(0.0, 0.0, 0.0, 0.5).into(),
                 style: Style {
                     width: Val::Auto,
                     height: Val::Auto,
