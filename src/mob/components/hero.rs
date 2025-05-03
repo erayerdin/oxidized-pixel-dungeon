@@ -29,7 +29,7 @@ pub enum HeroClass {
     Duelist,
 }
 
-impl<'a> From<&HeroClass> for AssetPath<'a> {
+impl From<&HeroClass> for AssetPath<'_> {
     fn from(value: &HeroClass) -> Self {
         match value {
             HeroClass::Warrior => "spd/sprites/warrior.png".into(),
