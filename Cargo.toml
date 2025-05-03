@@ -9,7 +9,7 @@ edition = "2021"
 bevy = "0.14"
 bevy-inspector-egui = "0.24.0"
 bevy-parallax = { version = "0.10", features = ["bevy-inspector-egui"] }
-bevy_asset_loader = "0.20.1"
+bevy_asset_loader = "0.21"
 bevy_pancam = { version = "0.15", features = ["bevy_egui"] }
 bevy_prototype_lyon = "0.12"
 derive_builder = { version = "0.20.0", features = ["clippy"] }
