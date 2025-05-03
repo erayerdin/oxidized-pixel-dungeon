@@ -58,20 +58,20 @@ impl HeroAssets {
         }
     }
 
-    pub fn sprite_sheet_bundle(
-        &self,
-        hero_class: &HeroClass,
-        grid: &Grid,
-        texture_atlas_layouts: &mut ResMut<Assets<TextureAtlasLayout>>,
-        texture_atlas_index: usize,
-    ) -> SpriteSheetBundle {
-        SpriteSheetBundle {
+    pub fn sprite_sheet(&self, hero_class: &HeroClass, grid: &Grid) -> SpriteBundle {
+        SpriteBundle {
             texture: self.image_handle(hero_class),
-            atlas: TextureAtlas {
-                layout: self.layout_handle(texture_atlas_layouts),
-                index: texture_atlas_index,
-            },
             transform: grid.transform(CHARACTER_Z_INDEX),
+            ..default()
+        }
+    }
+
+    pub fn texture_atlas(
+        &self,
+        texture_atlas_layouts: &mut ResMut<Assets<TextureAtlasLayout>>,
+    ) -> TextureAtlas {
+        TextureAtlas {
+            layout: self.layout_handle(texture_atlas_layouts),
             ..default()
         }
     }

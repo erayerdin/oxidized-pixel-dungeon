@@ -44,7 +44,8 @@ pub fn hero_init_system(
         hero_class,
         HeroTier::default(),
         FacingDirection::default(),
-        hero_assets.sprite_sheet_bundle(&hero_class, &grid, &mut texture_atlas_layouts, 0),
+        hero_assets.sprite_sheet(&hero_class, &grid),
+        hero_assets.texture_atlas(&mut texture_atlas_layouts),
         grid,
     ));
 }
