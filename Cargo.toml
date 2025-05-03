@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 bevy = "0.14"
-bevy-inspector-egui = "0.24.0"
+bevy-inspector-egui = "0.27"
 bevy-parallax = { version = "0.10", features = ["bevy-inspector-egui"] }
 bevy_asset_loader = "0.21"
 bevy_pancam = { version = "0.15", features = ["bevy_egui"] }
