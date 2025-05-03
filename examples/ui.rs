@@ -109,7 +109,7 @@ mod systems {
     ) {
         commands
             .spawn(NodeBundle {
-                background_color: Color::RED.into(),
+                background_color: Color::srgb(1.0, 0.0, 0.0).into(),
                 style: Style {
                     width: Val::Percent(100.0),
                     height: Val::Percent(100.0),
@@ -162,7 +162,7 @@ mod systems {
                     MyButton,
                     Button1WidgetPropsBuilder::default()
                         .text("Yellow text")
-                        .font_color(Color::YELLOW)
+                        .font_color(Color::srgb(1.0, 1.0, 0.0))
                         .build()
                         .unwrap(),
                 );

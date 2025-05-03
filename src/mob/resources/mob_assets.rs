@@ -38,13 +38,7 @@ pub struct HeroAssets {
 
 impl HeroAssets {
     pub fn layout(&self) -> TextureAtlasLayout {
-        TextureAtlasLayout::from_grid(
-            Vec2::new(11.0, 15.0),
-            21,
-            7,
-            Some(Vec2::new(1.0, 0.0)),
-            None,
-        )
+        TextureAtlasLayout::from_grid(UVec2::new(11, 15), 21, 7, Some(UVec2::new(1, 0)), None)
     }
 
     pub fn layout_handle(

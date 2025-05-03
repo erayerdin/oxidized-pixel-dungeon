@@ -21,7 +21,7 @@ use crate::user_interface::components::Overlay;
 
 pub fn overlay_painter_system(mut bg_color_query: Query<&mut BackgroundColor, With<Overlay>>) {
     for mut color in bg_color_query.iter_mut() {
-        *color = BackgroundColor(Color::BLACK.with_a(0.5));
+        *color = BackgroundColor(Color::srgba(0.0, 0.0, 0.0, 0.5));
     }
 }
 
