@@ -1,24 +1,6 @@
 [package]
 name = "oxidized-pixel-dungeon"
 version = "0.1.0"
-edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+edition = "2024"
 
 [dependencies]
-bevy = "0.14"
-bevy-inspector-egui = "0.27"
-bevy-parallax = { version = "0.10", features = ["bevy-inspector-egui"] }
-bevy_asset_loader = "0.21"
-bevy_pancam = { version = "0.15", features = ["bevy_egui"] }
-bevy_prototype_lyon = "0.12"
-derive_builder = { version = "0.20.0", features = ["clippy"] }
-rayon = "1.10.0"
-
-# Enable a small amount of optimization in debug mode
-[profile.dev]
-opt-level = 1
-
-# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
-[profile.dev.package."*"]
-opt-level = 3
