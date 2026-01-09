@@ -15,14 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod states;
-
 use bevy::prelude::*;
 
-pub(super) struct ScreenPlugin;
-
-impl Plugin for ScreenPlugin {
-    fn build(&self, app: &mut App) {
-        app.init_state::<states::ScreenState>();
-    }
+#[derive(Debug, Default, Hash, Eq, PartialEq, Clone, States)]
+pub enum ScreenState {
+    MainMenu,
+    Game,
+    #[default]
+    Loading,
 }
