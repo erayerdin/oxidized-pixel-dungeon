@@ -15,19 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod components;
-mod states;
-mod systems;
+mod loading_ui;
 
-use bevy::prelude::*;
-
-pub(super) struct ScreenPlugin;
-
-impl Plugin for ScreenPlugin {
-    fn build(&self, app: &mut App) {
-        app.init_state::<states::ScreenState>().add_systems(
-            Update,
-            systems::loading_screen_system.run_if(in_state(states::ScreenState::Loading)),
-        );
-    }
-}
+pub(super) use loading_ui::LoadingUI;
