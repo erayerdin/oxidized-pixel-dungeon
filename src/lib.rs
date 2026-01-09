@@ -17,7 +17,10 @@
 
 mod camera;
 
-use bevy::prelude::*;
+use bevy::{
+    log::{self, LogPlugin},
+    prelude::*,
+};
 
 pub struct GamePlugin;
 
@@ -25,7 +28,16 @@ impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app
             // Built-in plugins
-            .add_plugins(DefaultPlugins)
+            .add_plugins(DefaultPlugins.set(LogPlugin {
+                level: if cfg!(debug_assertions) {
+                    log::Level::DEBUG
+                } else {
+                    log::Level::WARN
+                },
+                filter:
+                    "wgpu=warn,bevy_ecs=info,bevy_shader=info,bevy_time=info,bevy_render=info,bevy_asset=info,bevy_winit=info,bevy_app=info,gilrs=info,winit=info,sctk=info,offset_allocator=info,naga=info,calloop=info".to_string(),
+                ..default()
+            }))
             // project plugins
             .add_plugins(camera::CameraPlugin);
     }
