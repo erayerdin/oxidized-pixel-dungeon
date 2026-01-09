@@ -15,6 +15,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub fn camera_init_system() {
-    todo!()
+use bevy::prelude::*;
+
+pub fn camera_init_system(mut commands: Commands) {
+    debug!("Running camera_init_system...");
+    debug!("Initializing Camera2d...");
+    commands.spawn(Camera2d);
+    debug!("Camera2d initialized.");
 }
