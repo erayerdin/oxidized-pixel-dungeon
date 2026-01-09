@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod camera_control;
-mod camera_init;
+use bevy::prelude::*;
 
-pub(super) use camera_control::camera_control_system;
-pub(super) use camera_init::camera_init_system;
+pub fn camera_control_system() {
+    todo!("Not implemented yet");
+}

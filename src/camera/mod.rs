@@ -19,11 +19,17 @@ mod systems;
 
 use bevy::prelude::*;
 
+use crate::screen::ScreenState;
+
 pub(super) struct CameraPlugin;
 
 impl Plugin for CameraPlugin {
     fn build(&self, app: &mut App) {
         debug!("Initializing CameraPlugin...");
-        app.add_systems(Startup, systems::camera_init_system);
+        app.add_systems(Startup, systems::camera_init_system)
+            .add_systems(
+                Update,
+                systems::camera_control_system.run_if(state_changed::<ScreenState>),
+            );
     }
 }
