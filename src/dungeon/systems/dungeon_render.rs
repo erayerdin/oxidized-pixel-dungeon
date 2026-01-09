@@ -20,20 +20,20 @@ use bevy::{platform::collections::Equivalent, prelude::*};
 use crate::{
     GameVariant,
     dungeon::{
-        components::Grid,
+        components::{Grid, Ground, Wall},
         constants::{GRID_SIZE, GridDebugColor},
     },
 };
 
 pub fn dungeon_render_system(
-    q1: Query<(Entity, &Grid)>,
+    q1: Query<(Entity, &Grid), With<Ground>>,
+    q2: Query<(Entity, &Grid), With<Wall>>,
     variant: Res<GameVariant>,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
     mut commands: Commands,
 ) {
-    // TODO: parallelize
-    for (entity, grid) in q1.iter() {
+    let mut render = |entity: Entity, grid: &Grid, color: GridDebugColor| {
         let (x, y) = grid.xy();
 
         commands.entity(entity).insert(Transform::from_xyz(
@@ -46,8 +46,17 @@ pub fn dungeon_render_system(
         if variant.equivalent(&GameVariant::ExampleTiles) {
             commands.entity(entity).insert((
                 Mesh2d(meshes.add(Rectangle::new(GRID_SIZE as f32, GRID_SIZE as f32))),
-                MeshMaterial2d(materials.add(GridDebugColor::Ground)),
+                MeshMaterial2d(materials.add(color)),
             ));
         }
+    };
+
+    // TODO: parallelize
+    for (entity, grid) in q1.iter() {
+        render(entity, grid, GridDebugColor::Ground);
+    }
+
+    for (entity, grid) in q2.iter() {
+        render(entity, grid, GridDebugColor::Wall);
     }
 }

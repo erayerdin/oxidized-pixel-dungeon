@@ -28,9 +28,9 @@ impl From<GridDebugColor> for ColorMaterial {
     fn from(value: GridDebugColor) -> Self {
         match value {
             GridDebugColor::Ground => ColorMaterial::from(Color::Srgba(Srgba {
-                red: 0.25,
-                green: 0.25,
-                blue: 0.25,
+                red: 0.75,
+                green: 0.75,
+                blue: 0.75,
                 alpha: 0.8,
             })),
             GridDebugColor::Wall => ColorMaterial::from(Color::Srgba(Srgba {
