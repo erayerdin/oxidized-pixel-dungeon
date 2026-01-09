@@ -26,6 +26,7 @@ use bevy::{
     log::{self, LogPlugin},
     prelude::*,
 };
+use bevy_pancam::PanCamPlugin;
 
 #[derive(Default, Resource, Clone, Eq, PartialEq)]
 pub enum GameVariant {
@@ -63,6 +64,9 @@ impl Plugin for GamePlugin {
                     "wgpu=warn,bevy_ecs=info,bevy_shader=info,bevy_time=info,bevy_render=info,bevy_asset=info,bevy_winit=info,bevy_app=info,gilrs=info,cosmic_text=info,winit=info,sctk=info,offset_allocator=info,naga=info,calloop=info".to_string(),
                 ..default()
             }));
+
+        // Third-party plugins
+        app.add_plugins(PanCamPlugin);
 
         if cfg!(debug_assertions) {
             app.add_plugins(EguiPlugin::default())
