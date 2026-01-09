@@ -15,6 +15,30 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod screen;
+use bevy::prelude::*;
 
-pub use screen::ScreenState;
+pub const GRID_SIZE: u8 = 16;
+
+pub enum GridDebugColor {
+    Ground,
+    Wall,
+}
+
+impl From<GridDebugColor> for ColorMaterial {
+    fn from(value: GridDebugColor) -> Self {
+        match value {
+            GridDebugColor::Ground => ColorMaterial::from(Color::Srgba(Srgba {
+                red: 0.75,
+                green: 0.75,
+                blue: 0.75,
+                alpha: 0.8,
+            })),
+            GridDebugColor::Wall => ColorMaterial::from(Color::Srgba(Srgba {
+                red: 0.5,
+                green: 0.5,
+                blue: 0.5,
+                alpha: 0.8,
+            })),
+        }
+    }
+}

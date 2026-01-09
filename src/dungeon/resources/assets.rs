@@ -15,6 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod screen;
+use bevy::prelude::*;
+use bevy_asset_loader::prelude::*;
 
-pub use screen::ScreenState;
+#[derive(AssetCollection, Resource)]
+pub struct DungeonAssets {}

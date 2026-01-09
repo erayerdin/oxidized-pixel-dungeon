@@ -21,6 +21,8 @@ mod systems;
 
 use bevy::prelude::*;
 
+pub(crate) use states::ScreenState;
+
 pub(super) struct ScreenPlugin;
 
 impl Plugin for ScreenPlugin {

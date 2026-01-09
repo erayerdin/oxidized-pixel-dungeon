@@ -15,6 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod screen;
+use bevy::prelude::*;
 
-pub use screen::ScreenState;
+/// Floor resource representing the current floor in the dungeon.
+#[derive(Resource, Default)]
+pub struct Floor {
+    pub number: u16,
+}

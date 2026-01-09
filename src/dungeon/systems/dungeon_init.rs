@@ -15,6 +15,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod screen;
+use bevy::{platform::collections::Equivalent, prelude::*};
 
-pub use screen::ScreenState;
+use crate::{
+    GameVariant,
+    dungeon::components::{Grid, Ground, Wall},
+};
+
+pub fn dungeon_init_system(variant: Res<GameVariant>, mut commands: Commands) {
+    if variant.equivalent(&GameVariant::ExampleTiles) {
+        commands.spawn((Grid::new(0, 0), Ground));
+        commands.spawn((Grid::new(1, 0), Wall));
+        return;
+    }
+
+    todo!("Not implemented yet.")
+}

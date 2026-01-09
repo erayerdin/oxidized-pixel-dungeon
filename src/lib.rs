@@ -16,19 +16,25 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 mod camera;
+mod dungeon;
 mod screen;
+
+#[cfg(debug_assertions)]
+use bevy_inspector_egui::{bevy_egui::EguiPlugin, quick::WorldInspectorPlugin};
 
 use bevy::{
     log::{self, LogPlugin},
     prelude::*,
 };
 
-#[derive(Default)]
+#[derive(Default, Resource, Clone, Eq, PartialEq)]
 pub enum GameVariant {
     #[default]
     Regular,
     #[cfg(debug_assertions)]
     ExampleLoading,
+    #[cfg(debug_assertions)]
+    ExampleTiles,
 }
 
 #[derive(Default)]
@@ -45,6 +51,7 @@ impl GamePlugin {
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app
+            .insert_resource(self.variant.clone())
             // Built-in plugins
             .add_plugins(DefaultPlugins.set(LogPlugin {
                 level: if cfg!(debug_assertions) {
@@ -57,15 +64,28 @@ impl Plugin for GamePlugin {
                 ..default()
             }));
 
+        if cfg!(debug_assertions) {
+            app.add_plugins(EguiPlugin::default())
+                .add_plugins(WorldInspectorPlugin::default());
+        }
+
         match self.variant {
             GameVariant::Regular => {
                 // project plugins
-                app.add_plugins((camera::CameraPlugin, screen::ScreenPlugin));
+                app.add_plugins((
+                    camera::CameraPlugin,
+                    screen::ScreenPlugin,
+                    dungeon::DungeonPlugin,
+                ));
             }
             #[cfg(debug_assertions)]
             GameVariant::ExampleLoading => {
                 // project plugins
                 app.add_plugins((camera::CameraPlugin, screen::ScreenPlugin));
+            }
+            #[cfg(debug_assertions)]
+            GameVariant::ExampleTiles => {
+                app.add_plugins((camera::CameraPlugin, dungeon::DungeonPlugin));
             }
         }
     }

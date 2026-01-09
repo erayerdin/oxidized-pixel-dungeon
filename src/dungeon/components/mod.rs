@@ -15,6 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod screen;
+mod grid;
 
-pub use screen::ScreenState;
+use bevy::prelude::*;
+
+pub(super) use grid::Grid;
+
+#[derive(Component)]
+pub(super) struct Ground;
+
+#[derive(Component)]
+pub(super) struct Wall;

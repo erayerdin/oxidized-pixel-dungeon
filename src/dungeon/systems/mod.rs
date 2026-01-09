@@ -15,6 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod screen;
+mod dungeon_init;
+mod dungeon_render;
 
-pub use screen::ScreenState;
+pub(super) use dungeon_init::dungeon_init_system;
+pub(super) use dungeon_render::dungeon_render_system;

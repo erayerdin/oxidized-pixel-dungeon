@@ -15,6 +15,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod screen;
+use bevy::prelude::*;
 
-pub use screen::ScreenState;
+/// Component representing a cell in a grid. Since Rust has a built-in Cell type, we have named
+/// this component `Grid` to avoid confusion.
+#[derive(Component)]
+pub struct Grid {
+    /// Horizontal location of the cell in the grid.
+    pub x: u16,
+    /// Vertical location of the cell in the grid.
+    pub y: u16,
+}
+
+impl Grid {
+    pub fn new(x: u16, y: u16) -> Self {
+        Self { x, y }
+    }
+
+    pub fn xy(&self) -> (u16, u16) {
+        (self.x, self.y)
+    }
+}

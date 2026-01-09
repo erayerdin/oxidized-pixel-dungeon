@@ -5,3 +5,5 @@ edition = "2024"
 
 [dependencies]
 bevy = "0.17.3"
+bevy-inspector-egui = "0.35.0"
+bevy_asset_loader = "0.24.0"
