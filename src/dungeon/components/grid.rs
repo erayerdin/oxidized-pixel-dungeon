@@ -26,3 +26,9 @@ pub struct Grid {
     /// Vertical location of the cell in the grid.
     pub y: u16,
 }
+
+impl Grid {
+    pub fn new(x: u16, y: u16) -> Self {
+        Self { x, y }
+    }
+}
