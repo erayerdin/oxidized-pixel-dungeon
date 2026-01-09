@@ -15,15 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod systems;
-
-use bevy::prelude::*;
-
-pub(super) struct CameraPlugin;
-
-impl Plugin for CameraPlugin {
-    fn build(&self, app: &mut App) {
-        debug!("Initializing CameraPlugin...");
-        app.add_systems(Startup, systems::camera_init_system);
-    }
+pub fn camera_init_system() {
+    todo!()
 }
