@@ -35,6 +35,7 @@ impl Plugin for DungeonPlugin {
                     .continue_to_state(ScreenState::Game)
                     .load_collection::<resources::DungeonAssets>(),
             )
-            .add_systems(Startup, systems::dungeon_init_system);
+            .add_systems(Startup, systems::dungeon_init_system)
+            .add_systems(Update, systems::dungeon_render_system);
     }
 }
