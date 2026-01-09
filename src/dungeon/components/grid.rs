@@ -31,4 +31,8 @@ impl Grid {
     pub fn new(x: u16, y: u16) -> Self {
         Self { x, y }
     }
+
+    pub fn xy(&self) -> (u16, u16) {
+        (self.x, self.y)
+    }
 }
