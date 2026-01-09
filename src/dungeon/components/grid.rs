@@ -15,14 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod components;
-
 use bevy::prelude::*;
 
-pub(super) struct DungeonPlugin;
-
-impl Plugin for DungeonPlugin {
-    fn build(&self, app: &mut App) {
-        todo!()
-    }
+/// Component representing a cell in a grid. Since Rust has a built-in Cell type, we have named
+/// this component `Grid` to avoid confusion.
+#[derive(Component)]
+pub struct Grid {
+    /// Horizontal location of the cell in the grid.
+    pub x: u16,
+    /// Vertical location of the cell in the grid.
+    pub y: u16,
 }
