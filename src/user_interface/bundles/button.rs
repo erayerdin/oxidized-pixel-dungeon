@@ -15,8 +15,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+use crate::user_interface::components::Interactable;
+use bevy::prelude::*;
+
+#[derive(Debug, Bundle)]
+pub struct InteractableButtonBundle {
+    pub interactable: Interactable,
+    pub button: ButtonBundle,
+}
+
+impl From<ButtonBundle> for InteractableButtonBundle {
+    fn from(value: ButtonBundle) -> Self {
+        Self {
+            interactable: Interactable::default(),
+            button: value,
+        }
+    }
+}

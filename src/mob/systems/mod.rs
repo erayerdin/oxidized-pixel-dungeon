@@ -15,8 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+mod hero;
+
+pub use hero::{hero_init_system, hero_tier_change_system};
+
+#[cfg(debug_assertions)]
+pub use hero::hero_texture_change_system;

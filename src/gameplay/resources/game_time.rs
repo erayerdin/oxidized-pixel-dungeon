@@ -15,8 +15,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+use bevy::prelude::*;
+
+/// In-game time that defines the turns.
+#[derive(Debug, Resource, Reflect)]
+#[reflect(Resource)]
+pub struct GameTime {
+    pub counter: f32,
+}
+
+impl GameTime {
+    pub const fn base_walk_time() -> f32 {
+        1.0
+    }
+}
+
+impl Default for GameTime {
+    fn default() -> Self {
+        Self { counter: 0.0 }
+    }
+}

@@ -15,8 +15,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+use bevy::prelude::*;
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use oxidized_pixel_dungeon::{
+    core::{states::AppState, CorePlugin},
+    gameplay::GameplayPlugin,
+    grid::GridPlugin,
+    mob::MobPlugin,
+};
+
+fn main() {
+    let mut app = App::new();
+
+    app.add_plugins((CorePlugin, GridPlugin, MobPlugin, GameplayPlugin));
+    app.insert_state(AppState::InGame);
+
+    if cfg!(debug_assertions) {
+        app.add_plugins(WorldInspectorPlugin::new());
+    }
+
+    app.run();
+}

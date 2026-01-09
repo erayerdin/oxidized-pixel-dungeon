@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+mod actions;
+mod pancam;
+
+pub use actions::walk_action_system;
+pub use pancam::{disable_pancam_system, enable_pancam_system};

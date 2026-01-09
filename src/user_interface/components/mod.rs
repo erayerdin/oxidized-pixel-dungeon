@@ -15,8 +15,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+use bevy::prelude::*;
+
+#[derive(Debug, Component)]
+pub struct Widget;
+
+#[derive(Debug, PartialEq, Eq, Hash, Clone, Component)]
+pub struct DialogBox;
+
+#[derive(Debug, Component)]
+pub struct Overlay;
+
+#[derive(Debug, Component)]
+/// Defines whether a specific UI element accepts interaction or not.
+/// `Default` implementation is set to `true` rather than std standard,
+/// which is `false`.
+pub struct Interactable(pub bool);
+
+impl Default for Interactable {
+    fn default() -> Self {
+        Self(true)
+    }
+}
