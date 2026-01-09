@@ -3957,6 +3957,7 @@ dependencies = [
  "bevy-inspector-egui",
  "bevy_asset_loader",
  "bevy_pancam",
+ "lazy_static",
 ]
 
 [[package]]
