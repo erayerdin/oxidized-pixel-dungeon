@@ -30,6 +30,8 @@ pub enum GameVariant {
     Regular,
     #[cfg(debug_assertions)]
     ExampleLoading,
+    #[cfg(not(debug_assertions))]
+    ExampleTiles,
 }
 
 #[derive(Default)]
