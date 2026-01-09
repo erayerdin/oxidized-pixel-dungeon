@@ -21,6 +21,7 @@ pub const GRID_SIZE: u8 = 16;
 
 pub enum GridDebugColor {
     Ground,
+    Wall,
 }
 
 impl From<GridDebugColor> for ColorMaterial {
@@ -30,6 +31,12 @@ impl From<GridDebugColor> for ColorMaterial {
                 red: 0.25,
                 green: 0.25,
                 blue: 0.25,
+                alpha: 0.8,
+            })),
+            GridDebugColor::Wall => ColorMaterial::from(Color::Srgba(Srgba {
+                red: 0.5,
+                green: 0.5,
+                blue: 0.5,
                 alpha: 0.8,
             })),
         }

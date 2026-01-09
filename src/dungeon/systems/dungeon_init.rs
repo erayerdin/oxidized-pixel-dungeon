@@ -19,12 +19,13 @@ use bevy::{platform::collections::Equivalent, prelude::*};
 
 use crate::{
     GameVariant,
-    dungeon::components::{Grid, Ground},
+    dungeon::components::{Grid, Ground, Wall},
 };
 
 pub fn dungeon_init_system(variant: Res<GameVariant>, mut commands: Commands) {
     if variant.equivalent(&GameVariant::ExampleTiles) {
         commands.spawn((Grid::new(0, 0), Ground));
+        commands.spawn((Grid::new(1, 0), Wall));
         return;
     }
 
