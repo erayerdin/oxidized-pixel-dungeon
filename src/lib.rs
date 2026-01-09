@@ -24,7 +24,7 @@ use bevy::{
     prelude::*,
 };
 
-#[derive(Default)]
+#[derive(Default, Resource, Clone)]
 pub enum GameVariant {
     #[default]
     Regular,
@@ -46,6 +46,7 @@ impl GamePlugin {
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app
+            .insert_resource(self.variant.clone())
             // Built-in plugins
             .add_plugins(DefaultPlugins.set(LogPlugin {
                 level: if cfg!(debug_assertions) {
