@@ -36,7 +36,7 @@ impl Plugin for GamePlugin {
                     log::Level::WARN
                 },
                 filter:
-                    "wgpu=warn,bevy_ecs=info,bevy_shader=info,bevy_time=info,bevy_render=info,bevy_asset=info,bevy_winit=info,bevy_app=info,gilrs=info,winit=info,sctk=info,offset_allocator=info,naga=info,calloop=info".to_string(),
+                    "wgpu=warn,bevy_ecs=info,bevy_shader=info,bevy_time=info,bevy_render=info,bevy_asset=info,bevy_winit=info,bevy_app=info,gilrs=info,cosmic_text=info,winit=info,sctk=info,offset_allocator=info,naga=info,calloop=info".to_string(),
                 ..default()
             }))
             // project plugins
