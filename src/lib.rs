@@ -26,6 +26,7 @@ use bevy::{
     log::{self, LogPlugin},
     prelude::*,
 };
+use bevy_pancam::PanCamPlugin;
 
 #[derive(Default, Resource, Clone, Eq, PartialEq)]
 pub enum GameVariant {
@@ -64,6 +65,9 @@ impl Plugin for GamePlugin {
                 ..default()
             }));
 
+        // Third-party plugins
+        app.add_plugins(PanCamPlugin);
+
         if cfg!(debug_assertions) {
             app.add_plugins(EguiPlugin::default())
                 .add_plugins(WorldInspectorPlugin::default());
@@ -85,7 +89,11 @@ impl Plugin for GamePlugin {
             }
             #[cfg(debug_assertions)]
             GameVariant::ExampleTiles => {
-                app.add_plugins((camera::CameraPlugin, dungeon::DungeonPlugin));
+                app.add_plugins((
+                    camera::CameraPlugin,
+                    dungeon::DungeonPlugin,
+                    screen::ScreenPlugin,
+                ));
             }
         }
     }
