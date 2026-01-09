@@ -16,6 +16,7 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 mod camera;
+mod dungeon;
 mod screen;
 
 use bevy::{
@@ -60,7 +61,11 @@ impl Plugin for GamePlugin {
         match self.variant {
             GameVariant::Regular => {
                 // project plugins
-                app.add_plugins((camera::CameraPlugin, screen::ScreenPlugin));
+                app.add_plugins((
+                    camera::CameraPlugin,
+                    screen::ScreenPlugin,
+                    dungeon::DungeonPlugin,
+                ));
             }
             #[cfg(debug_assertions)]
             GameVariant::ExampleLoading => {
