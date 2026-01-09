@@ -15,4 +15,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
+use bevy::prelude::*;
+
 pub const GRID_SIZE: u8 = 16;
+
+pub enum GridDebugColor {
+    Ground,
+}
+
+impl From<GridDebugColor> for ColorMaterial {
+    fn from(value: GridDebugColor) -> Self {
+        match value {
+            GridDebugColor::Ground => ColorMaterial::from(Color::Srgba(Srgba {
+                red: 0.25,
+                green: 0.25,
+                blue: 0.25,
+                alpha: 0.8,
+            })),
+        }
+    }
+}

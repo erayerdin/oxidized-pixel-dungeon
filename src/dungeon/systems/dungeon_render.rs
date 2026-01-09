@@ -19,7 +19,10 @@ use bevy::{platform::collections::Equivalent, prelude::*};
 
 use crate::{
     GameVariant,
-    dungeon::{components::Grid, constants::GRID_SIZE},
+    dungeon::{
+        components::Grid,
+        constants::{GRID_SIZE, GridDebugColor},
+    },
 };
 
 pub fn dungeon_render_system(
@@ -43,12 +46,7 @@ pub fn dungeon_render_system(
         if variant.equivalent(&GameVariant::ExampleTiles) {
             commands.entity(entity).insert((
                 Mesh2d(meshes.add(Rectangle::new(GRID_SIZE as f32, GRID_SIZE as f32))),
-                MeshMaterial2d(materials.add(Color::Srgba(Srgba {
-                    red: 0.25,
-                    green: 0.25,
-                    blue: 0.25,
-                    alpha: 0.8,
-                }))),
+                MeshMaterial2d(materials.add(GridDebugColor::Ground)),
             ));
         }
     }
