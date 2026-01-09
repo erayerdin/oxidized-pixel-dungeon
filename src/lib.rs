@@ -24,13 +24,13 @@ use bevy::{
     prelude::*,
 };
 
-#[derive(Default, Resource, Clone)]
+#[derive(Default, Resource, Clone, Eq, PartialEq)]
 pub enum GameVariant {
     #[default]
     Regular,
     #[cfg(debug_assertions)]
     ExampleLoading,
-    #[cfg(not(debug_assertions))]
+    #[cfg(debug_assertions)]
     ExampleTiles,
 }
 
@@ -74,6 +74,10 @@ impl Plugin for GamePlugin {
             GameVariant::ExampleLoading => {
                 // project plugins
                 app.add_plugins((camera::CameraPlugin, screen::ScreenPlugin));
+            }
+            #[cfg(debug_assertions)]
+            GameVariant::ExampleTiles => {
+                app.add_plugins((camera::CameraPlugin, dungeon::DungeonPlugin));
             }
         }
     }

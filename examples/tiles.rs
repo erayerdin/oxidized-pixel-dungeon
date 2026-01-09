@@ -15,6 +15,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
+use bevy::prelude::*;
+use oxidized_pixel_dungeon::{GamePlugin, GameVariant};
+
 fn main() {
-    todo!("Not implemented")
+    App::new()
+        .add_plugins(GamePlugin::new(GameVariant::ExampleTiles))
+        .run();
 }
