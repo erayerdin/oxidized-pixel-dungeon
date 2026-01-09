@@ -19,6 +19,9 @@ mod camera;
 mod dungeon;
 mod screen;
 
+#[cfg(debug_assertions)]
+use bevy_inspector_egui::{bevy_egui::EguiPlugin, quick::WorldInspectorPlugin};
+
 use bevy::{
     log::{self, LogPlugin},
     prelude::*,
@@ -60,6 +63,11 @@ impl Plugin for GamePlugin {
                     "wgpu=warn,bevy_ecs=info,bevy_shader=info,bevy_time=info,bevy_render=info,bevy_asset=info,bevy_winit=info,bevy_app=info,gilrs=info,cosmic_text=info,winit=info,sctk=info,offset_allocator=info,naga=info,calloop=info".to_string(),
                 ..default()
             }));
+
+        if cfg!(debug_assertions) {
+            app.add_plugins(EguiPlugin::default())
+                .add_plugins(WorldInspectorPlugin::default());
+        }
 
         match self.variant {
             GameVariant::Regular => {
