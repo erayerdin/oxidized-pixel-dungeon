@@ -15,6 +15,36 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub fn loading_screen_system() {
-    todo!()
+use bevy::prelude::*;
+
+use crate::screen::components::LoadingUI;
+
+pub fn loading_screen_system(mut commands: Commands, asset_server: Res<AssetServer>) {
+    // REF: https://bevy.org/examples/ui-user-interface/flex-layout/
+    let font = asset_server.load("opd/fonts/Jersey10-Regular.ttf");
+
+    commands
+        .spawn(LoadingUI)
+        .insert((
+            Node {
+                width: percent(100),
+                height: percent(100),
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },
+            BackgroundColor(Color::BLACK),
+        ))
+        .with_children(|builder| {
+            builder.spawn((
+                Text::new("Loading..."),
+                TextFont {
+                    font,
+                    font_size: 24.0,
+                    ..default()
+                },
+                TextColor::WHITE,
+            ));
+        });
 }
