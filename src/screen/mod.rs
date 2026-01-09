@@ -19,9 +19,11 @@ mod components;
 mod states;
 mod systems;
 
-use bevy::prelude::*;
+use bevy::{platform::collections::Equivalent, prelude::*};
 
 pub(crate) use states::ScreenState;
+
+use crate::GameVariant;
 
 pub(super) struct ScreenPlugin;
 
@@ -31,5 +33,16 @@ impl Plugin for ScreenPlugin {
             Update,
             systems::loading_screen_system.run_if(in_state(states::ScreenState::Loading)),
         );
+
+        if cfg!(debug_assertions) {
+            app.add_systems(
+                Startup,
+                |variant: Res<GameVariant>, mut commands: Commands| {
+                    if variant.equivalent(&GameVariant::ExampleTiles) {
+                        commands.set_state(states::ScreenState::Game);
+                    }
+                },
+            );
+        }
     }
 }

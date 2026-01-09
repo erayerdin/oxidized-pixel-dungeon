@@ -85,7 +85,11 @@ impl Plugin for GamePlugin {
             }
             #[cfg(debug_assertions)]
             GameVariant::ExampleTiles => {
-                app.add_plugins((camera::CameraPlugin, dungeon::DungeonPlugin));
+                app.add_plugins((
+                    camera::CameraPlugin,
+                    dungeon::DungeonPlugin,
+                    screen::ScreenPlugin,
+                ));
             }
         }
     }
