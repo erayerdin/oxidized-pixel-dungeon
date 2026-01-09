@@ -30,8 +30,8 @@ pub(super) fn default_pancam() -> PanCam {
         speed: 400.0,
         enabled: true,
         zoom_to_cursor: false,
-        min_scale: 1.0,
-        max_scale: 40.0,
+        min_scale: 0.25,
+        max_scale: 1.0,
         min_x: f32::NEG_INFINITY, // minimum x position of the camera window
         max_x: f32::INFINITY,     // maximum x position of the camera window
         min_y: f32::NEG_INFINITY, // minimum y position of the camera window
