@@ -1,0 +1,38 @@
+// Copyright (C) 2026 Eray Erdin
+//
+// This file is part of Oxidized Pixel Dungeon.
+//
+// Oxidized Pixel Dungeon is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Oxidized Pixel Dungeon is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
+
+use bevy::prelude::*;
+
+/// Component representing a cell in a grid. Since Rust has a built-in Cell type, we have named
+/// this component `Grid` to avoid confusion.
+#[derive(Component)]
+pub struct Grid {
+    /// Horizontal location of the cell in the grid.
+    pub x: u16,
+    /// Vertical location of the cell in the grid.
+    pub y: u16,
+}
+
+impl Grid {
+    pub fn new(x: u16, y: u16) -> Self {
+        Self { x, y }
+    }
+
+    pub fn xy(&self) -> (u16, u16) {
+        (self.x, self.y)
+    }
+}
