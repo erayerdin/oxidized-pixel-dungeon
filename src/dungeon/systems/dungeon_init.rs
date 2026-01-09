@@ -15,6 +15,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub fn dungeon_spawner_system() {
-    todo!("Not implemented yet");
+use bevy::{platform::collections::Equivalent, prelude::*};
+
+use crate::{GameVariant, dungeon::components::Grid};
+
+pub fn dungeon_init_system(variant: Res<GameVariant>, mut commands: Commands) {
+    if variant.equivalent(&GameVariant::ExampleTiles) {
+        commands.spawn(Grid::new(0, 0));
+        return;
+    }
+
+    todo!("Not implemented yet.")
 }

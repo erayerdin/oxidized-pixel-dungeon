@@ -15,6 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod dungeon_spawner;
+mod dungeon_init;
 
-pub(super) use dungeon_spawner::dungeon_spawner_system;
+pub(super) use dungeon_init::dungeon_init_system;
