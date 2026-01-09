@@ -15,8 +15,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+use bevy::prelude::*;
+
+use crate::user_interface::components::Overlay;
+
+pub fn overlay_painter_system(mut bg_color_query: Query<&mut BackgroundColor, With<Overlay>>) {
+    for mut color in bg_color_query.iter_mut() {
+        *color = BackgroundColor(Color::srgba(0.0, 0.0, 0.0, 0.5));
+    }
+}
+
+pub fn overlay_dismiss_system(
+    mut commands: Commands,
+    query: Query<(Entity, &Interaction), (With<Overlay>, Changed<Interaction>)>,
+) {
+    for (entity, interaction) in query.iter() {
+        if *interaction == Interaction::Pressed {
+            commands.entity(entity).despawn_recursive();
+        }
+    }
+}

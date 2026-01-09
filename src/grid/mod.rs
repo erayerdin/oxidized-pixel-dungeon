@@ -15,8 +15,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+pub mod components;
+pub mod constants;
+
+use crate::grid::components::grid::Grid;
+use bevy::prelude::*;
+
+pub struct GridPlugin;
+
+impl Plugin for GridPlugin {
+    fn build(&self, app: &mut bevy::prelude::App) {
+        debug!("Initializing GridPlugin...");
+
+        app.register_type::<Grid>();
+    }
+}

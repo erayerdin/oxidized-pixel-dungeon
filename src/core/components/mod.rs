@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+mod character;
+mod facing_direction;
+
+pub use character::Character;
+pub use facing_direction::FacingDirection;

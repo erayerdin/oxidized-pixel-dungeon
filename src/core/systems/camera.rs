@@ -15,8 +15,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+use bevy::prelude::*;
+use bevy_pancam::PanCam;
+use bevy_parallax::ParallaxCameraComponent;
+
+pub fn camera_init_system(mut commands: Commands) {
+    debug!("Running CorePlugin::init_system");
+    commands
+        .spawn(Camera2dBundle::default())
+        .insert(PanCam {
+            grab_buttons: vec![MouseButton::Middle],
+            enabled: false,
+            ..default()
+        })
+        .insert(ParallaxCameraComponent::default());
+}

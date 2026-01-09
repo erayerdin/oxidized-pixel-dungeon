@@ -15,8 +15,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-pub mod core;
-pub mod gameplay;
-pub mod grid;
-pub mod mob;
-pub mod user_interface;
+use bevy::prelude::*;
+use bevy_pancam::PanCam;
+
+pub fn enable_pancam_system(mut pancam_query: Query<&mut PanCam>) {
+    for mut pancam in pancam_query.iter_mut() {
+        pancam.enabled = true;
+    }
+}
+
+pub fn disable_pancam_system(mut pancam_query: Query<&mut PanCam>) {
+    for mut pancam in pancam_query.iter_mut() {
+        pancam.enabled = false;
+    }
+}
