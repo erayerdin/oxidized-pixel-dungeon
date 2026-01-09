@@ -16,8 +16,10 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
-use oxidized_pixel_dungeon::GamePlugin;
+use oxidized_pixel_dungeon::{GamePlugin, GameVariant};
 
 fn main() {
-    App::new().add_plugins(GamePlugin).run();
+    App::new()
+        .add_plugins(GamePlugin::new(GameVariant::ExampleLoading))
+        .run();
 }

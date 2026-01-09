@@ -23,7 +23,24 @@ use bevy::{
     prelude::*,
 };
 
-pub struct GamePlugin;
+#[derive(Default)]
+pub enum GameVariant {
+    #[default]
+    Regular,
+    #[cfg(debug_assertions)]
+    ExampleLoading,
+}
+
+#[derive(Default)]
+pub struct GamePlugin {
+    variant: GameVariant,
+}
+
+impl GamePlugin {
+    pub fn new(variant: GameVariant) -> Self {
+        Self { variant }
+    }
+}
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
@@ -38,8 +55,18 @@ impl Plugin for GamePlugin {
                 filter:
                     "wgpu=warn,bevy_ecs=info,bevy_shader=info,bevy_time=info,bevy_render=info,bevy_asset=info,bevy_winit=info,bevy_app=info,gilrs=info,cosmic_text=info,winit=info,sctk=info,offset_allocator=info,naga=info,calloop=info".to_string(),
                 ..default()
-            }))
-            // project plugins
-            .add_plugins((camera::CameraPlugin, screen::ScreenPlugin));
+            }));
+
+        match self.variant {
+            GameVariant::Regular => {
+                // project plugins
+                app.add_plugins((camera::CameraPlugin, screen::ScreenPlugin));
+            }
+            #[cfg(debug_assertions)]
+            GameVariant::ExampleLoading => {
+                // project plugins
+                app.add_plugins((camera::CameraPlugin, screen::ScreenPlugin));
+            }
+        }
     }
 }
