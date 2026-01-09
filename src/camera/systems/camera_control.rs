@@ -15,8 +15,33 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-use bevy::prelude::*;
+use bevy::{platform::collections::Equivalent, prelude::*};
+use bevy_pancam::PanCam;
 
-pub fn camera_control_system() {
-    todo!("Not implemented yet");
+use crate::screen::ScreenState;
+
+pub fn camera_control_system(
+    screen_state: Res<State<ScreenState>>,
+    mut q1: Query<&mut PanCam, With<Camera2d>>,
+) {
+    debug!("Running camera_control_system...");
+    if screen_state.equivalent(&ScreenState::Game) {
+        debug!("Trying to enable camera controls...");
+        match q1.single_mut() {
+            Ok(mut pancam) => {
+                debug!("Enabling camera controls...");
+                pancam.enabled = true;
+            }
+            Err(err) => error!("{}", err),
+        };
+    } else {
+        debug!("Disabling camera controls...");
+        match q1.single_mut() {
+            Ok(mut pancam) => {
+                debug!("Disabling camera controls...");
+                pancam.enabled = false;
+            }
+            Err(err) => error!("{}", err),
+        };
+    }
 }

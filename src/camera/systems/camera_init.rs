@@ -16,10 +16,19 @@
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
 use bevy::prelude::*;
+use bevy_pancam::PanCam;
+
+use crate::camera::constants::default_pancam;
 
 pub fn camera_init_system(mut commands: Commands) {
     debug!("Running camera_init_system...");
     debug!("Initializing Camera2d...");
-    commands.spawn(Camera2d);
+    commands.spawn((
+        Camera2d,
+        PanCam {
+            enabled: false,
+            ..default_pancam()
+        },
+    ));
     debug!("Camera2d initialized.");
 }
