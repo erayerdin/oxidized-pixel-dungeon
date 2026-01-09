@@ -17,4 +17,9 @@
 
 mod grid;
 
+use bevy::prelude::*;
+
 pub(super) use grid::Grid;
+
+#[derive(Component)]
+pub(super) struct Ground;
