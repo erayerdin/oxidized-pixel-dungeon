@@ -15,23 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Oxidized Pixel Dungeon.  If not, see <https://www.gnu.org/licenses/>.
 
-mod components;
-mod constants;
-mod resources;
-
 use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
 
-use crate::screen::ScreenState;
-
-pub(super) struct DungeonPlugin;
-
-impl Plugin for DungeonPlugin {
-    fn build(&self, app: &mut App) {
-        app.init_resource::<resources::Floor>().add_loading_state(
-            LoadingState::new(ScreenState::Loading)
-                .continue_to_state(ScreenState::Game)
-                .load_collection::<resources::DungeonAssets>(),
-        );
-    }
-}
+#[derive(AssetCollection, Resource)]
+pub struct DungeonAssets {}

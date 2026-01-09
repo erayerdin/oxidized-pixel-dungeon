@@ -17,4 +17,4 @@
 
 mod screen;
 
-pub(super) use screen::ScreenState;
+pub use screen::ScreenState;
