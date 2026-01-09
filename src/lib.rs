@@ -19,6 +19,9 @@ mod camera;
 mod dungeon;
 mod screen;
 
+#[macro_use]
+extern crate lazy_static;
+
 #[cfg(debug_assertions)]
 use bevy_inspector_egui::{bevy_egui::EguiPlugin, quick::WorldInspectorPlugin};
 
